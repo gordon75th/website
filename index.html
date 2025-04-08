@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anika's Love Garden</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+  <div class="music-control" onclick="toggleMusic()">🎵 Pause Music</div>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <h1>Hi Anika 🌷</h1>
+    <p>I made this little garden just for you... You can't be the only one with cute ideas behind kissed notes. Click a tulip to see a surprise 💖</p>
+
+    <div id="tulip-container">
+        <div class="tulip" onclick="showPopup('Your smile lights up my world ✨')">🌷</div>
+        <div class="tulip" onclick="showPopup('You’re my sunshine on cloudy days ☀️')">🌷</div>
+        <div class="tulip" onclick="showPopup('Being with you feels like home 🏡')">🌷</div>        
+    </div>
+
+    <div class="popup" id="popup-box"></div>
+
+    <div class="reasons">
+      <h2>100 Reasons Why I Love You 💕</h2>
+      <div id="reasons-list"></div>
+    </div>
+  </div>
+
+  <div class="card-section">
+    <div class="book">
+      <img src="images/bfr/img (1).jpg" alt="cute" />
+      <div class="cover"><p>Ichhh</p></div>
+    </div>
+    <div class="book">
+      <img src="images/bfr/img (2).jpg" alt="bear" />
+      <div class="cover"><p>haaaabbbb</p></div>
+    </div>
+    <div class="book">
+      <img src="images/bfr/img (3).jpg" alt="kitten" />
+      <div class="cover"><p>DIIIICHHH</p></div>
+    </div>
+    <div class="book">
+      <img src="images/bfr/img (5).jpg" alt="bear" />
+      <div class="cover"><p>gaaaaannnzzzz</p></div>
+    </div>
+    <div class="book">
+      <img src="images/bfr/img (6).jpg" alt="kitten" />
+      <div class="cover"><p>dolllleeeeee</p></div>
+    </div>
+    <div class="book">
+      <img src="images/bfr/img (9).jpg" alt="bear" />
+      <div class="cover"><p>liieeebbb <3 </p></div>
+    </div>
+  </div>
+
+  <script>
+    const popupBox = document.getElementById('popup-box');
+
+    function showPopup(message) {
+      popupBox.textContent = message;
+      popupBox.style.display = 'block';
+    }
+
+    const reasons = [
+      'You always listen to me when I have to yaaaapp',
+      'Your hugs make the world around me stop',
+      'You are always on my side, no matter what',
+      'Our little "arguments" make my day always a tiny bit better',
+      'I always get a smile on my face when you try to pay for small things',
+      'You make me feel like I deserve to be loved',
+      'You are always there when I need you the most'
+    ];
+
+    const list = document.getElementById('reasons-list');
+    for (let i = 0; i < reasons.length; i++) {
+      const div = document.createElement('div');
+      div.className = 'reason';
+      div.textContent = `${i + 1}. ${reasons[i]}`;
+      list.appendChild(div);
+    }
+
+    const music = document.getElementById('bg-music');
+    const control = document.querySelector('.music-control');
+    let isPlaying = true;
+
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+        control.textContent = '🎵 Play Music';
+      } else {
+        music.play();
+        control.textContent = '🎵 Pause Music';
+      }
+      isPlaying = !isPlaying;
+    }
+  </script>
+</body>
+</html>
