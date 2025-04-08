@@ -6,6 +6,8 @@
   <title>Anika's Love Garden</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+
 
 </head>
 <body>
@@ -31,6 +33,34 @@
       <h2>100 Reasons Why I Love You 💕</h2>
       <div id="reasons-list"></div>
     </div>
+    <div class="reasons">
+        <h2>Time has passed... ⏳ </h2>
+        <div class="container">
+            <p id="time-since" style="font-size: 1.5rem; color: #c9184a;"></p>
+                <div class="love-letter">
+                    <div class="floating-hearts">❤️ 💕 💖</div>
+                    <h2 class="letter-title">Für meine Anika 💗</h2>
+                    <p>
+                    Meine liebste Anika,<br><br>
+                    Es ist craazzyyy, wie schnell wir zusammengefunden haben, and wie richtig es sich anfühlt. Ich liebe es, dass du immer an meiner Seite bist, egal was passiert. Unsere kleinen „Streitereien“ darüber, wer wen mehr liebt (Spoiler: ich gewinne, wir warren doch vor Gericht 😌👍), oder darüber, wer zahlt (da gewinne ich auch btwww), machen alles nur noch süßer.
+                    </p>
+                    <p>
+                    Ich schätze es so sehr, dass wir unser kleines Safe Space miteinander haben, selbst wenn die Welt um uns herum laut ist. Dass ich mich immer auf dich verlassen kann, und dass wir keine social battery brauchen, um einfach zusammen zu sein, du bist einfach boddeeenlos süß duuu.
+                    </p>
+                    <p>
+                    Danke, dass du meinem ständigen yaaappeenn zuhörst, mich verstehst und mir Rat gibst. Ich verspreche dir: Ich werde immer auf deiner Seite sein. Du wirst mich nicht mehr los, regal was kommt. Und durch dieses ganze Anina fiasco – ich bin da. Für dich. Mit dir. Immer. 💗
+                    </p>
+                    <p>
+                    In Liebe,<br>
+                    (Arschloch) Maid <br>
+                    Dein Freund <3
+                    </p>
+                </div>
+  
+          </div>          
+      </div>
+
+      
   </div>
 
   <div class="card-section">
@@ -100,6 +130,23 @@
       }
       isPlaying = !isPlaying;
     }
+
+    function updateTimeSince() {
+    const startDate = new Date("March 5, 2025 14:00:00");
+    const now = new Date();
+    const diff = now - startDate;
+
+    const seconds = Math.floor(diff / 1000) % 60;
+    const minutes = Math.floor(diff / (1000 * 60)) % 60;
+    const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    
+    document.getElementById("time-since").textContent = 
+      `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds 💞`;
+  }
+
+  setInterval(updateTimeSince, 1000);
+  updateTimeSince();
   </script>
 </body>
 </html>
