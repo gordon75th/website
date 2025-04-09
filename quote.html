@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Anika's Hidden Chapter</title>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Dancing+Script&family=Quicksand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Dancing+Script&family=Quicksand&display=swap"
+    rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -28,7 +30,8 @@
       text-align: center;
     }
 
-    .book::before, .book::after {
+    .book::before,
+    .book::after {
       content: "";
       position: absolute;
       top: 0;
@@ -36,7 +39,7 @@
       height: 100%;
       background: #f6ebd9;
       z-index: -1;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
     }
 
     .book::before {
@@ -68,7 +71,7 @@
       text-decoration: none;
       font-family: 'Quicksand', sans-serif;
       font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
       transition: background 0.3s;
     }
 
@@ -77,11 +80,19 @@
     }
 
     @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
+
 <body>
   <a href="index.html" class="back-button">← Back to Garden</a>
   <div class="book">
@@ -89,6 +100,7 @@
   </div>
 
   <script src="js/quotes.js"></script>
-  
+
 </body>
+
 </html>

@@ -1,187 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>The Library of Us</title>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Quicksand&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: #f9fdf5;
-      font-family: 'Quicksand', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8" />
+    <title>The Library of Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Quicksand&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9fdf5;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-    h1 {
-      font-family: 'Caveat', cursive;
-      font-size: 3rem;
-      text-align: center;
-      color: #328E6E;
-      margin-top: 40px;
-    }
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
+            text-align: center;
+            color: #328E6E;
+            margin-top: 40px;
+        }
 
-    .bookshelf {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 40px auto;
-      max-width: 1000px;
-    }
+        .bookshelf {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 40px auto;
+            max-width: 1000px;
+        }
 
-    .book-spine {
-      width: 60px;
-      height: 180px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: transform 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      font-size: 1rem;
-      font-family: 'Caveat', cursive;
-    }
+        .book-spine {
+            width: 60px;
+            height: 180px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 1rem;
+            font-family: 'Caveat', cursive;
+        }
 
-    .book-spine:hover {
-      transform: scale(1.1);
-    }
+        .book-spine:hover {
+            transform: scale(1.1);
+        }
 
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.4);
-    }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
 
-    .modal-content {
-      background-color: #fff;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 400px;
-      text-align: center;
-      color: #328E6E;
-      font-family: 'Caveat', cursive;
-      font-size: 1.5rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      animation: popup 0.3s ease;
-    }
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            color: #328E6E;
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: popup 0.3s ease;
+        }
 
-    @keyframes popup {
-    0% {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-  }
-    }
+        @keyframes popup {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
 
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-    .quote-box {
-      background-color: #e1eebc;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 500px;
-      margin: 30px auto;
-      font-style: italic;
-      color: #328e6e;
-      font-family: 'Caveat', cursive;
-      font-size: 1.5rem;
-      text-align: center;
-    }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-    .back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: #67AE6E;
-    color: white;
-    padding: 10px 16px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-family: 'Caveat', cursive;
-    font-size: 1.2rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    transition: background 0.3s;
-    }
-    .back-button:hover {
-    background-color: #328E6E;
-    }
+        .quote-box {
+            background-color: #e1eebc;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            margin: 30px auto;
+            font-style: italic;
+            color: #328e6e;
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            text-align: center;
+        }
 
-  </style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #67AE6E;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #328E6E;
+        }
+    </style>
 </head>
+
 <body>
     <a href="index.html" class="back-button">← Back to Garden</a>
 
-  <h1>The Library of Us 📚</h1>
+    <h1>The Library of Us 📚</h1>
 
-  <div class="bookshelf">
+    <div class="bookshelf">
+        <script>
+            const colors = ['#328E6E', '#67AE6E', '#90C67C', '#E1EEBC'];
+            for (let i = 0; i < 28; i++) {
+                const shade = colors[i % colors.length];
+                const textColor = (shade === '#E1EEBC') ? '#328E6E' : 'white';
+                document.write(
+                    `<div class="book-spine" style="background:${shade}; color:${textColor}" onclick="openModal(${i})">${i + 1}</div>`
+                    );
+            }
+        </script>
+    </div>
+
+    <div class="quote-box" id="quote-box">Click a book to reveal a memory 💭</div>
+
     <script>
-      const colors = ['#328E6E', '#67AE6E', '#90C67C', '#E1EEBC'];
-      for (let i = 0; i < 28; i++) {
-        const shade = colors[i % colors.length];
-        const textColor = (shade === '#E1EEBC') ? '#328E6E' : 'white';
-        document.write(`<div class="book-spine" style="background:${shade}; color:${textColor}" onclick="openModal(${i})">${i + 1}</div>`);
-      }
-    </script>
-  </div>
+        const messages = [
+            "Der Winterbasar hätte unser erstes Treffen sein können, aber wir haben uns einfach verpasst.",
+            "25. Januar, der Tag, an dem wir uns offiziell trafen und der Funke übersprang.",
+            "10. Februar, der Tag, an dem ich begann, deine Aufmerksamkeit zu suchen 😶",
+            "Am 11. Februar ist dir ein Fehler unterlaufen, als du meine Story geliked hast (die du übrigens später wieder gelöscht hast, FRECCHH). Da keimte bei mir die Hoffnung.",
+            "Am 12. Februar tauchten die ersten Paparazzi-Bilder von mir auf...",
+            "14. Februar (poetisch), an dem meine Liebe wirklich begann, tiefer zu werden …",
+            "16th of February, you wanted to sacrifice me in a circle.. Also the day where I found out you knew that I liked you (Gurke) 👀",
+            "16. Februar, unser erstes „Argument“, Nein Broo / Doch Broo..",
+            "18. Februar, Hannah wegen Danyel zu mobben, hat mich so zum Lachen gebracht …",
+            "Am 18. Februar haben wir uns zum ersten Mal gute Nacht gesagt und jetzt kann ich nicht schlafen gehen, ohne mit dir zu reden und an dich zu denken.",
+            "19. Februar, Vertrauensprobleme, weil ich nicht weiß, mit wem ich spreche...",
+            "20. Februar, unser erstes gemeinsames Telefonat..",
+            "22. Februar, die Einladung zu Hannahs Hochzeit..",
+            "23. Februar, du wurdest mein Loser 1.0 <3 🥺",
+            "27. Februar, unser erstes Treffen auf einer Brücke, viele weitere werden folgen...",
+            "1. März, als du mich zum ersten Mal geküsst hast. Ein magischer Moment, an den ich mich immer erinnern werde 💞",
+            "2. März, ich hatte das Glück, dein blaues Gesicht zu sehen 💞",
+            "3. März, der Tag, an dem du in der Erde versunken bist, weil Stoner die Dinge gesagt hat, die allen über uns aufgefallen sind …",
+            "Der 3. März, auch der Tag, an dem ich mit einem breiten Lächeln und einem „A“ auf der Stirn nach Hause kam 💘",
+            "5. März. Der Tag, an dem sich mein Leben für immer veränderte und ich zum ersten Mal deine Lippen küssen durfte...",
+            "Am 8. März habe ich dir das erste von vielen Geschenken gemacht und wir konnten stundenlang kuscheln und die company des anderen genießen ... 💞",
+            "9. März, du warst für eine Woche weg. Unsere erste gemeinsame Motorradtour und der Tag, an dem wir die beiden Rosen bauen durften.",
+            "Am 12. März habe ich dir die erste von vielen appreciation messages geschickt, die ich dir schreiben werde.💘",
+            "15. März, du bist zurückgekommen.. Du hast mir Hubert und ein schönes Hintergrundbild für mein Handy gegeben.",
+            "22. März, das erste Mal, dass du fiess warst.. 😶",
+            "23. März, unser kleines Abenteuer in Konstanz fühlte sich wie Zuhause an.. 🏡",
+            "5. April, unser erster gemeinsamer Monat.. Wir haben 11 Stunden miteinander verbracht, die sich wie 3 angefühlt haben.. 💘",
+            "Ein paar Kapitel sind bereits geschrieben. Es kommen noch vieelleeeeee <3 ... 📖"
+        ];
 
-  <div class="quote-box" id="quote-box">Click a book to reveal a memory 💭</div>
-
-  <script>
-    const messages = [
-      "Der Winterbasar hätte unser erstes Treffen sein können, aber wir haben uns einfach verpasst.",
-      "25. Januar, der Tag, an dem wir uns offiziell trafen und der Funke übersprang.",
-      "10. Februar, der Tag, an dem ich begann, deine Aufmerksamkeit zu suchen 😶",
-      "Am 11. Februar ist dir ein Fehler unterlaufen, als du meine Story geliked hast (die du übrigens später wieder gelöscht hast, FRECCHH). Da keimte bei mir die Hoffnung.",
-      "Am 12. Februar tauchten die ersten Paparazzi-Bilder von mir auf...",
-      "14. Februar (poetisch), an dem meine Liebe wirklich begann, tiefer zu werden …",
-      "16th of February, you wanted to sacrifice me in a circle.. Also the day where I found out you knew that I liked you (Gurke) 👀",
-      "16. Februar, unser erstes „Argument“, Nein Broo / Doch Broo..",
-      "18. Februar, Hannah wegen Danyel zu mobben, hat mich so zum Lachen gebracht …",
-      "Am 18. Februar haben wir uns zum ersten Mal gute Nacht gesagt und jetzt kann ich nicht schlafen gehen, ohne mit dir zu reden und an dich zu denken.",
-      "19. Februar, Vertrauensprobleme, weil ich nicht weiß, mit wem ich spreche...",
-      "20. Februar, unser erstes gemeinsames Telefonat..",
-      "22. Februar, die Einladung zu Hannahs Hochzeit..",
-      "23. Februar, du wurdest mein Loser 1.0 <3 🥺",
-      "27. Februar, unser erstes Treffen auf einer Brücke, viele weitere werden folgen...",
-      "1. März, als du mich zum ersten Mal geküsst hast. Ein magischer Moment, an den ich mich immer erinnern werde 💞",
-      "2. März, ich hatte das Glück, dein blaues Gesicht zu sehen 💞",
-      "3. März, der Tag, an dem du in der Erde versunken bist, weil Stoner die Dinge gesagt hat, die allen über uns aufgefallen sind …",
-      "Der 3. März, auch der Tag, an dem ich mit einem breiten Lächeln und einem „A“ auf der Stirn nach Hause kam 💘",
-      "5. März. Der Tag, an dem sich mein Leben für immer veränderte und ich zum ersten Mal deine Lippen küssen durfte...",
-      "Am 8. März habe ich dir das erste von vielen Geschenken gemacht und wir konnten stundenlang kuscheln und die company des anderen genießen ... 💞",
-      "9. März, du warst für eine Woche weg. Unsere erste gemeinsame Motorradtour und der Tag, an dem wir die beiden Rosen bauen durften.",
-      "Am 12. März habe ich dir die erste von vielen appreciation messages geschickt, die ich dir schreiben werde.💘",
-      "15. März, du bist zurückgekommen.. Du hast mir Hubert und ein schönes Hintergrundbild für mein Handy gegeben.",
-      "22. März, das erste Mal, dass du fiess warst.. 😶",
-      "23. März, unser kleines Abenteuer in Konstanz fühlte sich wie Zuhause an.. 🏡",
-      "5. April, unser erster gemeinsamer Monat.. Wir haben 11 Stunden miteinander verbracht, die sich wie 3 angefühlt haben.. 💘",
-      "Ein paar Kapitel sind bereits geschrieben. Es kommen noch vieelleeeeee <3 ... 📖"
-    ];
-
-    for (let i = 0; i < 28; i++) {
-      document.write(`
+        for (let i = 0; i < 28; i++) {
+            document.write(`
         <div class="modal" id="modal-${i}">
           <div class="modal-content">
             <span class="close" onclick="closeModal(${i})">&times;</span>
@@ -189,24 +194,25 @@
           </div>
         </div>
       `);
-    }
-
-    function openModal(i) {
-      document.getElementById('modal-' + i).style.display = "block";
-    }
-
-    function closeModal(i) {
-      document.getElementById('modal-' + i).style.display = "none";
-    }
-
-    window.onclick = function(event) {
-      for (let i = 0; i < 28; i++) {
-        const modal = document.getElementById(`modal-${i}`);
-        if (event.target === modal) {
-          modal.style.display = "none";
         }
-      }
-    }
-  </script>
+
+        function openModal(i) {
+            document.getElementById('modal-' + i).style.display = "block";
+        }
+
+        function closeModal(i) {
+            document.getElementById('modal-' + i).style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            for (let i = 0; i < 28; i++) {
+                const modal = document.getElementById(`modal-${i}`);
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
+
 </html>
