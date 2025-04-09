@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Für meine Anika</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #fffdf5;
+      font-family: 'Caveat', cursive;
+      font-size: 1.7rem;
+      line-height: 1.8;
+      padding: 80px 20px;
+      color: #443;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+    }
+
+    .letter {
+      max-width: 700px;
+      white-space: pre-wrap;
+      border: 2px dashed #d7baa9;
+      padding: 30px;
+      background-color: #fefcf6;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #d7baa9;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-family: sans-serif;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-button">← Back</a>
+  <div class="letter" id="typewriter"></div>
+
+  <script>
+    const text = `Meine liebste Anika,
+
+Es ist craazzyyy, wie schnell wir zusammengefunden haben, and wie richtig es sich anfühlt. Ich liebe es, dass du immer an meiner Seite bist, egal was passiert. Unsere kleinen „Streitereien“ darüber, wer wen mehr liebt (Spoiler: ich gewinne, wir warren doch vor Gericht 😌👍), oder darüber, wer zahlt (da gewinne ich auch btwww), machen alles nur noch süßer.
+
+Ich schätze es so sehr, dass wir unser kleines Safe Space miteinander haben, selbst wenn die Welt um uns herum laut ist. Dass ich mich immer auf dich verlassen kann, und dass wir keine social battery brauchen, um einfach zusammen zu sein, du bist einfach boddeeenlos süß duuu.
+Danke, dass du meinem ständigen yaaappeenn zuhörst, mich verstehst und mir Rat gibst. Ich verspreche dir: Ich werde immer auf deiner Seite sein. Du wirst mich nicht mehr los, regal was kommt. Und durch dieses ganze Anina fiasco – ich bin da. Für dich. Mit dir. Immer. 💗
+           
+            In Liebe,
+            (Arschloch) Maid
+            Dein Freund <3
+                    `;
+
+    const el = document.getElementById("typewriter");
+    let i = 0;
+
+    function typeLetter() {
+      if (i < text.length) {
+        el.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeLetter, 40);
+      }
+    }
+
+    typeLetter();
+  </script>
+</body>
+</html>

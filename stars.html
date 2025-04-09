@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stargazing with You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+      height: 100vh;
+      font-family: 'Caveat', cursive;
+      color: white;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .quote {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.4);
+      z-index: 10;
+      padding: 0 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #fff;
+      color: #111;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      box-shadow: 0 2px 6px rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="index.html">← Back to Garden</a>
+  <div class="quote">Auch wenn wir getrennt sind, stehen wir unter denselben Sternen ✨</div>
+  <canvas id="starCanvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let stars = [];
+
+    for (let i = 0; i < 150; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2,
+        d: Math.random() * 1
+      });
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ffffff';
+      stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2, false);
+        ctx.fill();
+      });
+    }
+
+    function animateStars() {
+      stars.forEach(star => {
+        star.y += star.d;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      });
+      drawStars();
+      requestAnimationFrame(animateStars);
+    }
+
+    canvas.addEventListener('click', (e) => {
+      let x = e.clientX;
+      let y = e.clientY;
+      let length = 150;
+      let trail = 0;
+
+      function shootingStar() {
+        ctx.strokeStyle = 'white';
+        ctx.beginPath();
+        ctx.moveTo(x - trail, y - trail);
+        ctx.lineTo(x + trail, y + trail);
+        ctx.stroke();
+        trail += 5;
+        if (trail < length) {
+          requestAnimationFrame(shootingStar);
+        }
+      }
+      shootingStar();
+    });
+
+    drawStars();
+    animateStars();
+  </script>
+</body>
+</html>

@@ -12,6 +12,9 @@
 </head>
 <body>
   <div class="music-control" onclick="toggleMusic()">🎵 Pause Music</div>
+  <div><a href="quote.html" class="magic-bookmark">📖 Hidden Chapter</a></div>
+
+
 
   <a href="library.html">
     <button class="btn">
@@ -84,25 +87,8 @@
         <h2>Time has passed... ⏳ </h2>
         <div class="container">
             <p id="time-since" style="font-size: 1.5rem; color: #c9184a;"></p>
-                <div class="love-letter">
-                    <div class="floating-hearts">❤️ 💕 💖</div>
-                    <h2 class="letter-title">Für meine Anika 💗</h2>
-                    <p>
-                    Meine liebste Anika,<br><br>
-                    Es ist craazzyyy, wie schnell wir zusammengefunden haben, and wie richtig es sich anfühlt. Ich liebe es, dass du immer an meiner Seite bist, egal was passiert. Unsere kleinen „Streitereien“ darüber, wer wen mehr liebt (Spoiler: ich gewinne, wir warren doch vor Gericht 😌👍), oder darüber, wer zahlt (da gewinne ich auch btwww), machen alles nur noch süßer.
-                    </p>
-                    <p>
-                    Ich schätze es so sehr, dass wir unser kleines Safe Space miteinander haben, selbst wenn die Welt um uns herum laut ist. Dass ich mich immer auf dich verlassen kann, und dass wir keine social battery brauchen, um einfach zusammen zu sein, du bist einfach boddeeenlos süß duuu.
-                    </p>
-                    <p>
-                    Danke, dass du meinem ständigen yaaappeenn zuhörst, mich verstehst und mir Rat gibst. Ich verspreche dir: Ich werde immer auf deiner Seite sein. Du wirst mich nicht mehr los, regal was kommt. Und durch dieses ganze Anina fiasco – ich bin da. Für dich. Mit dir. Immer. 💗
-                    </p>
-                    <p>
-                    In Liebe,<br>
-                    (Arschloch) Maid <br>
-                    Dein Freund <3
-                    </p>
-                </div>
+            <a href="typewriter.html" style="font-family: 'Pacifico', cursive; color: rgb(83, 3, 70);" class="text">✍️ Love Letter</a>
+            <a href="stars.html" style="font-family: 'Pacifico', cursive; color: rgb(83, 3, 70);">🌌 Stargazing</a>
   
           </div>          
       </div>
@@ -136,6 +122,37 @@
     </div>
   </div>
 
+  <div class="carousel-container">
+    <h2 class="carousel-title">More Memories 🥰</h2>
+    <div class="carousel">
+      <button class="carousel-btn left" onclick="scrollCarousel(-1)">‹</button>
+      <div class="carousel-track" id="carouselTrack">
+        <img src="images/bfr/img (12).jpg" alt="memory 1" />
+        <img src="images/bfr/img (7).jpg" alt="memory 2" />
+        <img src="images/bfr/img (8).jpg" alt="memory 3" />
+        <img src="images/bfr/img (10).jpg" alt="memory 4" />
+        <img src="images/bfr/img (11).jpg" alt="memory 5" />
+        <img src="images/bfr/img (13).jpg" alt="memory 6" />
+        <img src="images/bfr/img (14).jpg" alt="memory 6" />
+        <img src="images/bfr/img (15).jpg" alt="memory 6" />
+        <img src="images/bfr/img (16).jpg" alt="memory 6" />
+        <img src="images/bfr/img (17).jpg" alt="memory 6" />
+        <img src="images/bfr/img (18).jpg" alt="memory 6" />
+        <img src="images/bfr/img (19).jpg" alt="memory 6" />
+        <img src="images/bfr/img (20).jpg" alt="memory 6" />
+        <img src="images/bfr/img (21).jpg" alt="memory 6" />
+        <img src="images/bfr/img (22).jpg" alt="memory 6" />
+        <img src="images/bfr/img (23).jpg" alt="memory 6" />
+        <img src="images/bfr/img (24).jpg" alt="memory 6" />
+        <img src="images/bfr/img (25).jpg" alt="memory 6" />
+        <img src="images/bfr/img (26).jpg" alt="memory 6" />
+        <img src="images/bfr/img (27).jpg" alt="memory 6" />
+      </div>
+      <button class="carousel-btn right" onclick="scrollCarousel(1)">›</button>
+    </div>
+  </div>
+  
+
   <script>
     const popupBox = document.getElementById('popup-box');
 
@@ -151,8 +168,51 @@
       'Our little "arguments" make my day always a tiny bit better',
       'I always get a smile on my face when you try to pay for small things',
       'You make me feel like I deserve to be loved',
-      'You are always there when I need you the most'
+      'You are always there when I need you the most',
+      'Your reactions to my "foltern"',
+      'The way you laugh at my dumb jokes',
+      'The way you use emotional manipulation to make me melt',
+      'How you try gaslighting me, even though you know what you said..',
+      'Cute litte reels you send me each and every day, please never stop',
+      'Your podcasts and voice messages that make my day just a bit brighter..',
+      'I love hearing about your life and whats going on when Im not there',
+      'I love our gossip sessions where we judge other people',
+      'I love hearing about whats going on at your school and how you want to punch people in the face',
+      'Hearing your random ADHS stories and decicions you make throughout the day always bring a smile to my face',
+      'Its just incredible how youre there for other people, even though youre not always in the best mood',
+      'You try to make others laugh and feel better, even when youre not a 100% yourself',
     ];
+
+  function scrollCarousel(direction) {
+  const track = document.getElementById('carouselTrack');
+  const scrollAmount = 300;
+  track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+  }
+
+  // Swipe support for carousel
+  let startX = 0;
+  let isDown = false;
+
+  const carousel = document.getElementById('carouselTrack');
+
+  carousel.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isDown = true;
+  });
+
+  carousel.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    const currentX = e.touches[0].clientX;
+    const diff = startX - currentX;
+    carousel.scrollLeft += diff;
+    startX = currentX;
+  });
+
+  carousel.addEventListener('touchend', () => {
+    isDown = false;
+  });
+
+
 
     const list = document.getElementById('reasons-list');
     for (let i = 0; i < reasons.length; i++) {
@@ -190,6 +250,13 @@
     document.getElementById("time-since").textContent = 
       `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds 💞`;
   }
+
+  function showPopup(message) {
+  popupBox.textContent = message;
+  popupBox.classList.add('show');
+  }
+
+
 
   setInterval(updateTimeSince, 1000);
   updateTimeSince();
