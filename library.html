@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Library of Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9fdf5;
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-family: 'Caveat', cursive;
+      font-size: 3rem;
+      text-align: center;
+      color: #328E6E;
+      margin-top: 40px;
+    }
+
+    .bookshelf {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 40px auto;
+      max-width: 1000px;
+    }
+
+    .book-spine {
+      width: 60px;
+      height: 180px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: 1rem;
+      font-family: 'Caveat', cursive;
+    }
+
+    .book-spine:hover {
+      transform: scale(1.1);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      color: #328E6E;
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .quote-box {
+      background-color: #e1eebc;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      margin: 30px auto;
+      font-style: italic;
+      color: #328e6e;
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #67AE6E;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: background 0.3s;
+    }
+    .back-button:hover {
+    background-color: #328E6E;
+    }
+
+  </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back to Garden</a>
+
+  <h1>The Library of Us 📚</h1>
+
+  <div class="bookshelf">
+    <script>
+      const colors = ['#328E6E', '#67AE6E', '#90C67C', '#E1EEBC'];
+      for (let i = 0; i < 28; i++) {
+        const shade = colors[i % colors.length];
+        const textColor = (shade === '#E1EEBC') ? '#328E6E' : 'white';
+        document.write(`<div class="book-spine" style="background:${shade}; color:${textColor}" onclick="openModal(${i})">${i + 1}</div>`);
+      }
+    </script>
+  </div>
+
+  <div class="quote-box" id="quote-box">Click a book to reveal a memory 💭</div>
+
+  <script>
+    const messages = [
+      "Our first date still makes me smile 💚",
+      "You and your hoodie cuddles 🤗",
+      "Late night talks that last for hours 🌙",
+      "Laughing so hard we couldn’t breathe 😂",
+      "Cooking pasta together 🍝",
+      "Your sleepy voice in the morning ☀️",
+      "Your hand finding mine without thinking 🖐️",
+      "Looking at you when you’re not watching 👀",
+      "Your voice when you say 'I love you' 🥹",
+      "Every little note you write me 📝",
+      "Our random adventures 🛵",
+      "Rainy afternoons wrapped in a blanket 🌧️",
+      "Falling asleep on call 😴",
+      "Your cute pouty face 🥺",
+      "Movie nights and popcorn fights 🍿",
+      "Slow dancing in the kitchen 💃🕺",
+      "The way you make me feela safe 💞",
+      "You always being my safe place 🏡",
+      "You. Always. Forever. 💘",
+      "This whole love story... ours. 📖",
+      "The way you make me feasel safe 💞",
+      "You always being my safe place 🏡",
+      "You. Always. Forever. 💘",
+      "This whole love story... ours. 📖",
+      "The way you make me fedael safe 💞",
+      "You always being my safe place 🏡",
+      "You. Always. Forever. 💘",
+      "This whole love story... oursaaaa. 📖"
+    ];
+
+    for (let i = 0; i < 28; i++) {
+      document.write(`
+        <div class="modal" id="modal-${i}">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal(${i})">&times;</span>
+            ${messages[i]}
+          </div>
+        </div>
+      `);
+    }
+
+    function openModal(i) {
+      document.getElementById('modal-' + i).style.display = "block";
+    }
+
+    function closeModal(i) {
+      document.getElementById('modal-' + i).style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      for (let i = 0; i < 28; i++) {
+        const modal = document.getElementById(`modal-${i}`);
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+</html>

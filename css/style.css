@@ -173,3 +173,68 @@ box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     100% { transform: translateY(0) rotate(-10deg); opacity: 1; }
   }
   
+    /* Library of Us */
+    .library {
+      background: #f9fdf5;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .library h2 {
+      font-family: 'Caveat', cursive;
+      font-size: 3rem;
+      color: #328E6E;
+      margin-bottom: 30px;
+    }
+    .bookshelf {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .book-spine {
+      width: 60px;
+      height: 180px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: 1rem;
+      font-family: 'Caveat', cursive;
+    }
+    .book-spine:hover {
+      transform: scale(1.1);
+    }
+
+    .quote-box {
+      background-color: #e1eebc;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      margin: 0 auto;
+      font-style: italic;
+      color: #328e6e;
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+    }
+
+    .magic-bookmark {
+      position: fixed;
+      top: 70px;
+      right: 10px;
+      background-color: #67ae6e;
+      padding: 10px 12px;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 998;
+      font-family: 'Caveat', cursive;
+    }
