@@ -109,7 +109,8 @@
           placeholder="Du kannst hier immer mit mit yappenn, auch wenn ich schlafe oder nicht da bin..."
           rows="4"></textarea> <br>
         <button class="note-btn" onclick="addNote()">Send</button>
-        <button class="note-btn" onclick="requestNotificationPermission()">Enable Love Alerts 💌</button>
+        <button onclick="requestNotificationPermission()">Enable Love Alerts 💌</button>
+
 
 
 
@@ -220,14 +221,15 @@
       console.log("Notification permission granted.");
       return messaging.getToken();
     })
-    .then(token => {
+    .then((token) => {
       console.log("Device token:", token);
-firebase.database().ref("notificationTokens/anika").set(token);
+      // Save token to Firebase if needed
     })
-    .catch(err => {
-      console.log("Permission denied", err);
+    .catch((err) => {
+      console.error("Permission denied or error:", err);
     });
 }
+
 
 
           const reasons = [
