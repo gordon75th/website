@@ -8,6 +8,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 
 
 </head>
@@ -67,7 +72,12 @@
 
     <div class="container">
       <h1>Hi Anika 🌷</h1>
-      <p>I made this little garden just for you... You can't be the only one with cute ideas behind kissed notes 💖 Du hast mir kürzlich ein tolles Geschenk gemacht, und ich habe mir überlegt, wie ich mich repayen kann. Obwohl ich jetzt nicht so gut im DIY Sachen bin, muss ich zugeben, dass ich gut im Programmieren bin. Und ich habe beschlossen, eine Website zu erstellen, die du immer öffnen kannst, wenn du dich schlecht fühlst. Ein Geschenk, das du immer wieder ansehen und bei dir tragen kannst. Uuuuund, ich werde dieses Website immer updaten, wenn etwas passiert oder wir ein neues süßes Foto zusammen macheenn, alssooo keep an eye out 🤗🫣</p>
+      <p>I made this little garden just for you... You can't be the only one with cute ideas behind kissed notes 💖 Du
+        hast mir kürzlich ein tolles Geschenk gemacht, und ich habe mir überlegt, wie ich mich repayen kann. Obwohl ich
+        jetzt nicht so gut im DIY Sachen bin, muss ich zugeben, dass ich gut im Programmieren bin. Und ich habe
+        beschlossen, eine Website zu erstellen, die du immer öffnen kannst, wenn du dich schlecht fühlst. Ein Geschenk,
+        das du immer wieder ansehen und bei dir tragen kannst. Uuuuund, ich werde dieses Website immer updaten, wenn
+        etwas passiert oder wir ein neues süßes Foto zusammen macheenn, alssooo keep an eye out 🤗🫣</p>
 
       <div id="tulip-container">
         <div class="tulip" onclick="showPopup('Your smile lights up my world ✨')">🌷</div>
@@ -92,6 +102,18 @@
 
         </div>
       </div>
+
+      <div class="love-notes">
+        <h2>Write Me a Little Love Note 💌</h2>
+        <input class="noteFrom" id="noteFrom" placeholder="Your name..." /> <br>
+        <textarea id="noteInput" placeholder="Write your love here..." rows="4"></textarea> <br>
+        <button class="note-btn" onclick="addNote()">Send</button>
+
+
+
+        <div id="notesDisplay"></div>
+      </div>
+
 
     </div>
 
@@ -161,6 +183,21 @@
 
 
         <script>
+          const firebaseConfig = {
+            apiKey: "AIzaSyDvrQH8cgKTa5naq_X-LRX2hKvwKPVdyPs",
+            authDomain: "lovenotesforanika.firebaseapp.com",
+            databaseURL: "https://lovenotesforanika-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "lovenotesforanika",
+            storageBucket: "lovenotesforanika.firebasestorage.app",
+            messagingSenderId: "955890146894",
+            appId: "1:955890146894:web:458debbf68510359bd6d1f",
+            measurementId: "G-Z0KZYDREQS"
+          };
+
+          firebase.initializeApp(firebaseConfig);
+          const db = firebase.database();
+
+
           const popupBox = document.getElementById('popup-box');
 
           function showPopup(message) {
@@ -270,7 +307,7 @@
             'I love your eyes, smile, hair, body, humor, smell, style, voice. Everything about you.',
             'I love YOU, Anika.'
 
-];
+          ];
 
           function scrollCarousel(direction) {
             const track = document.getElementById('carouselTrack');
@@ -351,7 +388,89 @@
 
           setInterval(updateTimeSince, 1000);
           updateTimeSince();
+
+          function addNote() {
+            const from = document.getElementById('noteFrom').value.trim();
+            const text = document.getElementById('noteInput').value.trim();
+            if (!text || !from) return;
+
+            const timestamp = getFormattedDate();
+
+            const newNote = {
+              from,
+              text,
+              time: timestamp
+            };
+
+            db.ref("loveNotes").push(newNote); // 💥 send to Firebase
+
+            document.getElementById('noteInput').value = '';
+            document.getElementById('noteFrom').value = '';
+            confetti({
+              particleCount: 100,
+              spread: 70,
+              origin: {
+                y: 0.6
+              }
+            });
+          }
+
+
+          function renderNotes() {
+            const display = document.getElementById('notesDisplay');
+            db.ref("loveNotes").on("value", (snapshot) => {
+              display.innerHTML = '';
+              const notes = snapshot.val();
+              if (notes) {
+                Object.values(notes).forEach(note => {
+                  const sender = note.from || "Someone";
+                  const time = note.time || "";
+                  const div = document.createElement('div');
+                  div.className = 'note';
+                  div.innerHTML = `<strong>${sender}</strong> <em>(${time})</em><br>${note.text}`;
+                  display.appendChild(div);
+                });
+              }
+            });
+          }
+          window.onload = () => {
+            renderNotes();
+          };
+
+
+          function getFormattedDate() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+            const year = now.getFullYear();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            return `${day}/${month}/${year} ${hours}:${minutes}`;
+          }
+
+
+
+          const timestamp = new Date().toLocaleString();
+          notes.push({
+            from,
+            text,
+            time: timestamp
+          });
+
+          function fakeTypingEffect(text, element) {
+            let i = 0;
+
+            function type() {
+              if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, 40);
+              }
+            }
+            type();
+          }
         </script>
+
 </body>
 
 </html>

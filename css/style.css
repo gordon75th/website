@@ -544,3 +544,89 @@ h1 {
 .carousel-btn.right {
   right: 10px;
 }
+
+.love-notes {
+  background-color: #fff6fa;
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 4px dashed #ffa9d6;
+  font-family: 'Caveat', cursive;
+}
+
+.love-notes h2 {
+  font-size: 2rem;
+  color: #d63384;
+  margin-bottom: 20px;
+}
+
+textarea#noteInput {
+  width: 80%;
+  max-width: 500px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #ffd2e3;
+  font-size: 1.2rem;
+  font-family: 'Quicksand', sans-serif;
+  resize: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.noteFrom {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #ffd2e3;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-family: 'Quicksand', sans-serif;
+  background-color: #fff6fa;
+  color: #444;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.noteFrom:focus {
+  outline: none;
+  border-color: #ff9ebc;
+  box-shadow: 0 0 8px rgba(255, 158, 188, 0.5);
+}
+
+
+
+.note-btn {
+  background-color: #ffb3c6;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  font-family: 'Pacifico', cursive;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.note-btn:hover {
+  background-color: #ff8fab;
+}
+
+#notesDisplay {
+  margin-top: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.note {
+  background-color: #ffe0f0;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  color: #444;
+  position: relative;
+}
