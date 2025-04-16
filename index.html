@@ -12,9 +12,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-
-
+  <audio id="notification-sound" src="your-sound-file.mp3" preload="auto"></audio>
 </head>
 
 <body>
@@ -106,12 +104,18 @@
       <div class="love-notes">
         <h2>Write Me a Little Love Note 💌</h2>
         <input class="noteFrom" id="noteFrom" placeholder="Your name..." /> <br>
-        <textarea id="noteInput" placeholder="Write your love here..." rows="4"></textarea> <br>
+        <textarea id="noteInput"
+          placeholder="Du kannst hier immer mit mit yappenn, auch wenn ich schlafe oder nicht da bin..."
+          rows="4"></textarea> <br>
         <button class="note-btn" onclick="addNote()">Send</button>
 
 
 
         <div id="notesDisplay"></div>
+      </div>
+
+      <div id="notification" class="notification" style="display: none;">
+        <p>💌 New message!</p>
       </div>
 
 
@@ -402,10 +406,11 @@
               time: timestamp
             };
 
-            db.ref("loveNotes").push(newNote); // 💥 send to Firebase
+            db.ref("loveNotes").push(newNote);
 
             document.getElementById('noteInput').value = '';
             document.getElementById('noteFrom').value = '';
+
             confetti({
               particleCount: 100,
               spread: 70,
@@ -413,7 +418,42 @@
                 y: 0.6
               }
             });
+
+            showNotification(from);
+
           }
+
+          function showNotification(from) {
+            const notification = document.getElementById('notification');
+            const name = from.toLowerCase();
+
+            let message = "";
+            if (name.includes("anika")) {
+              message = "🌷 A love note from Anika!";
+            } else if (name.includes("maid") || name.includes("majd") ||name.includes("dein vollidiot") || name.includes("your boy")) {
+              message = "🧸 Dein Vollidiot left you a message!";
+            } else {
+              message = "💌 Neue Notification!";
+            }
+
+            notification.innerHTML = `<p>${message}</p>`;
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+              notification.classList.add('show');
+            }, 10);
+
+            setTimeout(() => {
+              notification.classList.remove('show');
+              setTimeout(() => {
+                notification.style.display = 'none';
+              }, 500);
+            }, 5000);
+          }
+
+
+
+
 
 
           function renderNotes() {

@@ -630,3 +630,25 @@ textarea#noteInput {
   color: #444;
   position: relative;
 }
+
+.notification {
+  background-color: #ff9ebc;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: 8px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.notification.show {
+  opacity: 1;
+}
