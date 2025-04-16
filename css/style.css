@@ -593,6 +593,12 @@ textarea#noteInput {
   box-shadow: 0 0 8px rgba(255, 158, 188, 0.5);
 }
 
+.note.archived {
+  opacity: 0.6;
+  background-color: #f3e0ff;
+  border-left: 4px solid #c48bd1;
+}
+
 
 
 .note-btn {
