@@ -14,55 +14,60 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-messaging-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <audio id="notification-sound" src="images/notification.wav" preload="auto"></audio>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#ffe0f0" />
+
 </head>
 
 <body>
-  <div><a href="quote.html" class="magic-bookmark">📖 This reminded me of you <3 </a> </div> <a href="library.html">
-        <button class="btn">
-          <div class="wrapper">
-            <p style="font-family: 'Pacifico', cursive; color: rgb(83, 3, 70);" class="text">Bookmark</p>
+  <div class="top-buttons">
+    <a href="library.html">
+      <button class="btn">
+        <div class="wrapper">
+          <p style="font-family: 'Pacifico', cursive; color: rgb(83, 3, 70);" class="text">Bookmark</p>
 
-            <div class="flower flower1">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-            </div>
-            <div class="flower flower2">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-            </div>
-            <div class="flower flower3">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-            </div>
-            <div class="flower flower4">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-            </div>
-            <div class="flower flower5">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-            </div>
-            <div class="flower flower6">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-            </div>
+          <div class="flower flower1">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
           </div>
-        </button>
+          <div class="flower flower2">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+          </div>
+          <div class="flower flower3">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+          </div>
+          <div class="flower flower4">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+          </div>
+          <div class="flower flower5">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+          </div>
+          <div class="flower flower6">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+          </div>
+        </div>
+      </button>
     </a>
+  </div>
 
-    <div class="container">
+  <a href="quote.html" class="magic-bookmark">📖 This reminded me of you <3</a> <div class="container">
       <h1>Hi Anika 🌷</h1>
       <p>I made this little garden just for you... You can't be the only one with cute ideas behind kissed notes 💖 Du
         hast mir kürzlich ein tolles Geschenk gemacht, und ich habe mir überlegt, wie ich mich repayen kann. Obwohl ich
@@ -116,500 +121,511 @@
       </div>
 
 
-    </div>
- <div class="carousel-container">
-              <h2 class="carousel-title">More Memories 🥰</h2>
-              <div class="carousel">
-                <button class="carousel-btn left" onclick="scrollCarousel(-1)">‹</button>
-                <div class="carousel-track" id="carouselTrack">
-                  <img src="images/ank (1).jpg" alt="memory 1" />
-                  <img src="images/ank (2).jpg" alt="memory 1" />
-                  <img src="images/ank (3).jpg" alt="memory 1" />
-                  <img src="images/ank (4).jpg" alt="memory 1" />
-                  <img src="images/ank (5).jpg" alt="memory 1" />
-                  <img src="images/ank (6).jpg" alt="memory 1" />
-                  <img src="images/bfr/img (12).jpg" alt="memory 1" />
-                  <img src="images/bfr/img (7).jpg" alt="memory 2" />
-                  <img src="images/bfr/img (8).jpg" alt="memory 3" />
-                  <img src="images/bfr/img (10).jpg" alt="memory 4" />
-                  <img src="images/bfr/img (11).jpg" alt="memory 5" />
-                  <img src="images/bfr/img (13).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (14).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (15).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (16).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (17).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (18).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (19).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (20).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (21).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (22).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (23).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (24).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (25).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (26).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (27).jpg" alt="memory 6" />
-                  <img src="images/bfr/img (1).jpg" alt="cute" />
-                  <img src="images/bfr/img (2).jpg" alt="bear" />
-                  <img src="images/bfr/img (3).jpg" alt="kitten" />
-                  <img src="images/bfr/img (5).jpg" alt="bear" />
-                  <img src="images/bfr/img (6).jpg" alt="kitten" />
-                  <img src="images/bfr/img (9).jpg" alt="bear" />
-                </div>
-                <button class="carousel-btn right" onclick="scrollCarousel(1)">›</button>
-              </div>
-        </div>
-
-        <div id="adminSection" style="display: none;">
-          <h2>🛠️ Admin Panel</h2>
-          <button onclick="manuallyArchiveOldNotes()" class="note-btn">
-            💾 Archive Old Notes
-          </button>
-
-          <div id="archivedDisplay" style="margin-top: 30px;">
-            <h3>📁 Archived Notes</h3>
+      </div>
+      <div class="carousel-container">
+        <h2 class="carousel-title">More Memories 🥰</h2>
+        <div class="carousel">
+          <button class="carousel-btn left" onclick="scrollCarousel(-1)">‹</button>
+          <div class="carousel-track" id="carouselTrack">
+            <img src="images/ank (1).jpg" alt="memory 1" />
+            <img src="images/ank (2).jpg" alt="memory 1" />
+            <img src="images/ank (3).jpg" alt="memory 1" />
+            <img src="images/ank (4).jpg" alt="memory 1" />
+            <img src="images/ank (5).jpg" alt="memory 1" />
+            <img src="images/ank (6).jpg" alt="memory 1" />
+            <img src="images/bfr/img (12).jpg" alt="memory 1" />
+            <img src="images/bfr/img (7).jpg" alt="memory 2" />
+            <img src="images/bfr/img (8).jpg" alt="memory 3" />
+            <img src="images/bfr/img (10).jpg" alt="memory 4" />
+            <img src="images/bfr/img (11).jpg" alt="memory 5" />
+            <img src="images/bfr/img (13).jpg" alt="memory 6" />
+            <img src="images/bfr/img (14).jpg" alt="memory 6" />
+            <img src="images/bfr/img (15).jpg" alt="memory 6" />
+            <img src="images/bfr/img (16).jpg" alt="memory 6" />
+            <img src="images/bfr/img (17).jpg" alt="memory 6" />
+            <img src="images/bfr/img (18).jpg" alt="memory 6" />
+            <img src="images/bfr/img (19).jpg" alt="memory 6" />
+            <img src="images/bfr/img (20).jpg" alt="memory 6" />
+            <img src="images/bfr/img (21).jpg" alt="memory 6" />
+            <img src="images/bfr/img (22).jpg" alt="memory 6" />
+            <img src="images/bfr/img (23).jpg" alt="memory 6" />
+            <img src="images/bfr/img (24).jpg" alt="memory 6" />
+            <img src="images/bfr/img (25).jpg" alt="memory 6" />
+            <img src="images/bfr/img (26).jpg" alt="memory 6" />
+            <img src="images/bfr/img (27).jpg" alt="memory 6" />
+            <img src="images/bfr/img (1).jpg" alt="cute" />
+            <img src="images/bfr/img (2).jpg" alt="bear" />
+            <img src="images/bfr/img (3).jpg" alt="kitten" />
+            <img src="images/bfr/img (5).jpg" alt="bear" />
+            <img src="images/bfr/img (6).jpg" alt="kitten" />
+            <img src="images/bfr/img (9).jpg" alt="bear" />
           </div>
+          <button class="carousel-btn right" onclick="scrollCarousel(1)">›</button>
         </div>
+      </div>
+
+      <div id="adminSection" style="display: none;">
+        <h2>🛠️ Admin Panel</h2>
+        <button onclick="manuallyArchiveOldNotes()" class="note-btn">
+          💾 Archive Old Notes
+        </button>
+
+        <div id="archivedDisplay" style="margin-top: 30px;">
+          <h3>📁 Archived Notes</h3>
+        </div>
+      </div>
 
 
 
 
-        <script>
-          const firebaseConfig = {
-            apiKey: "AIzaSyDvrQH8cgKTa5naq_X-LRX2hKvwKPVdyPs",
-            authDomain: "lovenotesforanika.firebaseapp.com",
-            databaseURL: "https://lovenotesforanika-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "lovenotesforanika",
-            storageBucket: "lovenotesforanika.firebasestorage.app",
-            messagingSenderId: "955890146894",
-            appId: "1:955890146894:web:458debbf68510359bd6d1f",
-            measurementId: "G-Z0KZYDREQS"
-          };
+      <script>
+        const firebaseConfig = {
+          apiKey: "AIzaSyDvrQH8cgKTa5naq_X-LRX2hKvwKPVdyPs",
+          authDomain: "lovenotesforanika.firebaseapp.com",
+          databaseURL: "https://lovenotesforanika-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "lovenotesforanika",
+          storageBucket: "lovenotesforanika.firebasestorage.app",
+          messagingSenderId: "955890146894",
+          appId: "1:955890146894:web:458debbf68510359bd6d1f",
+          measurementId: "G-Z0KZYDREQS"
+        };
 
-          firebase.initializeApp(firebaseConfig);
-          const db = firebase.database();
-
-
-
-          const popupBox = document.getElementById('popup-box');
-
-          function showPopup(message) {
-            popupBox.textContent = message;
-            popupBox.style.display = 'block';
-          }
-
-          const messaging = firebase.messaging();
-
-          function requestNotificationPermission() {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                messaging.getToken({
-                    vapidKey: "BHyJvAdi4CH02Owikax9kDnAbs4iA7jlJE5v8WT9lsKbo_ejCjuUZPkcEA3pmIXwtVtuIYZmQcpKGI7iz58Z1bY"
-                  })
-                  .then((currentToken) => {
-                    if (currentToken) {
-                      console.log("Token received:", currentToken);
-
-                      // 💾 Save the token to Firebase
-                      db.ref("notificationTokens/anika").set(currentToken);
-                    } else {
-                      console.warn("No token available.");
-                    }
-                  })
-                  .catch((err) => {
-                    console.error("Token retrieval error:", err);
-                  });
-              } else {
-                console.warn("Permission not granted.");
-              }
-            });
-          }
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
 
 
 
+        const popupBox = document.getElementById('popup-box');
 
-          const reasons = [
-            'I love how you always listen to me when I have to yaaaapp',
-            'I love how your hugs make the world around me stop',
-            'I love how you are always on my side, no matter what',
-            'I love our little "arguments" make my day always a tiny bit better',
-            'I love how I always get a smile on my face when you try to pay for small things',
-            'I love how you make me feel like I deserve to be loved',
-            'I love how you are always there when I need you the most',
-            'I love your reactions to my "foltern"',
-            'I love the way you laugh at my dumb jokes',
-            'I love the way you use emotional manipulation to make me melt',
-            'I love how you try gaslighting me, even though you know what you said..',
-            'I love the cute litte reels you send me each and every day, please never stop',
-            'I love your podcasts and voice messages that make my day just a bit brighter..',
-            'I love hearing about your life and whats going on when Im not there',
-            'I love our gossip sessions where we judge other people',
-            'I love hearing about whats going on at your school and how you want to punch people in the face',
-            'I love hearing your random ADHS stories and decicions you make throughout the day always bring a smile to my face',
-            'I love how youre there for other people, even though youre not always in the best mood',
-            'I love how you try to make others laugh and feel better, even when youre not a 100% yourself',
-            'I love how you always get so lost talking about your books, your beauty makes me fall in love more each day',
-            'I love the person that I am, when Im with you',
-            'I love how you make me want to give my best, each and every day',
-            'I love scrolling on my phone or being out with friends and seeing stuff that reminds me of you',
-            'I love how you care so much about me and your friends',
-            'I love every moment between us, the loudest laughs and the quietest silences',
-            'I love how I can trust you with everything in my life',
-            'I love how you change every enviroment youre in, making it not the same without you there',
-            'I love how youre there when I need someone to talk to',
-            'I love how you always know how to cheer me up',
-            'I love how you listen to little things I say to you, and remember them',
-            'I love how sassy we get together when talking about other people',
-            'I love your randomness sometimes, brining a smile to my face all the time',
-            'I love opening my phone or wallet and seeing your picture there, makes me smile even if Im feeling shiiittt <3 ',
-            'I love seeing you in my hoodies, tshirts or generally showing off anything I give you',
-            'I love your touch, It makes me freeze up and melt at the same time',
-            'I love how you show off were together, especially around others or in public',
-            'I love holding your hand while walking down the street, showing youre mine and Im yours',
-            'I love how we get to laugh at the same dumb humour',
-            'I love how we both get jokes nobody else does',
-            'I love how we always think "wrong" and "dirty" after someone said something that could be missunderstood',
-            'I love how risky we get with each other sometimes, even though a bit more wouldnt hurt',
-            'I love spending time with you, hating the moment I have to say goodbye',
-            'I love being lost in your arms',
-            'I love laying in your lap by the sea, you caressing my hair, a perfect moment with THE perfect person',
-            'I love your energy',
-            'I love your pure heart',
-            'I love how unique you are, your voice, eyes, everything being Einzig-Artig und einfach wow..',
-            'I love the unforgetable smell of your parfume',
-            'I love the most amazing taste of your lips',
-            'I love how you made me believe in "forever" again',
-            'I love how you dont treat me as an option, but your one and only',
-            'I love how you fix my hair, clothes or remove something that falls onto my face',
-            'I love how you cant make me angry at you',
-            'I love the dreams I have about you each night',
-            'I love the way you fake being mad at me just to get extra kisses',
-            'I love how you try to win arguments with guilt trips (and it works)',
-            'I love how I get butterflies even from your smallest texts',
-            'I love that we always stay up together, even though were both sleepyyy',
-            'I love how you wear my hoodie and act like its yours now (it kinda is)',
-            'I love how we somehow end up cuddling during serious conversations',
-            'I love how you pull me closer like Im your personal pillow',
-            'I love how you pretend youre not needy but the cuddles say otherwise',
-            'I love how you give me "the look" and I instantly know whats up',
-            'I love how your kisses make me forget what I was mad about',
-            'I love the way you whisper things in my ear and make me blush like crazy',
-            'I love how you make even the most boring things feel like a fun date',
-            'I love how we have our own secret language and jokes',
-            'I love how your clinginess matches my neediness perfectly',
-            'I love how your neediness matches my clinginess perfectly',
-            'I love how you always know exactly how to push my buttons…',
-            'I love how torturing you on feels like a superpower',
-            'I love how we can flirt without saying a single word',
-            'I love how you leave your scent on my clothes just to torture me',
-            'I love how you pretend to be shy, then say the most chaotic things',
-            'I love how you always end up next to me, no matter the situation',
-            'I love how your teasing turns into full-blown seduction sometimes',
-            'I love how we can go from sweet to spicy in 0.3 seconds',
-            'I love how you randomly flash me with affection… or something else..',
-            'I love how you know exactly where to touch me or what to say to calm me down',
-            'I love how you make a simple kiss feel like a promise',
-            'I love the look you give me when youre up to no good',
-            'I love how you make me feel like the only person in the room',
-            'I love how you take care of me like a partner, not just a lover',
-            'I love how you always want "just a few more minutes" when were outside and both being late home',
-            'I love how you make even silence feel intimate',
-            'I love the way you get all snuggly and warm when youre sleepy',
-            'I love how you make fun of me but still adore me endlessly',
-            'I love how you touch my body and face when we kiss, it makes me melt',
-            'I love how we can have an entire conversation with just eye contact',
-            'I love how you sometimes act like a brat just to get my attention',
-            'I love how you always make me want to be touching or holding you somehow',
-            'I love how we talk about the future like its already ours',
-            'I love how we both get to laugh over ugly images and stickers from each other',
-            'I love how our personality types match up perfectly (ENFJxINTP 🔛🔝)',
-            'I love our phone calls that feel like they last 10 minutes and not three hours..',
-            'I love our ability to roast each other for 30 minutes, then go to kissing in a second',
-            'I love how we can talk about both nothing and everything all the time',
-            'I love every second, minute, hour, day spent with you',
-            'I love your eyes, smile, hair, body, humor, smell, style, voice. Everything about you.',
-            'I love YOU, Anika.'
+        function showPopup(message) {
+          popupBox.textContent = message;
+          popupBox.style.display = 'block';
+        }
 
-          ];
+        const messaging = firebase.messaging();
 
-          function scrollCarousel(direction) {
-            const track = document.getElementById('carouselTrack');
-            const scrollAmount = 300;
-            track.scrollBy({
-              left: direction * scrollAmount,
-              behavior: 'smooth'
-            });
-          }
+        function requestNotificationPermission() {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              messaging.getToken({
+                  vapidKey: "BHyJvAdi4CH02Owikax9kDnAbs4iA7jlJE5v8WT9lsKbo_ejCjuUZPkcEA3pmIXwtVtuIYZmQcpKGI7iz58Z1bY"
+                })
+                .then((currentToken) => {
+                  if (currentToken) {
+                    console.log("Token received:", currentToken);
 
-          let startX = 0;
-          let isDown = false;
-
-          const carousel = document.getElementById('carouselTrack');
-
-          carousel.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            isDown = true;
-          });
-
-          carousel.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            const currentX = e.touches[0].clientX;
-            const diff = startX - currentX;
-            carousel.scrollLeft += diff;
-            startX = currentX;
-          });
-
-          carousel.addEventListener('touchend', () => {
-            isDown = false;
-          });
-
-
-
-          const list = document.getElementById('reasons-list');
-          for (let i = 0; i < reasons.length; i++) {
-            const div = document.createElement('div');
-            div.className = 'reason';
-            div.textContent = `${i + 1}. ${reasons[i]}`;
-            list.appendChild(div);
-          }
-
-          function updateTimeSince() {
-            const startDate = new Date("March 5, 2025 14:00:00");
-            const now = new Date();
-            const diff = now - startDate;
-
-            const seconds = Math.floor(diff / 1000) % 60;
-            const minutes = Math.floor(diff / (1000 * 60)) % 60;
-            const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-            document.getElementById("time-since").textContent =
-              `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds 💞`;
-          }
-
-          function showPopup(message) {
-            popupBox.textContent = message;
-            popupBox.classList.add('show');
-          }
-
-
-
-          setInterval(updateTimeSince, 1000);
-          updateTimeSince();
-
-          function addNote() {
-            const from = document.getElementById('noteFrom').value.trim();
-            const text = document.getElementById('noteInput').value.trim();
-            if (!text || !from) return;
-
-            const timestamp = getFormattedDate();
-
-            const newNote = {
-              from,
-              text,
-              time: timestamp
-            };
-
-            db.ref("loveNotes").push(newNote);
-
-            document.getElementById('noteInput').value = '';
-            document.getElementById('noteFrom').value = '';
-
-            confetti({
-              particleCount: 100,
-              spread: 70,
-              origin: {
-                y: 0.6
-              }
-            });
-
-            showNotification(from);
-
-            if (from.toLowerCase().includes("maidadmin")) {
-              localStorage.setItem("admin", "true");
-              document.getElementById("adminSection").style.display = "block";
-            }
-
-            window.onload = () => {
-              if (yourAreAdmin()) renderArchivedNotes();
-            };
-          }
-
-          function manuallyArchiveOldNotes() {
-            db.ref("loveNotes").once("value", (snapshot) => {
-              const updates = {};
-              const deletions = {};
-
-              snapshot.forEach((child) => {
-                const note = child.val();
-                const key = child.key;
-
-                // Archive everything, no matter how old
-                updates[`/archivedNotes/${key}`] = note;
-                deletions[`/loveNotes/${key}`] = null;
-              });
-
-              if (Object.keys(updates).length > 0) {
-                db.ref().update({
-                    ...updates,
-                    ...deletions
-                  })
-                  .then(() => {
-                    alert("🗃️ All current notes have been archived.");
-                    renderArchivedNotes(); // Refresh archive display
-                    renderNotes(); // Optionally clear live view
-                  })
-                  .catch((err) => {
-                    console.error("Error archiving notes:", err);
-                  });
-              } else {
-                alert("📭 No notes found to archive.");
-              }
-            });
-          }
-
-
-          function renderArchivedNotes() {
-            const display = document.getElementById('archivedDisplay');
-            db.ref("archivedNotes").once("value", (snapshot) => {
-              display.innerHTML = '<h3>📁 Archived Notes</h3>';
-              const notes = snapshot.val();
-
-              if (notes) {
-                Object.entries(notes).forEach(([key, note]) => {
-                  const div = document.createElement('div');
-                  div.className = 'note archived';
-                  div.innerHTML = `
-          <strong>${note.from}</strong> <em>(${note.time})</em><br>${note.text}
-          <br><button onclick="restoreNote('${key}')">🔁 Restore</button>
-        `;
-                  display.appendChild(div);
-                });
-              } else {
-                display.innerHTML += "<p>No archived notes.</p>";
-              }
-            });
-          }
-
-          function yourAreAdmin() {
-            // Replace with something real if needed
-            return localStorage.getItem("admin") === "true";
-          }
-
-          function showNotification(from) {
-            const notification = document.getElementById('notification');
-            const name = from.toLowerCase();
-
-            let message = "";
-            if (name.includes("anika")) {
-              message = "🌷 A love note from Anika!";
-            } else if (name.includes("maid") || name.includes("majd") || name.includes("dein vollidiot") || name
-              .includes("your boy")) {
-              message = "🧸 Dein Vollidiot left you a message!";
-            } else {
-              message = "💌 Neue Notification!";
-            }
-
-            notification.innerHTML = `<p>${message}</p>`;
-            notification.style.display = 'block';
-
-            setTimeout(() => {
-              notification.classList.add('show');
-            }, 10);
-
-            setTimeout(() => {
-              notification.classList.remove('show');
-              setTimeout(() => {
-                notification.style.display = 'none';
-              }, 500);
-            }, 5000);
-          }
-
-
-
-
-
-
-          function renderNotes() {
-            const display = document.getElementById('notesDisplay');
-            db.ref("loveNotes").on("value", (snapshot) => {
-              display.innerHTML = '';
-              const notes = snapshot.val();
-              if (notes) {
-                Object.values(notes).forEach(note => {
-                  const sender = note.from || "Someone";
-                  const time = note.time || "";
-                  const div = document.createElement('div');
-                  div.className = 'note';
-                  div.innerHTML = `<strong>${sender}</strong> <em>(${time})</em><br>${note.text}`;
-                  display.appendChild(div);
-                });
-              }
-            });
-          }
-          window.onload = () => {
-            renderNotes();
-          };
-
-          function restoreNote(key) {
-            db.ref(`archivedNotes/${key}`).once("value", (snapshot) => {
-              const note = snapshot.val();
-              if (!note) return;
-
-              db.ref(`loveNotes/${key}`).set(note)
-                .then(() => db.ref(`archivedNotes/${key}`).remove())
-                .then(() => {
-                  alert("🔁 Note restored!");
-                  renderArchivedNotes();
-                  renderNotes();
+                    // 💾 Save the token to Firebase
+                    db.ref("notificationTokens/anika").set(currentToken);
+                  } else {
+                    console.warn("No token available.");
+                  }
                 })
                 .catch((err) => {
-                  console.error("Restore error:", err);
+                  console.error("Token retrieval error:", err);
                 });
-            });
-          }
+            } else {
+              console.warn("Permission not granted.");
+            }
+          });
+        }
 
 
 
-          function getFormattedDate() {
-            const now = new Date();
-            const day = String(now.getDate()).padStart(2, '0');
-            const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-            const year = now.getFullYear();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            return `${day}/${month}/${year} ${hours}:${minutes}`;
-          }
+
+        const reasons = [
+          'I love how you always listen to me when I have to yaaaapp',
+          'I love how your hugs make the world around me stop',
+          'I love how you are always on my side, no matter what',
+          'I love our little "arguments" make my day always a tiny bit better',
+          'I love how I always get a smile on my face when you try to pay for small things',
+          'I love how you make me feel like I deserve to be loved',
+          'I love how you are always there when I need you the most',
+          'I love your reactions to my "foltern"',
+          'I love the way you laugh at my dumb jokes',
+          'I love the way you use emotional manipulation to make me melt',
+          'I love how you try gaslighting me, even though you know what you said..',
+          'I love the cute litte reels you send me each and every day, please never stop',
+          'I love your podcasts and voice messages that make my day just a bit brighter..',
+          'I love hearing about your life and whats going on when Im not there',
+          'I love our gossip sessions where we judge other people',
+          'I love hearing about whats going on at your school and how you want to punch people in the face',
+          'I love hearing your random ADHS stories and decicions you make throughout the day always bring a smile to my face',
+          'I love how youre there for other people, even though youre not always in the best mood',
+          'I love how you try to make others laugh and feel better, even when youre not a 100% yourself',
+          'I love how you always get so lost talking about your books, your beauty makes me fall in love more each day',
+          'I love the person that I am, when Im with you',
+          'I love how you make me want to give my best, each and every day',
+          'I love scrolling on my phone or being out with friends and seeing stuff that reminds me of you',
+          'I love how you care so much about me and your friends',
+          'I love every moment between us, the loudest laughs and the quietest silences',
+          'I love how I can trust you with everything in my life',
+          'I love how you change every enviroment youre in, making it not the same without you there',
+          'I love how youre there when I need someone to talk to',
+          'I love how you always know how to cheer me up',
+          'I love how you listen to little things I say to you, and remember them',
+          'I love how sassy we get together when talking about other people',
+          'I love your randomness sometimes, brining a smile to my face all the time',
+          'I love opening my phone or wallet and seeing your picture there, makes me smile even if Im feeling shiiittt <3 ',
+          'I love seeing you in my hoodies, tshirts or generally showing off anything I give you',
+          'I love your touch, It makes me freeze up and melt at the same time',
+          'I love how you show off were together, especially around others or in public',
+          'I love holding your hand while walking down the street, showing youre mine and Im yours',
+          'I love how we get to laugh at the same dumb humour',
+          'I love how we both get jokes nobody else does',
+          'I love how we always think "wrong" and "dirty" after someone said something that could be missunderstood',
+          'I love how risky we get with each other sometimes, even though a bit more wouldnt hurt',
+          'I love spending time with you, hating the moment I have to say goodbye',
+          'I love being lost in your arms',
+          'I love laying in your lap by the sea, you caressing my hair, a perfect moment with THE perfect person',
+          'I love your energy',
+          'I love your pure heart',
+          'I love how unique you are, your voice, eyes, everything being Einzig-Artig und einfach wow..',
+          'I love the unforgetable smell of your parfume',
+          'I love the most amazing taste of your lips',
+          'I love how you made me believe in "forever" again',
+          'I love how you dont treat me as an option, but your one and only',
+          'I love how you fix my hair, clothes or remove something that falls onto my face',
+          'I love how you cant make me angry at you',
+          'I love the dreams I have about you each night',
+          'I love the way you fake being mad at me just to get extra kisses',
+          'I love how you try to win arguments with guilt trips (and it works)',
+          'I love how I get butterflies even from your smallest texts',
+          'I love that we always stay up together, even though were both sleepyyy',
+          'I love how you wear my hoodie and act like its yours now (it kinda is)',
+          'I love how we somehow end up cuddling during serious conversations',
+          'I love how you pull me closer like Im your personal pillow',
+          'I love how you pretend youre not needy but the cuddles say otherwise',
+          'I love how you give me "the look" and I instantly know whats up',
+          'I love how your kisses make me forget what I was mad about',
+          'I love the way you whisper things in my ear and make me blush like crazy',
+          'I love how you make even the most boring things feel like a fun date',
+          'I love how we have our own secret language and jokes',
+          'I love how your clinginess matches my neediness perfectly',
+          'I love how your neediness matches my clinginess perfectly',
+          'I love how you always know exactly how to push my buttons…',
+          'I love how torturing you on feels like a superpower',
+          'I love how we can flirt without saying a single word',
+          'I love how you leave your scent on my clothes just to torture me',
+          'I love how you pretend to be shy, then say the most chaotic things',
+          'I love how you always end up next to me, no matter the situation',
+          'I love how your teasing turns into full-blown seduction sometimes',
+          'I love how we can go from sweet to spicy in 0.3 seconds',
+          'I love how you randomly flash me with affection… or something else..',
+          'I love how you know exactly where to touch me or what to say to calm me down',
+          'I love how you make a simple kiss feel like a promise',
+          'I love the look you give me when youre up to no good',
+          'I love how you make me feel like the only person in the room',
+          'I love how you take care of me like a partner, not just a lover',
+          'I love how you always want "just a few more minutes" when were outside and both being late home',
+          'I love how you make even silence feel intimate',
+          'I love the way you get all snuggly and warm when youre sleepy',
+          'I love how you make fun of me but still adore me endlessly',
+          'I love how you touch my body and face when we kiss, it makes me melt',
+          'I love how we can have an entire conversation with just eye contact',
+          'I love how you sometimes act like a brat just to get my attention',
+          'I love how you always make me want to be touching or holding you somehow',
+          'I love how we talk about the future like its already ours',
+          'I love how we both get to laugh over ugly images and stickers from each other',
+          'I love how our personality types match up perfectly (ENFJxINTP 🔛🔝)',
+          'I love our phone calls that feel like they last 10 minutes and not three hours..',
+          'I love our ability to roast each other for 30 minutes, then go to kissing in a second',
+          'I love how we can talk about both nothing and everything all the time',
+          'I love every second, minute, hour, day spent with you',
+          'I love your eyes, smile, hair, body, humor, smell, style, voice. Everything about you.',
+          'I love YOU, Anika.'
+
+        ];
+
+        function scrollCarousel(direction) {
+          const track = document.getElementById('carouselTrack');
+          const scrollAmount = 300;
+          track.scrollBy({
+            left: direction * scrollAmount,
+            behavior: 'smooth'
+          });
+        }
+
+        let startX = 0;
+        let isDown = false;
+
+        const carousel = document.getElementById('carouselTrack');
+
+        carousel.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+          isDown = true;
+        });
+
+        carousel.addEventListener('touchmove', (e) => {
+          if (!isDown) return;
+          const currentX = e.touches[0].clientX;
+          const diff = startX - currentX;
+          carousel.scrollLeft += diff;
+          startX = currentX;
+        });
+
+        carousel.addEventListener('touchend', () => {
+          isDown = false;
+        });
 
 
 
-          const timestamp = new Date().toLocaleString();
-          notes.push({
+        const list = document.getElementById('reasons-list');
+        for (let i = 0; i < reasons.length; i++) {
+          const div = document.createElement('div');
+          div.className = 'reason';
+          div.textContent = `${i + 1}. ${reasons[i]}`;
+          list.appendChild(div);
+        }
+
+        function updateTimeSince() {
+          const startDate = new Date("March 5, 2025 14:00:00");
+          const now = new Date();
+          const diff = now - startDate;
+
+          const seconds = Math.floor(diff / 1000) % 60;
+          const minutes = Math.floor(diff / (1000 * 60)) % 60;
+          const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+          document.getElementById("time-since").textContent =
+            `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds 💞`;
+        }
+
+        function showPopup(message) {
+          popupBox.textContent = message;
+          popupBox.classList.add('show');
+        }
+
+
+
+        setInterval(updateTimeSince, 1000);
+        updateTimeSince();
+
+        function addNote() {
+          const from = document.getElementById('noteFrom').value.trim();
+          const text = document.getElementById('noteInput').value.trim();
+          if (!text || !from) return;
+
+          const timestamp = getFormattedDate();
+
+          const newNote = {
             from,
             text,
             time: timestamp
+          };
+
+          db.ref("loveNotes").push(newNote);
+
+          document.getElementById('noteInput').value = '';
+          document.getElementById('noteFrom').value = '';
+
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: {
+              y: 0.6
+            }
           });
 
-          function fakeTypingEffect(text, element) {
-            let i = 0;
+          showNotification(from);
 
-            function type() {
-              if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, 40);
-              }
-            }
-            type();
+          if (from.toLowerCase().includes("maidadmin")) {
+            localStorage.setItem("admin", "true");
+            document.getElementById("adminSection").style.display = "block";
           }
 
           window.onload = () => {
-            renderNotes();
-            if (yourAreAdmin()) {
-              document.getElementById("adminSection").style.display = "block";
-              renderArchivedNotes();
-            }
+            if (yourAreAdmin()) renderArchivedNotes();
           };
-        </script>
+        }
+
+        function manuallyArchiveOldNotes() {
+          db.ref("loveNotes").once("value", (snapshot) => {
+            const updates = {};
+            const deletions = {};
+
+            snapshot.forEach((child) => {
+              const note = child.val();
+              const key = child.key;
+
+              // Archive everything, no matter how old
+              updates[`/archivedNotes/${key}`] = note;
+              deletions[`/loveNotes/${key}`] = null;
+            });
+
+            if (Object.keys(updates).length > 0) {
+              db.ref().update({
+                  ...updates,
+                  ...deletions
+                })
+                .then(() => {
+                  alert("🗃️ All current notes have been archived.");
+                  renderArchivedNotes(); // Refresh archive display
+                  renderNotes(); // Optionally clear live view
+                })
+                .catch((err) => {
+                  console.error("Error archiving notes:", err);
+                });
+            } else {
+              alert("📭 No notes found to archive.");
+            }
+          });
+        }
+
+
+        function renderArchivedNotes() {
+          const display = document.getElementById('archivedDisplay');
+          db.ref("archivedNotes").once("value", (snapshot) => {
+            display.innerHTML = '<h3>📁 Archived Notes</h3>';
+            const notes = snapshot.val();
+
+            if (notes) {
+              Object.entries(notes).forEach(([key, note]) => {
+                const div = document.createElement('div');
+                div.className = 'note archived';
+                div.innerHTML = `
+          <strong>${note.from}</strong> <em>(${note.time})</em><br>${note.text}
+          <br><button onclick="restoreNote('${key}')">🔁 Restore</button>
+        `;
+                display.appendChild(div);
+              });
+            } else {
+              display.innerHTML += "<p>No archived notes.</p>";
+            }
+          });
+        }
+
+        function yourAreAdmin() {
+          // Replace with something real if needed
+          return localStorage.getItem("admin") === "true";
+        }
+
+        function showNotification(from) {
+          const notification = document.getElementById('notification');
+          const name = from.toLowerCase();
+
+          let message = "";
+          if (name.includes("anika")) {
+            message = "🌷 A love note from Anika!";
+          } else if (name.includes("maid") || name.includes("majd") || name.includes("dein vollidiot") || name
+            .includes("your boy")) {
+            message = "🧸 Dein Vollidiot left you a message!";
+          } else {
+            message = "💌 Neue Notification!";
+          }
+
+          notification.innerHTML = `<p>${message}</p>`;
+          notification.style.display = 'block';
+
+          setTimeout(() => {
+            notification.classList.add('show');
+          }, 10);
+
+          setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+              notification.style.display = 'none';
+            }, 500);
+          }, 5000);
+        }
+
+
+
+
+
+
+        function renderNotes() {
+          const display = document.getElementById('notesDisplay');
+          db.ref("loveNotes").on("value", (snapshot) => {
+            display.innerHTML = '';
+            const notes = snapshot.val();
+            if (notes) {
+              Object.values(notes).forEach(note => {
+                const sender = note.from || "Someone";
+                const time = note.time || "";
+                const div = document.createElement('div');
+                div.className = 'note';
+                div.innerHTML = `<strong>${sender}</strong> <em>(${time})</em><br>${note.text}`;
+                display.appendChild(div);
+              });
+            }
+          });
+        }
+        window.onload = () => {
+          renderNotes();
+        };
+
+        function restoreNote(key) {
+          db.ref(`archivedNotes/${key}`).once("value", (snapshot) => {
+            const note = snapshot.val();
+            if (!note) return;
+
+            db.ref(`loveNotes/${key}`).set(note)
+              .then(() => db.ref(`archivedNotes/${key}`).remove())
+              .then(() => {
+                alert("🔁 Note restored!");
+                renderArchivedNotes();
+                renderNotes();
+              })
+              .catch((err) => {
+                console.error("Restore error:", err);
+              });
+          });
+        }
+
+
+
+        function getFormattedDate() {
+          const now = new Date();
+          const day = String(now.getDate()).padStart(2, '0');
+          const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+          const year = now.getFullYear();
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          return `${day}/${month}/${year} ${hours}:${minutes}`;
+        }
+
+
+
+        const timestamp = new Date().toLocaleString();
+        notes.push({
+          from,
+          text,
+          time: timestamp
+        });
+
+        function fakeTypingEffect(text, element) {
+          let i = 0;
+
+          function type() {
+            if (i < text.length) {
+              element.innerHTML += text.charAt(i);
+              i++;
+              setTimeout(type, 40);
+            }
+          }
+          type();
+        }
+
+        window.onload = () => {
+          renderNotes();
+          if (yourAreAdmin()) {
+            document.getElementById("adminSection").style.display = "block";
+            renderArchivedNotes();
+          }
+        };
+
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function () {
+            navigator.serviceWorker.register('service-worker.js')
+              .then(function (registration) {
+                console.log('Service Worker registered with scope:', registration.scope);
+              }).catch(function (error) {
+                console.log('Service Worker registration failed:', error);
+              });
+          });
+        }
+      </script>
 
 </body>
 
