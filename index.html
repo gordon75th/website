@@ -17,7 +17,6 @@
 </head>
 
 <body>
-  <div class="music-control" onclick="toggleMusic()">🎵 Pause Music</div>
   <div><a href="quote.html" class="magic-bookmark">📖 This reminded me of you <3 </a> </div> <a href="library.html">
         <button class="btn">
           <div class="wrapper">
@@ -62,12 +61,6 @@
           </div>
         </button>
     </a>
-
-
-
-    <audio id="bg-music" autoplay loop>
-      <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
-    </audio>
 
     <div class="container">
       <h1>Hi Anika 🌷</h1>
@@ -174,7 +167,6 @@
 
           <div id="archivedDisplay" style="margin-top: 30px;">
             <h3>📁 Archived Notes</h3>
-            <!-- Archived notes will appear here -->
           </div>
         </div>
 
@@ -378,21 +370,6 @@
             div.className = 'reason';
             div.textContent = `${i + 1}. ${reasons[i]}`;
             list.appendChild(div);
-          }
-
-          const music = document.getElementById('bg-music');
-          const control = document.querySelector('.music-control');
-          let isPlaying = true;
-
-          function toggleMusic() {
-            if (isPlaying) {
-              music.pause();
-              control.textContent = '🎵 Play Music';
-            } else {
-              music.play();
-              control.textContent = '🎵 Pause Music';
-            }
-            isPlaying = !isPlaying;
           }
 
           function updateTimeSince() {
