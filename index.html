@@ -11,6 +11,7 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-messaging-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <audio id="notification-sound" src="images/notification.wav" preload="auto"></audio>
 </head>
@@ -108,6 +109,8 @@
           placeholder="Du kannst hier immer mit mit yappenn, auch wenn ich schlafe oder nicht da bin..."
           rows="4"></textarea> <br>
         <button class="note-btn" onclick="addNote()">Send</button>
+        <button class="note-btn" onclick="requestNotificationPermission()">Enable Love Alerts 💌</button>
+
 
 
 
@@ -200,6 +203,8 @@
 
           firebase.initializeApp(firebaseConfig);
           const db = firebase.database();
+          const messaging = firebase.messaging();
+
 
 
           const popupBox = document.getElementById('popup-box');
@@ -208,6 +213,22 @@
             popupBox.textContent = message;
             popupBox.style.display = 'block';
           }
+
+          function requestNotificationPermission() {
+  messaging.requestPermission()
+    .then(() => {
+      console.log("Notification permission granted.");
+      return messaging.getToken();
+    })
+    .then(token => {
+      console.log("Device token:", token);
+firebase.database().ref("notificationTokens/anika").set(token);
+    })
+    .catch(err => {
+      console.log("Permission denied", err);
+    });
+}
+
 
           const reasons = [
             'I love how you always listen to me when I have to yaaaapp',
