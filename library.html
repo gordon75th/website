@@ -130,6 +130,66 @@
         .back-button:hover {
             background-color: #328E6E;
         }
+
+        .noteFrom {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #d4ffd2;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-family: 'Quicksand', sans-serif;
+  background-color: #f6fff7;
+  color: #444;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.noteFrom:focus {
+  outline: none;
+  border-color: #9effb3;
+  box-shadow: 0 0 8px rgba(255, 158, 188, 0.5);
+}
+
+#libNote {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #d4ffd2;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-family: 'Quicksand', sans-serif;
+  background-color: #f6fff7;
+  color: #444;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#libNote:focus {
+  outline: none;
+  border-color: #9effb3;
+  box-shadow: 0 0 8px rgba(255, 158, 188, 0.5);
+}
+
+.note-btn {
+  background-color: #1f572b;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  font-family: 'Pacifico', cursive;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.note-btn:hover {
+  background-color: #ff8fab;
+}
+
     </style>
 </head>
 
@@ -146,12 +206,18 @@
                 const textColor = (shade === '#E1EEBC') ? '#328E6E' : 'white';
                 document.write(
                     `<div class="book-spine" style="background:${shade}; color:${textColor}" onclick="openModal(${i})">${i + 1}</div>`
-                    );
+                );
             }
         </script>
     </div>
+    <div class="quote-box" style="margin-top: 40px;">
+        <h3>✍️ Leave a Note for the Library</h3>
+        <input class="noteFrom" id="libFrom" placeholder="Your name..." /><br><br>
+        <textarea id="libNote" rows="3" placeholder="Write a little memory, message, or moment..."></textarea><br><br>
+        <button class="note-btn" onclick="addLibraryNote()">📚 Add to Library</button>
+    </div>
 
-    <div class="quote-box" id="quote-box">Click a book to reveal a memory 💭</div>
+    <div id="libraryNotes" style="margin-top: 20px;"></div>
 
     <script>
         const messages = [
@@ -215,6 +281,62 @@
             }
         }
     </script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvrQH8cgKTa5naq_X-LRX2hKvwKPVdyPs",
+            authDomain: "lovenotesforanika.firebaseapp.com",
+            databaseURL: "https://lovenotesforanika-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "lovenotesforanika",
+            storageBucket: "lovenotesforanika.appspot.com",
+            messagingSenderId: "955890146894",
+            appId: "1:955890146894:web:458debbf68510359bd6d1f"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        function addLibraryNote() {
+            const from = document.getElementById('libFrom').value.trim();
+            const text = document.getElementById('libNote').value.trim();
+            const time = new Date().toLocaleString();
+            if (!from || !text) return;
+
+            const note = {
+                from,
+                text,
+                time
+            };
+
+            db.ref("libraryNotes").push(note);
+
+            document.getElementById('libFrom').value = '';
+            document.getElementById('libNote').value = '';
+        }
+
+        function loadLibraryNotes() {
+            const display = document.getElementById('libraryNotes');
+            db.ref("libraryNotes").on("value", (snapshot) => {
+                display.innerHTML = '';
+                const notes = snapshot.val();
+                if (notes) {
+                    Object.values(notes).forEach(note => {
+                        const div = document.createElement('div');
+                        div.className = 'note';
+                        div.innerHTML =
+                            `<strong>${note.from}</strong> <em>(${note.time})</em><br>${note.text}`;
+                        display.appendChild(div);
+                    });
+                }
+            });
+        }
+
+        loadLibraryNotes();
+    </script>
+
 </body>
 
 </html>

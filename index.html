@@ -120,6 +120,20 @@
         <p>💌 New message!</p>
       </div>
 
+      <div class="love-notes" style="margin-top: 50px;">
+        <h2>💫 Chat with Future You</h2>
+        <input class="noteFrom" id="futureFrom" placeholder="From (vllttt futuree Anika oder Maid?)" /> <br>
+        <textarea class="noteFrom" id="futureInput" rows="4"
+          placeholder="Write a message for Future You..."></textarea><br>
+        <label style="font-family: 'Quicksand'; color: #c9184a;">Unlock Date:</label>
+        <input type="date" id="unlockDate" class="noteFrom" /> <br>
+        <button class="note-btn" onclick="addFutureMessage()">Send to the Future 💌</button>
+
+
+
+        <div id="futureMessages" style="margin-top: 30px;"></div>
+      </div>
+
 
       </div>
       <div class="carousel-container">
@@ -625,6 +639,61 @@
               });
           });
         }
+
+        function addFutureMessage() {
+          const from = document.getElementById('futureFrom').value.trim();
+          const text = document.getElementById('futureInput').value.trim();
+          const unlockDate = document.getElementById('unlockDate').value;
+          const time = getFormattedDate();
+
+          if (!text || !from || !unlockDate) return;
+
+          const message = {
+            from,
+            text,
+            unlockDate,
+            time
+          };
+
+          db.ref("futureMessages").push(message);
+
+          document.getElementById('futureFrom').value = '';
+          document.getElementById('futureInput').value = '';
+          document.getElementById('unlockDate').value = '';
+
+          alert("💌 Message saved for the future!");
+          loadFutureMessages();
+        }
+
+
+        function loadFutureMessages() {
+          const container = document.getElementById('futureMessages');
+          db.ref("futureMessages").on("value", (snapshot) => {
+            container.innerHTML = '';
+            const messages = snapshot.val();
+            if (messages) {
+              Object.values(messages).forEach(msg => {
+                const div = document.createElement('div');
+                div.className = 'note';
+
+                const today = new Date();
+                const unlock = new Date(msg.unlockDate);
+
+                if (today >= unlock) {
+                  div.innerHTML = `<strong>${msg.from}</strong> <em>(${msg.time})</em><br>${msg.text}`;
+                } else {
+                  div.innerHTML =
+                    `<strong>${msg.from}</strong> <em>(${msg.time})</em><br>🔒 This message unlocks on <b>${msg.unlockDate}</b>`;
+                }
+
+                container.appendChild(div);
+              });
+            }
+          });
+        }
+
+
+        loadFutureMessages();
       </script>
 
 </body>
