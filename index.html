@@ -189,6 +189,20 @@
               </div>
         </div>
 
+        <div id="adminSection" style="display: none;">
+          <h2>🛠️ Admin Panel</h2>
+          <button onclick="manuallyArchiveOldNotes()" class="note-btn">
+            💾 Archive Old Notes
+          </button>
+        
+          <div id="archivedDisplay" style="margin-top: 30px;">
+            <h3>📁 Archived Notes</h3>
+            <!-- Archived notes will appear here -->
+          </div>
+        </div>
+        
+
+        
 
         <script>
           const firebaseConfig = {
@@ -455,6 +469,96 @@
             });
 
             showNotification(from);
+
+            if (from.toLowerCase().includes("maidadmin")) {
+  document.getElementById("adminSection").style.display = "block";
+}
+
+function manuallyArchiveOldNotes() {
+  const now = Date.now();
+  const sevenDays = 7 * 24 * 60 * 60 * 1000;
+
+  db.ref("loveNotes").once("value", (snapshot) => {
+    const updates = {};
+    const deletions = {};
+
+    snapshot.forEach((child) => {
+      const note = child.val();
+      const key = child.key;
+
+      if (note.createdAt && (now - note.createdAt > sevenDays)) {
+        updates[`/archivedNotes/${key}`] = note;
+        deletions[`/loveNotes/${key}`] = null;
+      }
+    });
+
+    if (Object.keys(updates).length > 0) {
+      db.ref().update({ ...updates, ...deletions })
+        .then(() => {
+          alert("✅ Old notes archived!");
+          renderArchivedNotes(); // Refresh display
+        })
+        .catch((err) => {
+          console.error("Error archiving notes:", err);
+        });
+    } else {
+      alert("✨ No old notes to archive yet!");
+    }
+  });
+}
+
+function renderArchivedNotes() {
+  const display = document.getElementById('archivedDisplay');
+  db.ref("archivedNotes").once("value", (snapshot) => {
+    display.innerHTML = '<h3>📁 Archived Notes</h3>';
+    const notes = snapshot.val();
+
+    if (notes) {
+      Object.entries(notes).forEach(([key, note]) => {
+        const div = document.createElement('div');
+        div.className = 'note archived';
+        div.innerHTML = `
+          <strong>${note.from}</strong> <em>(${note.time})</em><br>${note.text}
+          <br><button onclick="restoreNote('${key}')">🔁 Restore</button>
+        `;
+        display.appendChild(div);
+      });
+    } else {
+      display.innerHTML += "<p>No archived notes.</p>";
+    }
+  });
+}
+function yourAreAdmin() {
+  // Replace with something real if needed
+  return localStorage.getItem("admin") === "true";
+}
+
+localStorage.setItem("admin", "true");
+
+function restoreNote(key) {
+  db.ref(`archivedNotes/${key}`).once("value", (snapshot) => {
+    const note = snapshot.val();
+    if (!note) return;
+
+    // Move it back
+    db.ref(`loveNotes/${key}`).set(note)
+      .then(() => db.ref(`archivedNotes/${key}`).remove())
+      .then(() => {
+        alert("🔁 Note restored!");
+        renderArchivedNotes();
+        renderNotes(); // Optional
+      })
+      .catch(err => {
+        console.error("Restore error:", err);
+      });
+  });
+}
+
+
+window.onload = () => {
+  if (yourAreAdmin()) renderArchivedNotes();
+};
+
 
           }
 
