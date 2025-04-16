@@ -217,19 +217,30 @@
           const messaging = firebase.messaging();
 
           function requestNotificationPermission() {
-  messaging.requestPermission()
-    .then(() => {
-      console.log("Notification permission granted.");
-      return messaging.getToken();
-    })
-    .then((token) => {
-      console.log("Device token:", token);
-      // Save token to Firebase if needed
-    })
-    .catch((err) => {
-      console.error("Permission denied or error:", err);
-    });
-}
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                messaging.getToken({
+                    vapidKey: "BHyJvAdi4CH02Owikax9kDnAbs4iA7jlJE5v8WT9lsKbo_ejCjuUZPkcEA3pmIXwtVtuIYZmQcpKGI7iz58Z1bY"
+                  })
+                  .then((currentToken) => {
+                    if (currentToken) {
+                      console.log("Token received:", currentToken);
+
+                      // 💾 Save the token to Firebase
+                      db.ref("notificationTokens/anika").set(currentToken);
+                    } else {
+                      console.warn("No token available.");
+                    }
+                  })
+                  .catch((err) => {
+                    console.error("Token retrieval error:", err);
+                  });
+              } else {
+                console.warn("Permission not granted.");
+              }
+            });
+          }
+
 
 
 
@@ -454,7 +465,8 @@
             let message = "";
             if (name.includes("anika")) {
               message = "🌷 A love note from Anika!";
-            } else if (name.includes("maid") || name.includes("majd") ||name.includes("dein vollidiot") || name.includes("your boy")) {
+            } else if (name.includes("maid") || name.includes("majd") || name.includes("dein vollidiot") || name
+              .includes("your boy")) {
               message = "🧸 Dein Vollidiot left you a message!";
             } else {
               message = "💌 Neue Notification!";
