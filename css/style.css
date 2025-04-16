@@ -600,7 +600,12 @@ textarea#noteInput {
   margin-top: 10px;
 }
 
-
+.archive-checkbox {
+  display: none;
+}
+.admin .archive-checkbox {
+  display: inline-block;
+}
 
 
 
