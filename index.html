@@ -78,10 +78,11 @@
         etwas passiert oder wir ein neues süßes Foto zusammen macheenn, alssooo keep an eye out 🤗🫣</p>
 
       <div id="tulip-container">
-        <div class="tulip" onclick="showPopup('Your smile lights up my world ✨')">🌷</div>
-        <div class="tulip" onclick="showPopup('You’re my sunshine on cloudy days ☀️')">🌷</div>
-        <div class="tulip" onclick="showPopup('Being with you feels like home 🏡')">🌷</div>
+        <div class="tulip" onclick="showRandomTulipMessage()">🌷</div>
+        <div class="tulip" onclick="showRandomTulipMessage()">🌷</div>
+        <div class="tulip" onclick="showRandomTulipMessage()">🌷</div>
       </div>
+
 
       <div class="popup" id="popup-box"></div>
 
@@ -223,9 +224,41 @@
         const popupBox = document.getElementById('popup-box');
 
         function showPopup(message) {
+          const popupBox = document.getElementById('popup-box');
           popupBox.textContent = message;
+          popupBox.classList.add('show');
           popupBox.style.display = 'block';
+
+          setTimeout(() => {
+            popupBox.classList.remove('show');
+            popupBox.style.display = 'none';
+          }, 4000);
         }
+
+
+        const tulipMessages = [
+          "Your smile lights up my world ✨",
+          "You’re my sunshine on cloudy days ☀️",
+          "Being with you feels like home 🏡",
+          "You’re my favorite kind of forever 💞",
+          "You’re the reason love songs make sense 🎶",
+          "My heart does a happy dance every time I think of you 💃",
+          "You + Me = Always meant to be 🧸",
+          "I still get butterflies when I see your name pop up 💌",
+          "You make the ordinary feel magical 🌟",
+          "You are the love story I always wanted 📖💘",
+          "Hugging you is my favorite hobby 🤗",
+          "You're my safe place and my wildest adventure 🌍",
+          "You’re my best decision. Ever. 💯",
+          "You turn my cloudy days into sparkly skies 🌈",
+          "Falling for you is my favorite free fall 💗"
+        ];
+
+        function showRandomTulipMessage() {
+          const msg = tulipMessages[Math.floor(Math.random() * tulipMessages.length)];
+          showPopup(msg);
+        }
+
 
         const messaging = firebase.messaging();
 
@@ -257,7 +290,7 @@
 
         document.getElementById("adminTrigger").addEventListener("click", () => {
           const pass = prompt("🔐 Enter the Admin password:");
-          if (pass === "tulips2025") {
+          if (pass === "hubert") {
             sessionStorage.setItem("admin", "true");
             document.getElementById("adminSection").style.display = "block";
             document.body.classList.add("admin-mode");
