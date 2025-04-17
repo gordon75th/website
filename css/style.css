@@ -6,6 +6,12 @@ body {
   overflow-x: hidden;
 }
 
+body.admin-mode {
+  box-shadow: inset 0 0 20px #f10505;
+  background: linear-gradient(to top, #4d0404, #b83838);
+}
+
+
 .container {
   text-align: center;
   padding: 50px 20px;
@@ -643,11 +649,15 @@ body.admin-mode .archive-checkbox {
 }
 
 #futureMessages .note.locked {
-  filter: blur(4px);
-  pointer-events: none;
-  user-select: none;
-  opacity: 0.6;
+  opacity: 0.6;               /* Still visibly "locked" */
+  pointer-events: auto;       /* ✅ Allow clicks (like checkbox) */
+  filter: blur(0);            /* ✅ Don't blur the entire box */
 }
+
+.note.locked .message-text {
+  filter: blur(6px);          /* ✅ Only blur the actual message content */
+}
+
 
 .note .lock-icon {
   font-size: 1.4rem;

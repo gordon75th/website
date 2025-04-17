@@ -178,15 +178,26 @@
         </div>
       </div>
 
-      <div id="adminSection" style="display: none;">
+      <div id="adminSection">
         <h2>🛠️ Admin Panel</h2>
-        <button onclick="archiveSelected()" class="note-btn">
-          📁 Archive Selected
-        </button>
+
+        <button onclick="archiveSelected()" class="note-btn">📁 Archive Selected</button>
+        <button onclick="deleteSelectedArchived()" class="note-btn" style="background-color: #ffdddd;">🗑️ Delete
+          Selected</button>
+        <button onclick="exitAdminMode()" class="note-btn" style="background-color: #fff4f4; color: #a00;">🚪 Exit Admin
+          Mode</button>
+
 
         <div id="archivedDisplay" style="margin-top: 30px;">
           <h3>📁 Archived Notes</h3>
         </div>
+
+
+      </div>
+
+      <div id="adminTrigger"
+        style="position:fixed; bottom:5px; right:5px; font-size:10px; opacity:0.2; cursor:pointer;">
+        admin
       </div>
 
 
@@ -243,6 +254,21 @@
           });
         }
 
+
+        document.getElementById("adminTrigger").addEventListener("click", () => {
+          const pass = prompt("🔐 Enter the Admin password:");
+          if (pass === "tulips2025") {
+            sessionStorage.setItem("admin", "true");
+            document.getElementById("adminSection").style.display = "block";
+            document.body.classList.add("admin-mode");
+            renderNotes();
+            renderArchivedNotes();
+            loadFutureMessages();
+            alert("✅ Admin Mode Activated!");
+          } else {
+            alert("❌ Wrong password!");
+          }
+        });
 
 
 
@@ -498,16 +524,90 @@
                 const div = document.createElement('div');
                 div.className = 'note archived';
                 div.innerHTML = `
-          <strong>${note.from}</strong> <em>(${note.time})</em><br>${note.text}
-          <br><button onclick="restoreNote('${key}')">🔁 Restore</button>
-        `;
+                ${yourAreAdmin() ? `<input type="checkbox" class="archive-checkbox" data-type="archivedNote" data-key="${key}">` : ''}
+                <strong>${note.from}</strong> <em>(${note.time})</em><br>${note.text}
+                <br><button onclick="restoreNote('${key}')">🔁 Restore</button>
+
+              `;
                 display.appendChild(div);
               });
             } else {
               display.innerHTML += "<p>No archived notes.</p>";
             }
           });
+          // Now render archived future messages
+          db.ref("archivedFutureMessages").once("value", (futureSnap) => {
+            const futureMessages = futureSnap.val();
+
+            if (futureMessages) {
+              Object.entries(futureMessages).forEach(([key, msg]) => {
+                const div = document.createElement('div');
+                div.className = 'note archived future';
+                div.innerHTML = `
+                  ${yourAreAdmin() ? `<input type="checkbox" class="archive-checkbox" data-type="archivedFutureMessage" data-key="${key}">` : ''}
+                  <strong>${msg.from}</strong> <em>(${msg.time})</em><br>
+                  <i>Future Msg (Unlock on ${msg.unlockDate})</i><br>
+                  ${msg.text}
+                  <br><button onclick="restoreFutureMessage('${key}')">🔁 Restore</button>
+                `;
+                display.appendChild(div);
+              });
+            }
+          });
         }
+
+        function restoreFutureMessage(key) {
+          db.ref(`archivedFutureMessages/${key}`).once("value", (snapshot) => {
+            const msg = snapshot.val();
+            if (!msg) return;
+
+            db.ref(`futureMessages/${key}`).set(msg)
+              .then(() => db.ref(`archivedFutureMessages/${key}`).remove())
+              .then(() => {
+                alert("🔁 Future message restored!");
+                renderArchivedNotes();
+                loadFutureMessages();
+              })
+              .catch((err) => {
+                console.error("Restore error:", err);
+              });
+          });
+        }
+
+
+        function deleteSelectedArchived() {
+          const checkboxes = document.querySelectorAll('.archive-checkbox:checked');
+          if (checkboxes.length === 0) {
+            alert("❌ No archived notes selected.");
+            return;
+          }
+
+          if (!confirm("Are you sure you want to permanently delete these notes? This cannot be undone.")) return;
+
+          const deletions = {};
+
+          checkboxes.forEach((box) => {
+            const key = box.dataset.key;
+            const type = box.dataset.type;
+
+            if (type === "archivedNote") {
+              deletions[`archivedNotes/${key}`] = null;
+            } else if (type === "archivedFutureMessage") {
+              deletions[`archivedFutureMessages/${key}`] = null;
+            }
+          });
+
+          db.ref().update(deletions)
+            .then(() => {
+              alert("🗑️ Selected archived notes deleted.");
+              renderArchivedNotes(); // Refresh archive section
+            })
+            .catch((err) => {
+              console.error("Error deleting archived notes:", err);
+            });
+        }
+
+
 
         function yourAreAdmin() {
           return sessionStorage.getItem("admin") === "true";
@@ -705,6 +805,15 @@
             }
           });
         }
+
+        function exitAdminMode() {
+          sessionStorage.removeItem("admin");
+          document.getElementById("adminSection").style.display = "none";
+          document.body.classList.remove("admin-mode");
+          alert("👋 Admin Mode exited.");
+        }
+
+
 
         function archiveSelected() {
           const checkboxes = document.querySelectorAll('.archive-checkbox:checked');
