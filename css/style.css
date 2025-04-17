@@ -619,10 +619,56 @@ textarea#noteInput {
 .archive-checkbox {
   display: none;
 }
-.admin .archive-checkbox {
+
+body.admin-mode .archive-checkbox {
   display: inline-block;
+  transform: scale(1.3);
+  margin-right: 10px;
 }
 
+#adminSection {
+  display: none;
+}
+
+
+#futureMessages .note {
+  background-color: #fff0f6;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: filter 0.5s ease, opacity 0.5s ease;
+}
+
+#futureMessages .note.locked {
+  filter: blur(4px);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.6;
+}
+
+.note .lock-icon {
+  font-size: 1.4rem;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #d63384;
+}
+
+.unlock-date {
+  font-size: 0.95rem;
+  color: #c9184a;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.countdown {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 5px;
+}
 
 
 

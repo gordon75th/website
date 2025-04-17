@@ -19,6 +19,7 @@
 
 </head>
 
+
 <body>
   <div class="top-buttons">
     <a href="library.html">
@@ -120,7 +121,7 @@
         <p>💌 New message!</p>
       </div>
 
-<!--      <div class="love-notes" style="margin-top: 50px;">
+      <div class="love-notes" style="margin-top: 50px;">
         <h2>💫 Chat with Future You</h2>
         <input class="noteFrom" id="futureFrom" placeholder="From (vllttt futuree Anika oder Maid?)" /> <br>
         <textarea class="noteFrom" id="futureInput" rows="4"
@@ -129,10 +130,9 @@
         <input type="date" id="unlockDate" class="noteFrom" /> <br>
         <button class="note-btn" onclick="addFutureMessage()">Send to the Future 💌</button>
 
-
-
         <div id="futureMessages" style="margin-top: 30px;"></div>
-      </div>-->
+      </div>
+
 
 
       </div>
@@ -180,8 +180,8 @@
 
       <div id="adminSection" style="display: none;">
         <h2>🛠️ Admin Panel</h2>
-        <button onclick="manuallyArchiveOldNotes()" class="note-btn">
-          💾 Archive Old Notes
+        <button onclick="archiveSelected()" class="note-btn">
+          📁 Archive Selected
         </button>
 
         <div id="archivedDisplay" style="margin-top: 30px;">
@@ -444,13 +444,12 @@
           showNotification(from);
 
           if (from.toLowerCase().includes("maidadmin")) {
-            localStorage.setItem("admin", "true");
+            sessionStorage.setItem("admin", "true");
             document.getElementById("adminSection").style.display = "block";
+            document.body.classList.add("admin-mode"); // ✅ add this line
+            renderNotes();
           }
 
-          window.onload = () => {
-            if (yourAreAdmin()) renderArchivedNotes();
-          };
         }
 
         function manuallyArchiveOldNotes() {
@@ -476,6 +475,7 @@
                   alert("🗃️ All current notes have been archived.");
                   renderArchivedNotes(); // Refresh archive display
                   renderNotes(); // Optionally clear live view
+                  loadFutureMessages();
                 })
                 .catch((err) => {
                   console.error("Error archiving notes:", err);
@@ -510,8 +510,7 @@
         }
 
         function yourAreAdmin() {
-          // Replace with something real if needed
-          return localStorage.getItem("admin") === "true";
+          return sessionStorage.getItem("admin") === "true";
         }
 
         function showNotification(from) {
@@ -554,20 +553,33 @@
             display.innerHTML = '';
             const notes = snapshot.val();
             if (notes) {
-              Object.values(notes).forEach(note => {
+              Object.entries(notes).forEach(([key, note]) => {
                 const sender = note.from || "Someone";
                 const time = note.time || "";
+
                 const div = document.createElement('div');
                 div.className = 'note';
-                div.innerHTML = `<strong>${sender}</strong> <em>(${time})</em><br>${note.text}`;
+                div.innerHTML = `
+          ${yourAreAdmin() ? `<input type="checkbox" class="archive-checkbox" data-type="loveNote" data-key="${key}">` : ''}
+          <strong>${sender}</strong> <em>(${time})</em><br>${note.text}
+        `;
                 display.appendChild(div);
               });
             }
           });
         }
+
         window.onload = () => {
-          renderNotes();
+          renderNotes(); // Always render notes
+          loadFutureMessages(); // Always load future messages
+
+          if (yourAreAdmin()) {
+            document.getElementById("adminSection").style.display = "block";
+            document.body.classList.add("admin-mode");
+            renderArchivedNotes();
+          }
         };
+
 
         function restoreNote(key) {
           db.ref(`archivedNotes/${key}`).once("value", (snapshot) => {
@@ -621,13 +633,6 @@
           type();
         }
 
-        window.onload = () => {
-          renderNotes();
-          if (yourAreAdmin()) {
-            document.getElementById("adminSection").style.display = "block";
-            renderArchivedNotes();
-          }
-        };
 
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', function () {
@@ -665,36 +670,114 @@
           loadFutureMessages();
         }
 
-
         function loadFutureMessages() {
           const container = document.getElementById('futureMessages');
           db.ref("futureMessages").on("value", (snapshot) => {
             container.innerHTML = '';
             const messages = snapshot.val();
             if (messages) {
-              Object.values(messages).forEach(msg => {
+              Object.entries(messages).forEach(([key, msg]) => {
                 const div = document.createElement('div');
                 div.className = 'note';
 
                 const today = new Date();
                 const unlock = new Date(msg.unlockDate);
+                const isUnlocked = today >= unlock;
 
-                if (today >= unlock) {
-                  div.innerHTML = `<strong>${msg.from}</strong> <em>(${msg.time})</em><br>${msg.text}`;
-                } else {
-                  div.innerHTML =
-                    `<strong>${msg.from}</strong> <em>(${msg.time})</em><br>🔒 This message unlocks on <b>${msg.unlockDate}</b>`;
-                }
+                if (!isUnlocked) div.classList.add('locked');
+
+                div.innerHTML = `
+          ${yourAreAdmin() ? `<input type="checkbox" class="archive-checkbox" data-type="futureMessage" data-key="${key}">` : ''}
+          <strong>${msg.from}</strong> <em>(${msg.time})</em><br>
+          ${isUnlocked ? msg.text : `🔒 This message is locked until <b>${msg.unlockDate}</b><div class="countdown">${getCountdown(unlock)}</div>`}
+        `;
 
                 container.appendChild(div);
+
+                if (isUnlocked) {
+                  div.style.opacity = 0;
+                  setTimeout(() => {
+                    div.style.transition = 'opacity 1s ease-in-out';
+                    div.style.opacity = 1;
+                  }, 100);
+                }
               });
             }
           });
         }
 
+        function archiveSelected() {
+          const checkboxes = document.querySelectorAll('.archive-checkbox:checked');
+          const updates = {};
+          const deletions = {};
 
-        loadFutureMessages();
+          if (checkboxes.length === 0) {
+            alert("📭 No notes selected.");
+            return;
+          }
+
+          checkboxes.forEach((box) => {
+            const key = box.dataset.key;
+            const type = box.dataset.type;
+
+            if (type === "loveNote") {
+              const refPath = `loveNotes/${key}`;
+              const archivePath = `archivedNotes/${key}`;
+              db.ref(refPath).once("value", (snapshot) => {
+                if (snapshot.exists()) {
+                  updates[archivePath] = snapshot.val();
+                  deletions[refPath] = null;
+                }
+                finalizeArchiving(updates, deletions);
+              });
+            } else if (type === "futureMessage") {
+              const refPath = `futureMessages/${key}`;
+              const archivePath = `archivedFutureMessages/${key}`;
+              db.ref(refPath).once("value", (snapshot) => {
+                if (snapshot.exists()) {
+                  updates[archivePath] = snapshot.val();
+                  deletions[refPath] = null;
+                }
+                finalizeArchiving(updates, deletions);
+              });
+            }
+          });
+        }
+
+        function finalizeArchiving(updates, deletions) {
+          if (Object.keys(updates).length === 0) return;
+
+          db.ref().update({
+              ...updates,
+              ...deletions
+            })
+            .then(() => {
+              alert("📁 Selected messages archived.");
+              renderNotes();
+              loadFutureMessages();
+              renderArchivedNotes();
+            })
+            .catch((err) => {
+              console.error("Archiving error:", err);
+            });
+        }
+
+
+        function getCountdown(unlockDate) {
+          const now = new Date();
+          const diff = new Date(unlockDate) - now;
+
+          if (diff <= 0) return "Unlocked soon!";
+
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+          return `Unlocks in ${days}d ${hours}h ${minutes}m`;
+        }
       </script>
+
+
 
 </body>
 
