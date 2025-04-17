@@ -1,6 +1,6 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <title>The Library of Us</title>
@@ -12,7 +12,6 @@
             margin: 0;
             padding: 0;
         }
-
         h1 {
             font-family: 'Caveat', cursive;
             font-size: 3rem;
@@ -20,7 +19,6 @@
             color: #328E6E;
             margin-top: 40px;
         }
-
         .bookshelf {
             display: flex;
             justify-content: center;
@@ -29,7 +27,6 @@
             margin: 40px auto;
             max-width: 1000px;
         }
-
         .book-spine {
             width: 60px;
             height: 180px;
@@ -46,11 +43,9 @@
             font-size: 1rem;
             font-family: 'Caveat', cursive;
         }
-
         .book-spine:hover {
             transform: scale(1.1);
         }
-
         .modal {
             display: none;
             position: fixed;
@@ -62,7 +57,6 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.4);
         }
-
         .modal-content {
             background-color: #fff;
             margin: 10% auto;
@@ -77,19 +71,10 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             animation: popup 0.3s ease;
         }
-
         @keyframes popup {
-            0% {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
         }
-
         .close {
             color: #aaa;
             float: right;
@@ -97,7 +82,6 @@
             font-weight: bold;
             cursor: pointer;
         }
-
         .quote-box {
             background-color: #e1eebc;
             padding: 20px;
@@ -111,7 +95,6 @@
             font-size: 1.5rem;
             text-align: center;
         }
-
         .back-button {
             position: absolute;
             top: 20px;
@@ -126,217 +109,187 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
             transition: background 0.3s;
         }
-
         .back-button:hover {
             background-color: #328E6E;
         }
-
-        .noteFrom {
-  width: 80%;
-  max-width: 400px;
-  padding: 10px 15px;
-  margin-bottom: 15px;
-  border: 2px solid #d4ffd2;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  font-family: 'Quicksand', sans-serif;
-  background-color: #f6fff7;
-  color: #444;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.noteFrom:focus {
-  outline: none;
-  border-color: #9effb3;
-  box-shadow: 0 0 8px rgba(255, 158, 188, 0.5);
-}
-
-#libNote {
-  width: 80%;
-  max-width: 400px;
-  padding: 10px 15px;
-  margin-bottom: 15px;
-  border: 2px solid #d4ffd2;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  font-family: 'Quicksand', sans-serif;
-  background-color: #f6fff7;
-  color: #444;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-#libNote:focus {
-  outline: none;
-  border-color: #9effb3;
-  box-shadow: 0 0 8px rgba(255, 158, 188, 0.5);
-}
-
-.note-btn {
-  background-color: #1f572b;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  color: white;
-  font-size: 1rem;
-  font-family: 'Pacifico', cursive;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.note-btn:hover {
-  background-color: #ff8fab;
-}
-
+        .noteFrom, #libNote {
+            width: 80%;
+            max-width: 400px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border: 2px solid #d4ffd2;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f6fff7;
+            color: #444;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .noteFrom:focus, #libNote:focus {
+            outline: none;
+            border-color: #9effb3;
+            box-shadow: 0 0 8px rgba(255, 158, 188, 0.5);
+        }
+        .note-btn {
+            background-color: #1f572b;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-family: 'Pacifico', cursive;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .note-btn:hover {
+            background-color: #ff8fab;
+        }
     </style>
 </head>
-
 <body>
-    <a href="index.html" class="back-button">← Back to Garden</a>
+<a href="index.html" class="back-button">← Back to Garden</a>
+<h1>The Library of Us 📚</h1>
 
-    <h1>The Library of Us 📚</h1>
+<div class="quote-box">
+    <h3>✍️ Leave a Note for the Library</h3>
+    <input class="noteFrom" id="libFrom" placeholder="Anika oder Maid...?" /><br><br>
+    <textarea id="libNote" rows="3" placeholder="Write a little memory, message, or moment..."></textarea><br><br>
+    <button class="note-btn" onclick="addLibraryNote()">📚 Add to Library</button>
+</div>
 
-    <div class="bookshelf">
-        <script>
-            const colors = ['#328E6E', '#67AE6E', '#90C67C', '#E1EEBC'];
-            for (let i = 0; i < 30; i++) {
-                const shade = colors[i % colors.length];
+<div class="bookshelf" id="bookshelf"></div>
+<div id="modals-container"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyDvrQH8cgKTa5naq_X-LRX2hKvwKPVdyPs",
+    authDomain: "lovenotesforanika.firebaseapp.com",
+    databaseURL: "https://lovenotesforanika-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "lovenotesforanika",
+    storageBucket: "lovenotesforanika.appspot.com",
+    messagingSenderId: "955890146894",
+    appId: "1:955890146894:web:458debbf68510359bd6d1f"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+const staticMessages = [
+  "Der Winterbasar hätte unser erstes Treffen sein können, aber wir haben uns einfach verpasst.",
+  "25. Januar, der Tag, an dem wir uns offiziell trafen und der Funke übersprang.",
+  "10. Februar, der Tag, an dem ich begann, deine Aufmerksamkeit zu suchen 😶",
+  "Am 11. Februar ist dir ein Fehler unterlaufen, als du meine Story geliked hast (die du übrigens später wieder gelöscht hast, FRECCHH). Da keimte bei mir die Hoffnung.",
+  "Am 12. Februar tauchten die ersten Paparazzi-Bilder von mir auf...",
+  "14. Februar (poetisch), an dem meine Liebe wirklich begann, tiefer zu werden …",
+  "16th of February, you wanted to sacrifice me in a circle.. Also the day where I found out you knew that I liked you (Gurke) 👀",
+  "16. Februar, unser erstes „Argument“, Nein Broo / Doch Broo..",
+  "18. Februar, Hannah wegen Danyel zu mobben, hat mich so zum Lachen gebracht …",
+  "Am 18. Februar haben wir uns zum ersten Mal gute Nacht gesagt und jetzt kann ich nicht schlafen gehen, ohne mit dir zu reden und an dich zu denken.",
+  "19. Februar, Vertrauensprobleme, weil ich nicht weiß, mit wem ich spreche...",
+  "20. Februar, unser erstes gemeinsames Telefonat..",
+  "22. Februar, die Einladung zu Hannahs Hochzeit..",
+  "23. Februar, du wurdest mein Loser 1.0 <3 🥺",
+  "27. Februar, unser erstes Treffen auf einer Brücke, viele weitere werden folgen...",
+  "1. März, als du mich zum ersten Mal geküsst hast. Ein magischer Moment, an den ich mich immer erinnern werde 💞",
+  "2. März, ich hatte das Glück, dein blaues Gesicht zu sehen 💞",
+  "3. März, der Tag, an dem du in der Erde versunken bist, weil Stoner die Dinge gesagt hat, die allen über uns aufgefallen sind …",
+  "Der 3. März, auch der Tag, an dem ich mit einem breiten Lächeln und einem „A“ auf der Stirn nach Hause kam 💘",
+  "5. März. Der Tag, an dem sich mein Leben für immer veränderte und ich zum ersten Mal deine Lippen küssen durfte...",
+  "Am 8. März habe ich dir das erste von vielen Geschenken gemacht und wir konnten stundenlang kuscheln und die company des anderen genießen ... 💞",
+  "9. März, du warst für eine Woche weg. Unsere erste gemeinsame Motorradtour und der Tag, an dem wir die beiden Rosen bauen durften.",
+  "Am 12. März habe ich dir die erste von vielen appreciation messages geschickt, die ich dir schreiben werde.💘",
+  "15. März, du bist zurückgekommen.. Du hast mir Hubert und ein schönes Hintergrundbild für mein Handy gegeben.",
+  "22. März, das erste Mal, dass du fiess warst.. 😶",
+  "23. März, unser kleines Abenteuer in Konstanz fühlte sich wie Zuhause an.. 🏡",
+  "5. April, unser erster gemeinsamer Monat.. Wir haben 11 Stunden miteinander verbracht, die sich wie 3 angefühlt haben.. 💘",
+  "9. April, unser kleines Planetarium Date, wo du mit vieeleee Experten geredet hast 😶",
+  "12. April, beim Kuscheln mit dir fuehlte ich nur Waerme und Zugehoerigkeit.. Also the picnic besides the river, einfach perfekt <3",
+  "14. April, Wir haben unseren ersten gemeinsamen Film angeschaut, Vaiana 2, war seeehrr... 'interesant'.. Also the time spent with you and Popcorn on the fields in the sunset was.. undescribable.."
+];
+
+const colors = ['#328E6E', '#67AE6E', '#90C67C', '#E1EEBC'];
+
+function yourAreAdmin() {
+    return sessionStorage.getItem("admin") === "true";
+}
+
+function renderLibraryBooks() {
+    const shelf = document.getElementById("bookshelf");
+    const modals = document.getElementById("modals-container");
+    shelf.innerHTML = '';
+    modals.innerHTML = '';
+
+    staticMessages.forEach((msg, i) => {
+        const shade = colors[i % colors.length];
+        const textColor = (shade === '#E1EEBC') ? '#328E6E' : 'white';
+        const id = `static-${i}`;
+        shelf.innerHTML += `<div class="book-spine" style="background:${shade}; color:${textColor}" onclick="openModal('${id}')">${i + 1}</div>`;
+        modals.innerHTML += `<div class="modal" id="modal-${id}"><div class="modal-content"><span class="close" onclick="closeModal('${id}')">&times;</span>${msg}</div></div>`;
+    });
+
+    db.ref("libraryNotes").once("value", (snapshot) => {
+        const notes = snapshot.val();
+        if (notes) {
+            Object.entries(notes).forEach(([key, note], idx) => {
+                const index = staticMessages.length + idx;
+                const shade = colors[index % colors.length];
                 const textColor = (shade === '#E1EEBC') ? '#328E6E' : 'white';
-                document.write(
-                    `<div class="book-spine" style="background:${shade}; color:${textColor}" onclick="openModal(${i})">${i + 1}</div>`
-                );
-            }
-        </script>
-    </div>
-<!--    <div class="quote-box" style="margin-top: 40px;">
-        <h3>✍️ Leave a Note for the Library</h3>
-        <input class="noteFrom" id="libFrom" placeholder="Anika oder Maid...?" /><br><br>
-        <textarea id="libNote" rows="3" placeholder="Write a little memory, message, or moment..."></textarea><br><br>
-        <button class="note-btn" onclick="addLibraryNote()">📚 Add to Library</button>
-    </div>
-
-    <div id="libraryNotes" style="margin-top: 20px;"></div>-->
-
-    <script>
-        const messages = [
-            "Der Winterbasar hätte unser erstes Treffen sein können, aber wir haben uns einfach verpasst.",
-            "25. Januar, der Tag, an dem wir uns offiziell trafen und der Funke übersprang.",
-            "10. Februar, der Tag, an dem ich begann, deine Aufmerksamkeit zu suchen 😶",
-            "Am 11. Februar ist dir ein Fehler unterlaufen, als du meine Story geliked hast (die du übrigens später wieder gelöscht hast, FRECCHH). Da keimte bei mir die Hoffnung.",
-            "Am 12. Februar tauchten die ersten Paparazzi-Bilder von mir auf...",
-            "14. Februar (poetisch), an dem meine Liebe wirklich begann, tiefer zu werden …",
-            "16th of February, you wanted to sacrifice me in a circle.. Also the day where I found out you knew that I liked you (Gurke) 👀",
-            "16. Februar, unser erstes „Argument“, Nein Broo / Doch Broo..",
-            "18. Februar, Hannah wegen Danyel zu mobben, hat mich so zum Lachen gebracht …",
-            "Am 18. Februar haben wir uns zum ersten Mal gute Nacht gesagt und jetzt kann ich nicht schlafen gehen, ohne mit dir zu reden und an dich zu denken.",
-            "19. Februar, Vertrauensprobleme, weil ich nicht weiß, mit wem ich spreche...",
-            "20. Februar, unser erstes gemeinsames Telefonat..",
-            "22. Februar, die Einladung zu Hannahs Hochzeit..",
-            "23. Februar, du wurdest mein Loser 1.0 <3 🥺",
-            "27. Februar, unser erstes Treffen auf einer Brücke, viele weitere werden folgen...",
-            "1. März, als du mich zum ersten Mal geküsst hast. Ein magischer Moment, an den ich mich immer erinnern werde 💞",
-            "2. März, ich hatte das Glück, dein blaues Gesicht zu sehen 💞",
-            "3. März, der Tag, an dem du in der Erde versunken bist, weil Stoner die Dinge gesagt hat, die allen über uns aufgefallen sind …",
-            "Der 3. März, auch der Tag, an dem ich mit einem breiten Lächeln und einem „A“ auf der Stirn nach Hause kam 💘",
-            "5. März. Der Tag, an dem sich mein Leben für immer veränderte und ich zum ersten Mal deine Lippen küssen durfte...",
-            "Am 8. März habe ich dir das erste von vielen Geschenken gemacht und wir konnten stundenlang kuscheln und die company des anderen genießen ... 💞",
-            "9. März, du warst für eine Woche weg. Unsere erste gemeinsame Motorradtour und der Tag, an dem wir die beiden Rosen bauen durften.",
-            "Am 12. März habe ich dir die erste von vielen appreciation messages geschickt, die ich dir schreiben werde.💘",
-            "15. März, du bist zurückgekommen.. Du hast mir Hubert und ein schönes Hintergrundbild für mein Handy gegeben.",
-            "22. März, das erste Mal, dass du fiess warst.. 😶",
-            "23. März, unser kleines Abenteuer in Konstanz fühlte sich wie Zuhause an.. 🏡",
-            "5. April, unser erster gemeinsamer Monat.. Wir haben 11 Stunden miteinander verbracht, die sich wie 3 angefühlt haben.. 💘",
-            "9. April, unser kleines Planetarium Date, wo du mit vieeleee Experten geredet hast 😶",
-            "12. April, beim Kuscheln mit dir fuehlte ich nur Waerme und Zugehoerigkeit.. Also the picnic besides the river, einfach perfekt <3",
-            "14. April, Wir haben unseren ersten gemeinsamen Film angeschaut, Vaiana 2, war seeehrr... 'interesant'.. Also the time spent with you and Popcorn on the fields in the sunset was.. undescribable.."
-        ];
-
-        for (let i = 0; i < 30; i++) {
-            document.write(`
-        <div class="modal" id="modal-${i}">
-          <div class="modal-content">
-            <span class="close" onclick="closeModal(${i})">&times;</span>
-            ${messages[i]}
-          </div>
-        </div>
-      `);
-        }
-
-        function openModal(i) {
-            document.getElementById('modal-' + i).style.display = "block";
-        }
-
-        function closeModal(i) {
-            document.getElementById('modal-' + i).style.display = "none";
-        }
-
-        window.onclick = function (event) {
-            for (let i = 0; i < 30; i++) {
-                const modal = document.getElementById(`modal-${i}`);
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            }
-        }
-    </script>
-
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
-
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyDvrQH8cgKTa5naq_X-LRX2hKvwKPVdyPs",
-            authDomain: "lovenotesforanika.firebaseapp.com",
-            databaseURL: "https://lovenotesforanika-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "lovenotesforanika",
-            storageBucket: "lovenotesforanika.appspot.com",
-            messagingSenderId: "955890146894",
-            appId: "1:955890146894:web:458debbf68510359bd6d1f"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-
-        function addLibraryNote() {
-            const from = document.getElementById('libFrom').value.trim();
-            const text = document.getElementById('libNote').value.trim();
-            const time = new Date().toLocaleString();
-            if (!from || !text) return;
-
-            const note = {
-                from,
-                text,
-                time
-            };
-
-            db.ref("libraryNotes").push(note);
-
-            document.getElementById('libFrom').value = '';
-            document.getElementById('libNote').value = '';
-        }
-
-        function loadLibraryNotes() {
-            const display = document.getElementById('libraryNotes');
-            db.ref("libraryNotes").on("value", (snapshot) => {
-                display.innerHTML = '';
-                const notes = snapshot.val();
-                if (notes) {
-                    Object.values(notes).forEach(note => {
-                        const div = document.createElement('div');
-                        div.className = 'note';
-                        div.innerHTML =
-                            `<strong>${note.from}</strong> <em>(${note.time})</em><br>${note.text}`;
-                        display.appendChild(div);
-                    });
-                }
+                const id = `note-${key}`;
+                shelf.innerHTML += `<div class="book-spine" style="background:${shade}; color:${textColor}" onclick="openModal('${id}')">${index + 1}</div>`;
+                modals.innerHTML += `<div class="modal" id="modal-${id}"><div class="modal-content"><span class="close" onclick="closeModal('${id}')">&times;</span><strong>${note.from}</strong> <em>(${note.time})</em><br>${note.text}${yourAreAdmin() ? `<br><br><button onclick="editLibraryNote('${key}', \`${note.text.replace(/`/g, "\`")}\`)">🖋️ Edit</button> <button onclick="deleteLibraryNote('${key}')">🗑️ Delete</button>` : ''}</div></div>`;
             });
         }
+    });
+}
 
-        loadLibraryNotes();
-    </script>
+function openModal(id) {
+    document.getElementById('modal-' + id).style.display = "block";
+}
+function closeModal(id) {
+    document.getElementById('modal-' + id).style.display = "none";
+}
+window.onclick = function (event) {
+    document.querySelectorAll('.modal').forEach(modal => {
+        if (event.target === modal) modal.style.display = "none";
+    });
+}
 
+function addLibraryNote() {
+    const from = document.getElementById('libFrom').value.trim();
+    const text = document.getElementById('libNote').value.trim();
+    const time = new Date().toLocaleString();
+    if (!from || !text) return;
+    const note = { from, text, time };
+    db.ref("libraryNotes").push(note).then(() => {
+        document.getElementById('libFrom').value = '';
+        document.getElementById('libNote').value = '';
+        renderLibraryBooks();
+    });
+}
+
+function editLibraryNote(key, oldText) {
+    const newText = prompt("Edit your memory:", oldText);
+    if (!newText) return;
+    db.ref(`libraryNotes/${key}/text`).set(newText).then(() => {
+        alert("🖋️ Updated!");
+        renderLibraryBooks();
+    });
+}
+
+function deleteLibraryNote(key) {
+    if (confirm("Are you sure you want to delete this memory forever?")) {
+        db.ref(`libraryNotes/${key}`).remove().then(() => {
+            alert("🗑️ Deleted.");
+            renderLibraryBooks();
+        });
+    }
+}
+
+renderLibraryBooks();
+</script>
 </body>
-
 </html>
