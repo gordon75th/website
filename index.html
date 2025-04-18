@@ -439,9 +439,11 @@ function startHeartbeat() {
   heartbeatSound.volume = 0.4;
   heartbeatSound.play();
 
-  // Vibrate on mobile
   if (navigator.vibrate) {
-    navigator.vibrate([100, 50, 100]);
+    navigator.vibrate([100, 30]); // initial kick
+    vibrationInterval = setInterval(() => {
+      navigator.vibrate([100, 30]); // pulse every ~1s
+    }, 1000);
   }
 
   longHoldTriggered = false;
