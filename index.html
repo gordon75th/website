@@ -702,8 +702,44 @@
             document.getElementById("adminSection").style.display = "block";
             document.body.classList.add("admin-mode");
             renderArchivedNotes();
+            renderVisitLogs();
           }
         };
+
+        function logVisit() {
+  const timestamp = new Date().toLocaleString();
+  const visitorID = 'anika'; // You can change this if needed
+  const visitRef = db.ref(`visits/${visitorID}`).push();
+
+  visitRef.set({
+    time: timestamp,
+    userAgent: navigator.userAgent
+  });
+}
+
+// Only log if not admin
+if (!sessionStorage.getItem("admin")) {
+  logVisit();
+}
+
+function renderVisitLogs() {
+  const display = document.createElement('div');
+  display.innerHTML = `<h3>👀 Visit Log</h3>`;
+  db.ref("visits/anika").once("value", (snapshot) => {
+    const visits = snapshot.val();
+    if (!visits) {
+      display.innerHTML += "<p>No visits logged yet.</p>";
+    } else {
+      const list = Object.values(visits)
+        .sort((a, b) => new Date(b.time) - new Date(a.time))
+        .map(v => `<li>${v.time} <br><small style="color:#888;">${v.userAgent}</small></li>`)
+        .join("");
+      display.innerHTML += `<ul style="text-align:left;">${list}</ul>`;
+    }
+    document.getElementById("adminSection").appendChild(display);
+  });
+}
+
 
 
         function restoreNote(key) {
