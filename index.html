@@ -13,8 +13,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-messaging-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-storage-compat.js"></script>
-
   <audio id="notification-sound" src="images/notification.wav" preload="auto"></audio>
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#ffe0f0" />
@@ -175,15 +173,7 @@
         </div>
       </div>
 
-      <div class="love-notes">
-        <div class="memory-upload">
-          <label for="memoryImage" class="custom-file-label">📸 Choose Memory</label>
-          <input type="file" id="memoryImage" accept="image/*" />
-          <input type="text" id="memoryCaption" placeholder="Say something sweet..." class="noteFrom" />
-          <button class="note-btn" onclick="uploadMemory()">Add to Carousel</button>
-        </div>
-      </div>
-
+      
 
       <div id="adminSection">
         <h2>🛠️ Admin Panel</h2>
@@ -241,62 +231,6 @@
           }, 4000);
         }
 
-        function loadMemories() {
-          const carousel = document.getElementById("carouselTrack");
-          carousel.innerHTML = ''; // Clear current carousel
-
-          db.ref("memories").once("value", (snapshot) => {
-            const memories = snapshot.val();
-            if (!memories) return;
-
-            Object.values(memories).forEach(mem => {
-              const img = document.createElement("img");
-              img.src = mem.imageUrl;
-              img.alt = mem.caption || "A shared memory";
-              img.title = mem.caption || "";
-              carousel.appendChild(img);
-            });
-          });
-        }
-
-
-        function uploadMemory() {
-          const file = document.getElementById('memoryImage').files[0];
-          const caption = document.getElementById('memoryCaption').value.trim();
-
-          if (!file) {
-            alert("Please choose an image to upload.");
-            return;
-          }
-
-          const storageRef = firebase.storage().ref(`memories/${Date.now()}_${file.name}`);
-          const uploadTask = storageRef.put(file);
-
-          uploadTask.on('state_changed',
-            null,
-            (error) => {
-              console.error("Upload failed:", error);
-              alert("Something went wrong uploading your memory 😢");
-            },
-            () => {
-              uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-                const memory = {
-                  imageUrl: url,
-                  caption,
-                  time: new Date().toISOString()
-                };
-                db.ref("memories").push(memory).then(() => {
-                  alert("📸 Memory added!");
-                  loadMemories(); // Refresh carousel
-                  document.getElementById('memoryImage').value = '';
-                  document.getElementById('memoryCaption').value = '';
-                });
-              });
-            }
-          );
-        }
-
-
 
         const tulipMessages = [
           "Your smile lights up my world ✨",
@@ -320,15 +254,6 @@
           const msg = tulipMessages[Math.floor(Math.random() * tulipMessages.length)];
           showPopup(msg);
         }
-
-        document.getElementById('memoryImage').addEventListener('change', function () {
-          const label = document.querySelector('.custom-file-label');
-          if (this.files.length > 0) {
-            label.textContent = `📸 ${this.files[0].name}`;
-          } else {
-            label.textContent = '📸 Choose Memory';
-          }
-        });
 
 
         const messaging = firebase.messaging();
