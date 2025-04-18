@@ -23,6 +23,33 @@ h1 {
   color: #d63384;
 }
 
+.memory-upload {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.custom-file-label {
+  display: inline-block;
+  background-color: #ffb3c6;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Pacifico', cursive;
+  font-size: 1rem;
+  transition: background 0.3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.custom-file-label:hover {
+  background-color: #ff8fab;
+}
+
+input[type="file"]#memoryImage {
+  display: none;
+}
+
+
 .tulip {
   font-size: 3rem;
   margin: 20px;
