@@ -17,7 +17,7 @@
   <audio id="heartbeatSound" src="sounds/heartbeat.mp3" preload="auto"></audio>
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
-  
+
 
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#ffe0f0" />
@@ -74,7 +74,7 @@
   </div>
 
   <a href="quote.html" class="magic-bookmark">📖 This reminded me of you <3</a> <div class="container">
-    
+
       <h1>Hi Anika 🌷</h1>
 
       <div id="tulip-container">
@@ -82,7 +82,7 @@
         <div class="tulip" onclick="showRandomTulipMessage()">🌷</div>
         <div class="tulip" onclick="showRandomTulipMessage()">🌷</div>
       </div>
-      
+
 
 
       <div class="popup" id="popup-box"></div>
@@ -99,13 +99,13 @@
             Love Letter</a><br>
           <br> <a href="stars.html" style="font-family: 'Pacifico', cursive; color: rgb(83, 3, 70);" class="text">🌌
             Stargazing</a>
-            <br>
-            <div id="heartbeatContainer" class="heartbeat-wrapper">
-              <button id="heartbeatBtn">❤️ Hold for Heartbeat</button>
-              <div id="heartbeatPulse" class="pulse-circle"></div>
-              <p id="heartbeatMsg" class="heartbeat-msg">Press and hold to feel the beat...</p>
-            </div>
-            
+          <br>
+          <div id="heartbeatContainer" class="heartbeat-wrapper">
+            <button id="heartbeatBtn">❤️ Hold for Heartbeat</button>
+            <div id="heartbeatPulse" class="pulse-circle"></div>
+            <p id="heartbeatMsg" class="heartbeat-msg">Press and hold to feel the beat...</p>
+          </div>
+
 
         </div>
       </div>
@@ -199,18 +199,18 @@
         <div id="archivedDisplay" style="margin-top: 30px;">
           <h3>📁 Archived Notes</h3>
         </div>
-        
+
 
 
       </div>
-      
+
 
       <div id="adminTrigger"
         style="position:fixed; bottom:5px; right:5px; font-size:10px; opacity:0.2; cursor:pointer;">
         admin
       </div>
-      
-      
+
+
 
 
 
@@ -424,65 +424,65 @@
         ];
 
         const heartbeatBtn = document.getElementById('heartbeatBtn');
-const heartbeatPulse = document.getElementById('heartbeatPulse');
-const heartbeatMsg = document.getElementById('heartbeatMsg');
-const heartbeatSound = document.getElementById('heartbeatSound');
+        const heartbeatPulse = document.getElementById('heartbeatPulse');
+        const heartbeatMsg = document.getElementById('heartbeatMsg');
+        const heartbeatSound = document.getElementById('heartbeatSound');
 
-let holdTimer;
-let longHoldTriggered = false;
+        let holdTimer;
+        let longHoldTriggered = false;
 
-heartbeatBtn.addEventListener('mousedown', startHeartbeat);
-heartbeatBtn.addEventListener('touchstart', startHeartbeat);
+        heartbeatBtn.addEventListener('mousedown', startHeartbeat);
+        heartbeatBtn.addEventListener('touchstart', startHeartbeat);
 
-heartbeatBtn.addEventListener('mouseup', stopHeartbeat);
-heartbeatBtn.addEventListener('mouseleave', stopHeartbeat);
-heartbeatBtn.addEventListener('touchend', stopHeartbeat);
+        heartbeatBtn.addEventListener('mouseup', stopHeartbeat);
+        heartbeatBtn.addEventListener('mouseleave', stopHeartbeat);
+        heartbeatBtn.addEventListener('touchend', stopHeartbeat);
 
-function startHeartbeat() {
-  heartbeatPulse.classList.add('pulse-active');
-  heartbeatMsg.textContent = "This is how my heart beats when I think of you 💗";
+        function startHeartbeat() {
+          heartbeatPulse.classList.add('pulse-active');
+          heartbeatMsg.textContent = "This is how my heart beats when I think of you 💗";
 
-  // Start heartbeat sound
-  heartbeatSound.loop = true;
-  heartbeatSound.volume = 0.4;
-  heartbeatSound.play();
+          // Start heartbeat sound
+          heartbeatSound.loop = true;
+          heartbeatSound.volume = 0.4;
+          heartbeatSound.play();
 
-  if (navigator.vibrate) {
-    navigator.vibrate([100, 30]); // initial kick
-    vibrationInterval = setInterval(() => {
-      navigator.vibrate([100, 30]); // pulse every ~1s
-    }, 1000);
-  }
+          if (navigator.vibrate) {
+            navigator.vibrate([100, 30]); // initial kick
+            vibrationInterval = setInterval(() => {
+              navigator.vibrate([100, 30]); // pulse every ~1s
+            }, 1000);
+          }
 
-  longHoldTriggered = false;
-  holdTimer = setTimeout(() => {
-    heartbeatMsg.textContent = "Wow.. ich habb diiichhh auch gaanz dolle lieebbb <33";
-    longHoldTriggered = true;
-
-
-    navigator.vibrate([200, 100, 200, 100, 200]);
-  }, 10000);
-}
-
-function stopHeartbeat() {
-  heartbeatPulse.classList.remove('pulse-active');
-  heartbeatSound.pause();
-  heartbeatSound.currentTime = 0;
-
-  clearTimeout(holdTimer);
-
-  if (vibrationInterval) {
-    clearInterval(vibrationInterval);
-    vibrationInterval = null;
-  }
-
-  if (!longHoldTriggered) {
-    heartbeatMsg.textContent = "Press and hold to feel the beat...";
-  }
-}
+          longHoldTriggered = false;
+          holdTimer = setTimeout(() => {
+            heartbeatMsg.textContent = "Wow.. ich habb diiichhh auch gaanz dolle lieebbb <33";
+            longHoldTriggered = true;
 
 
-        
+            navigator.vibrate([200, 100, 200, 100, 200]);
+          }, 10000);
+        }
+
+        function stopHeartbeat() {
+          heartbeatPulse.classList.remove('pulse-active');
+          heartbeatSound.pause();
+          heartbeatSound.currentTime = 0;
+
+          clearTimeout(holdTimer);
+
+          if (vibrationInterval) {
+            clearInterval(vibrationInterval);
+            vibrationInterval = null;
+          }
+
+          if (!longHoldTriggered) {
+            heartbeatMsg.textContent = "Press and hold to feel the beat...";
+          }
+        }
+
+
+
         function scrollCarousel(direction) {
           const track = document.getElementById('carouselTrack');
           const scrollAmount = 300;
@@ -784,50 +784,62 @@ function stopHeartbeat() {
         };
 
 
-        
+
         function logVisit() {
-  const timestamp = new Date().toLocaleString();
-  const visitorID = 'anika'; // You can change this if needed
-  const visitRef = db.ref(`visits/${visitorID}`).push();
+          const timestamp = new Date().toLocaleString();
+          const visitorID = 'anika'; // You can change this if needed
+          const visitRef = db.ref(`visits/${visitorID}`).push();
 
-  // Define your desktop and phone user agents to exclude both
-  const myUserAgentDesktop = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 OPR/117.0.0.0";
-  const myUserAgentVSC = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.99.3 Chrome/132.0.6834.210 Electron/34.3.2 Safari/537.36"
-  const myUserAgentPhone = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36 OPR/88.0.0.0";
+          // Define your desktop and phone user agents to exclude both
+          const myUserAgentDesktop =
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 OPR/117.0.0.0";
+          const myUserAgentVSC =
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.99.3 Chrome/132.0.6834.210 Electron/34.3.2 Safari/537.36"
+          const myUserAgentPhone =
+            "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36 OPR/88.0.0.0";
 
-  const userAgent = navigator.userAgent;
+          const userAgent = navigator.userAgent;
 
-  // Only log if not admin and user agent is neither desktop nor phone
-  if (!sessionStorage.getItem("admin") && userAgent !== myUserAgentDesktop && userAgent !== myUserAgentPhone && userAgent !== myUserAgentVSC) {
-    visitRef.set({
-      time: timestamp,
-      userAgent: userAgent
-    });
-  }
-}
+          // Only log if not admin and user agent is neither desktop nor phone
+          if (!sessionStorage.getItem("admin") && userAgent !== myUserAgentDesktop && userAgent !== myUserAgentPhone &&
+            userAgent !== myUserAgentVSC) {
+            visitRef.set({
+              time: timestamp,
+              userAgent: userAgent
+            });
+          }
+        }
 
-// Only log if not admin
-if (!sessionStorage.getItem("admin")) {
-  logVisit();
-}
+        // Only log if not admin
+        if (!sessionStorage.getItem("admin")) {
+          logVisit();
+        }
 
-function renderVisitLogs() {
-  const display = document.createElement('div');
-  display.innerHTML = `<h3>👀 Visit Log</h3>`;
-  db.ref("visits/anika").once("value", (snapshot) => {
-    const visits = snapshot.val();
-    if (!visits) {
-      display.innerHTML += "<p>No visits logged yet.</p>";
-    } else {
-      const list = Object.values(visits)
-        .sort((a, b) => new Date(b.time) - new Date(a.time))
-        .map(v => `<li>${v.time} <br><small style="color:#888;">${v.userAgent}</small></li>`)
-        .join("");
-      display.innerHTML += `<ul style="text-align:left;">${list}</ul>`;
-    }
-    document.getElementById("adminSection").appendChild(display);
-  });
-}
+        function renderVisitLogs() {
+          const display = document.createElement('div');
+          display.innerHTML = `<h3>👀 Visit Log</h3>`;
+          db.ref("visits/anika").once("value", (snapshot) => {
+            const visits = snapshot.val();
+            if (!visits) {
+              display.innerHTML += "<p>No visits logged yet.</p>";
+            } else {
+              const anikaUserAgent =
+                "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/27.0 Chrome/125.0.0.0 Mobile Safari/537.36";
+
+              const list = Object.values(visits)
+                .sort((a, b) => new Date(b.time) - new Date(a.time))
+                .map(v => {
+                  const isAnika = v.userAgent === anikaUserAgent;
+                  const label = isAnika ? `<span style="color: #c9184a;">👸 Anika ❤️</span>` : "";
+                  return `<li>${v.time} ${label}<br><small style="color:#888;">${v.userAgent}</small></li>`;
+                })
+                .join("");
+
+              display.innerHTML += `<ul style="text-align:left;">${list}</ul>`;
+            }
+            document.getElementById("adminSection").appendChild(display);
+          });
+        }
 
 
 
