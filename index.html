@@ -247,6 +247,8 @@
         }
 
         let vibrationInterval;
+        let fastVibrationInterval;
+
 
 
 
@@ -442,7 +444,6 @@
           heartbeatPulse.classList.add('pulse-active');
           heartbeatMsg.textContent = "This is how my heart beats when I think of you 💗";
 
-          // Start heartbeat sound
           heartbeatSound.loop = true;
           heartbeatSound.volume = 0.4;
           heartbeatSound.play();
@@ -450,7 +451,7 @@
           if (navigator.vibrate) {
             navigator.vibrate([100, 30]); // initial kick
             vibrationInterval = setInterval(() => {
-              navigator.vibrate([100, 30]); // pulse every ~1s
+              navigator.vibrate([100, 30]); // slow beat
             }, 1000);
           }
 
@@ -459,10 +460,17 @@
             heartbeatMsg.textContent = "Wow.. ich habb diiichhh auch gaanz dolle lieebbb <33";
             longHoldTriggered = true;
 
+            clearInterval(vibrationInterval); // Stop slow beat
 
-            navigator.vibrate([200, 100, 200, 100, 200]);
+            // Start faster beat
+            fastVibrationInterval = setInterval(() => {
+              navigator.vibrate([60, 20]);
+            }, 500);
+
+            navigator.vibrate([200, 100, 200, 100, 200]); // special pulse on trigger
           }, 10000);
         }
+
 
         function stopHeartbeat() {
           heartbeatPulse.classList.remove('pulse-active');
@@ -475,11 +483,16 @@
             clearInterval(vibrationInterval);
             vibrationInterval = null;
           }
+          if (fastVibrationInterval) {
+            clearInterval(fastVibrationInterval);
+            fastVibrationInterval = null;
+          }
 
           if (!longHoldTriggered) {
             heartbeatMsg.textContent = "Press and hold to feel the beat...";
           }
         }
+
 
 
 
