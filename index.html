@@ -15,6 +15,9 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <audio id="notification-sound" src="images/notification.wav" preload="auto"></audio>
   <audio id="heartbeatSound" src="sounds/heartbeat.mp3" preload="auto"></audio>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+  
 
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#ffe0f0" />
@@ -243,6 +246,9 @@
           }, 4000);
         }
 
+        let vibrationInterval;
+
+
 
         const tulipMessages = [
           "Your smile lights up my world ✨",
@@ -465,10 +471,16 @@ function stopHeartbeat() {
 
   clearTimeout(holdTimer);
 
+  if (vibrationInterval) {
+    clearInterval(vibrationInterval);
+    vibrationInterval = null;
+  }
+
   if (!longHoldTriggered) {
     heartbeatMsg.textContent = "Press and hold to feel the beat...";
   }
 }
+
 
         
         function scrollCarousel(direction) {
