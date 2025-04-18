@@ -14,6 +14,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-messaging-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <audio id="notification-sound" src="images/notification.wav" preload="auto"></audio>
+  <audio id="heartbeatSound" src="sounds/heartbeat.mp3" preload="auto"></audio>
+
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#ffe0f0" />
 
@@ -94,6 +96,13 @@
             Love Letter</a><br>
           <br> <a href="stars.html" style="font-family: 'Pacifico', cursive; color: rgb(83, 3, 70);" class="text">🌌
             Stargazing</a>
+            <br>
+            <div id="heartbeatContainer" class="heartbeat-wrapper">
+              <button id="heartbeatBtn">❤️ Hold for Heartbeat</button>
+              <div id="heartbeatPulse" class="pulse-circle"></div>
+              <p id="heartbeatMsg" class="heartbeat-msg">Press and hold to feel the beat...</p>
+            </div>
+            
 
         </div>
       </div>
@@ -406,6 +415,58 @@
 
         ];
 
+        const heartbeatBtn = document.getElementById('heartbeatBtn');
+const heartbeatPulse = document.getElementById('heartbeatPulse');
+const heartbeatMsg = document.getElementById('heartbeatMsg');
+const heartbeatSound = document.getElementById('heartbeatSound');
+
+let holdTimer;
+let longHoldTriggered = false;
+
+heartbeatBtn.addEventListener('mousedown', startHeartbeat);
+heartbeatBtn.addEventListener('touchstart', startHeartbeat);
+
+heartbeatBtn.addEventListener('mouseup', stopHeartbeat);
+heartbeatBtn.addEventListener('mouseleave', stopHeartbeat);
+heartbeatBtn.addEventListener('touchend', stopHeartbeat);
+
+function startHeartbeat() {
+  heartbeatPulse.classList.add('pulse-active');
+  heartbeatMsg.textContent = "This is how my heart beats when I think of you 💗";
+
+  // Start heartbeat sound
+  heartbeatSound.loop = true;
+  heartbeatSound.volume = 0.4;
+  heartbeatSound.play();
+
+  // Vibrate on mobile
+  if (navigator.vibrate) {
+    navigator.vibrate([100, 50, 100]);
+  }
+
+  longHoldTriggered = false;
+  holdTimer = setTimeout(() => {
+    heartbeatMsg.textContent = "Wow.. ich habb diiichhh auch gaanz dolle lieebbb <33";
+    longHoldTriggered = true;
+
+
+    navigator.vibrate([200, 100, 200, 100, 200]);
+  }, 10000);
+}
+
+function stopHeartbeat() {
+  heartbeatPulse.classList.remove('pulse-active');
+  heartbeatSound.pause();
+  heartbeatSound.currentTime = 0;
+
+  clearTimeout(holdTimer);
+
+  if (!longHoldTriggered) {
+    heartbeatMsg.textContent = "Press and hold to feel the beat...";
+  }
+}
+
+        
         function scrollCarousel(direction) {
           const track = document.getElementById('carouselTrack');
           const scrollAmount = 300;

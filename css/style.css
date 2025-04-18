@@ -44,6 +44,68 @@ body.romantic-mode .carousel-btn {
   color: #ffe0f0;
 }
 
+.heartbeat-wrapper {
+  text-align: center;
+  margin: 60px 0;
+  position: relative;
+}
+
+#heartbeatBtn {
+  background-color: #ffb3c6;
+  color: white;
+  font-size: 1.3rem;
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Pacifico', cursive;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+#heartbeatPulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  height: 180px;
+  background-color: rgba(255, 179, 198, 0.3);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pulse-active {
+  animation: pulse 1s infinite;
+  opacity: 1 !important;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.4;
+  }
+}
+
+.heartbeat-msg {
+  margin-top: 20px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: #c9184a;
+  transition: opacity 0.3s;
+}
+
+
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
