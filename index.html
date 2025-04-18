@@ -769,15 +769,24 @@ function stopHeartbeat() {
           }
         };
 
+
+        
         function logVisit() {
   const timestamp = new Date().toLocaleString();
   const visitorID = 'anika'; // You can change this if needed
   const visitRef = db.ref(`visits/${visitorID}`).push();
 
-  visitRef.set({
-    time: timestamp,
-    userAgent: navigator.userAgent
-  });
+  // Define your own user agent or another condition to exclude yourself
+  const myUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 OPR/117.0.0.0"; // Replace with your actual user agent or identifier
+  const userAgent = navigator.userAgent;
+
+  // Only log if not admin and user agent is not yours
+  if (!sessionStorage.getItem("admin") && userAgent !== myUserAgent) {
+    visitRef.set({
+      time: timestamp,
+      userAgent: userAgent
+    });
+  }
 }
 
 // Only log if not admin
@@ -802,6 +811,7 @@ function renderVisitLogs() {
     document.getElementById("adminSection").appendChild(display);
   });
 }
+
 
 
 
