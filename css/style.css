@@ -61,6 +61,12 @@ body.romantic-mode .carousel-btn {
   font-family: 'Pacifico', cursive;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   z-index: 2;
+  touch-action: manipulation;
+  user-select: none;         /* Prevent text selection */
+  -webkit-user-select: none; /* For Safari/Chrome on mobile */
+  -ms-user-select: none;     /* For IE/Edge (legacy) */
+  -moz-user-select: none;    /* For Firefox */
+  -webkit-tap-highlight-color: transparent; /* Remove blue highlight */
 }
 
 #heartbeatPulse {
