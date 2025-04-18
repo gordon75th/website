@@ -963,11 +963,16 @@
 
                 if (!isUnlocked) div.classList.add('locked');
 
+                const canView = isUnlocked || yourAreAdmin();
+
                 div.innerHTML = `
-          ${yourAreAdmin() ? `<input type="checkbox" class="archive-checkbox" data-type="futureMessage" data-key="${key}">` : ''}
-          <strong>${msg.from}</strong> <em>(${msg.time})</em><br>
-          ${isUnlocked ? msg.text : `🔒 This message is locked until <b>${msg.unlockDate}</b><div class="countdown">${getCountdown(unlock)}</div>`}
-        `;
+                ${yourAreAdmin() ? `<input type="checkbox" class="archive-checkbox" data-type="futureMessage" data-key="${key}">` : ''}
+                <strong>${msg.from}</strong> <em>(${msg.time})</em><br>
+                ${canView
+                  ? msg.text
+                  : `🔒 This message is locked until <b>${msg.unlockDate}</b><div class="countdown">${getCountdown(unlock)}</div>`}
+              `;
+
 
                 container.appendChild(div);
 
