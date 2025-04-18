@@ -184,7 +184,7 @@
       </div>
 
       <div id="adminSection">
-        <h2>🛠️ Admin Panel</h2>
+        <h2 onload="renderVisitLogs()">🛠️ Admin Panel</h2>
 
         <button onclick="archiveSelected()" class="note-btn">📁 Archive Selected</button>
         <button onclick="deleteSelectedArchived()" class="note-btn" style="background-color: #ffdddd;">🗑️ Delete
@@ -196,9 +196,11 @@
         <div id="archivedDisplay" style="margin-top: 30px;">
           <h3>📁 Archived Notes</h3>
         </div>
+        
 
 
       </div>
+      
 
       <div id="adminTrigger"
         style="position:fixed; bottom:5px; right:5px; font-size:10px; opacity:0.2; cursor:pointer;">
