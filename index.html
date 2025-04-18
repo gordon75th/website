@@ -778,12 +778,13 @@ function stopHeartbeat() {
 
   // Define your desktop and phone user agents to exclude both
   const myUserAgentDesktop = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 OPR/117.0.0.0";
+  const myUserAgentVSC = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.99.3 Chrome/132.0.6834.210 Electron/34.3.2 Safari/537.36"
   const myUserAgentPhone = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36 OPR/88.0.0.0";
 
   const userAgent = navigator.userAgent;
 
   // Only log if not admin and user agent is neither desktop nor phone
-  if (!sessionStorage.getItem("admin") && userAgent !== myUserAgentDesktop && userAgent !== myUserAgentPhone) {
+  if (!sessionStorage.getItem("admin") && userAgent !== myUserAgentDesktop && userAgent !== myUserAgentPhone && userAgent !== myUserAgentVSC) {
     visitRef.set({
       time: timestamp,
       userAgent: userAgent
