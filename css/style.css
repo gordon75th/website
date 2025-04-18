@@ -23,6 +23,39 @@ h1 {
   color: #d63384;
 }
 
+body.romantic-mode {
+  background: linear-gradient(to bottom, #1a1a1a, #3a3a3a);
+  color: #ffe0f0;
+}
+
+body.romantic-mode .note,
+body.romantic-mode .noteFrom,
+body.romantic-mode textarea,
+body.romantic-mode .popup,
+body.romantic-mode .love-notes,
+body.romantic-mode .reasons {
+  background-color: #2e2e2e !important;
+  color: #ffe0f0 !important;
+  border-color: #ff9ebc;
+}
+
+body.romantic-mode .carousel-btn {
+  background-color: #333;
+  color: #ffe0f0;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 .memory-upload {
   margin: 20px 0;
   text-align: center;

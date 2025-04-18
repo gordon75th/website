@@ -69,6 +69,7 @@
   </div>
 
   <a href="quote.html" class="magic-bookmark">📖 This reminded me of you <3</a> <div class="container">
+    
       <h1>Hi Anika 🌷</h1>
 
       <div id="tulip-container">
@@ -76,6 +77,7 @@
         <div class="tulip" onclick="showRandomTulipMessage()">🌷</div>
         <div class="tulip" onclick="showRandomTulipMessage()">🌷</div>
       </div>
+      
 
 
       <div class="popup" id="popup-box"></div>
@@ -193,6 +195,8 @@
         style="position:fixed; bottom:5px; right:5px; font-size:10px; opacity:0.2; cursor:pointer;">
         admin
       </div>
+      
+      
 
 
 
@@ -455,11 +459,6 @@
 
           document.getElementById("time-since").textContent =
             `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds 💞`;
-        }
-
-        function showPopup(message) {
-          popupBox.textContent = message;
-          popupBox.classList.add('show');
         }
 
 
