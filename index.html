@@ -249,13 +249,19 @@
           popupBox.classList.add('show');
           popupBox.style.display = 'block';
 
-          setTimeout(() => {
+          // Clear old timeout if it's still running
+          if (popupTimeout) clearTimeout(popupTimeout);
+
+          // Set a new timeout
+          popupTimeout = setTimeout(() => {
             popupBox.classList.remove('show');
             popupBox.style.display = 'none';
-          }, 4000);
+          }, 18000);
         }
 
+
         let vibrationInterval;
+        let popupTimeout;
         let fastVibrationInterval;
 
 
