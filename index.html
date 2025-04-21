@@ -79,9 +79,10 @@
       <h1>Hi Anika 🌷</h1>
 
       <div id="tulip-container">
-        <div class="tulip" onclick="showRandomTulipMessage()">🌷</div>
-        <div class="tulip" onclick="showRandomTulipMessage()">🌷</div>
-        <div class="tulip" onclick="showRandomTulipMessage()">🌷</div>
+        <div class="tulip" onclick="showRandomTulipMessage(event)">🌷</div>
+        <div class="tulip" onclick="showRandomTulipMessage(event)">🌷</div>
+        <div class="tulip" onclick="showRandomTulipMessage(event)">🌷</div>
+
       </div>
 
 
@@ -195,6 +196,9 @@
         </div>
       </div>
 
+      <div class="floating-heart-container" id="floatingHeartContainer"></div>
+
+
       <div id="adminSection">
         <h2 onload="renderVisitLogs()">🛠️ Admin Panel</h2>
 
@@ -285,10 +289,19 @@
           "Falling for you is my favorite free fall 💗"
         ];
 
-        function showRandomTulipMessage() {
+        function showRandomTulipMessage(event) {
           const msg = tulipMessages[Math.floor(Math.random() * tulipMessages.length)];
           showPopup(msg);
+
+          if (event?.target?.classList) {
+
+            event.target.classList.add('blooming');
+            setTimeout(() => {
+              event.target.classList.remove('blooming');
+            }, 600);
+          }
         }
+
 
 
         const messaging = firebase.messaging();
@@ -1081,6 +1094,19 @@
 
           return `Unlocks in ${days}d ${hours}h ${minutes}m`;
         }
+
+        window.addEventListener('scroll', () => {
+          const heart = document.createElement('div');
+          heart.className = 'floating-heart';
+          heart.textContent = '💗';
+          heart.style.left = Math.random() * window.innerWidth + 'px';
+          heart.style.top = (window.scrollY + Math.random() * 50) + 'px';
+          document.getElementById('floatingHeartContainer').appendChild(heart);
+
+          setTimeout(() => {
+            heart.remove();
+          }, 4000);
+        });
       </script>
 
 
