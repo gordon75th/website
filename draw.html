@@ -87,6 +87,19 @@
   </div>
 
   <script>
+      const firebaseConfig = {
+    apiKey: "AIzaSyDvrQH8cgKTa5naq_X-LRX2hKvwKPVdyPs",
+    authDomain: "lovenotesforanika.firebaseapp.com",
+    databaseURL: "https://lovenotesforanika-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "lovenotesforanika",
+    storageBucket: "lovenotesforanika.appspot.com",
+    messagingSenderId: "955890146894",
+    appId: "1:955890146894:web:458debbf68510359bd6d1f"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
     const canvas = document.getElementById("drawCanvas");
     const ctx = canvas.getContext("2d");
     let drawing = false;
@@ -190,18 +203,6 @@
     canvas.addEventListener("touchstart", startDraw);
     canvas.addEventListener("touchend", endDraw);
     canvas.addEventListener("touchmove", draw);
-  const firebaseConfig = {
-    apiKey: "AIzaSyDvrQH8cgKTa5naq_X-LRX2hKvwKPVdyPs",
-    authDomain: "lovenotesforanika.firebaseapp.com",
-    databaseURL: "https://lovenotesforanika-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "lovenotesforanika",
-    storageBucket: "lovenotesforanika.appspot.com",
-    messagingSenderId: "955890146894",
-    appId: "1:955890146894:web:458debbf68510359bd6d1f"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
 
   </script>
 </body>
