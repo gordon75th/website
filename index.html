@@ -27,6 +27,15 @@
 
 
 <body>
+  <div style="position: fixed; bottom: 10px; left: 10px; z-index: 999;">
+  <button onclick="reloadWithLove()" class="note-btn">🔄 Reload with Love</button>
+  </div>
+
+  <div style="position: fixed; bottom: 10px; right: 10px; z-index: 999;">
+  <button onclick="toggleRomanticMode()" class="note-btn">🌙 Romantic Mode</button>
+</div>
+
+
   <div class="top-buttons">
     <a href="library.html">
       <button class="btn">
@@ -142,6 +151,18 @@
 
         <div id="futureMessages" style="margin-top: 30px;"></div>
       </div>
+
+      <div class="love-notes" style="margin-top: 60px;">
+  <h2>📓 Private Journal</h2>
+  <select id="journalOwner" class="noteFrom">
+    <option value="anika">Anika's Journal</option>
+    <option value="maid">Maid's Journal</option>
+  </select> <br>
+  <textarea class="noteFrom" rows="6" placeholder="Your secret thoughts..."></textarea><br>
+  <button class="note-btn" onclick="saveJournal()">💾 Save Entry</button>
+  <button class="note-btn" onclick="loadJournal()">📖 Load Entry</button>
+</div>
+
 
 
 
@@ -1107,6 +1128,52 @@
             heart.remove();
           }, 4000);
         });
+
+        function reloadWithLove() {
+  confetti({ particleCount: 100, spread: 100, origin: { y: 0.7 } });
+
+  const heart = document.createElement('div');
+  heart.className = 'floating-heart';
+  heart.textContent = '💖';
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.top = '50%';
+  document.getElementById('floatingHeartContainer').appendChild(heart);
+
+  setTimeout(() => {
+    location.reload();
+  }, 1500);
+}
+
+function toggleRomanticMode() {
+  const isOn = document.body.classList.toggle("romantic-mode");
+  localStorage.setItem("romanticMode", isOn ? "on" : "off");
+}
+
+window.onload = () => {
+  if (localStorage.getItem("romanticMode") === "on") {
+    document.body.classList.add("romantic-mode");
+  }
+
+  // Existing initializers like renderNotes(), etc.
+};
+
+function saveJournal() {
+  const owner = document.getElementById("journalOwner").value;
+  const entry = document.getElementById("journalEntry").value;
+  if (!entry) return alert("Write something first!");
+  localStorage.setItem(`journal-${owner}`, entry);
+  alert("✍️ Entry saved for " + owner.charAt(0).toUpperCase() + owner.slice(1));
+}
+
+function loadJournal() {
+  const owner = document.getElementById("journalOwner").value;
+  const saved = localStorage.getItem(`journal-${owner}`);
+  document.getElementById("journalEntry").value = saved || "";
+}
+
+
+
+
       </script>
 
 
