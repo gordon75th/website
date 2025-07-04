@@ -28,7 +28,7 @@
 
 <body>
   <div style="position: fixed; bottom: 10px; left: 10px; z-index: 999;">
-  <button onclick="reloadWithLove()" class="note-btn">🔄 Reload with Love</button>
+ <!-- <button onclick="reloadWithLove()" class="note-btn">🔄 Reload with Love</button>-->
   </div>
 
   <div style="position: fixed; bottom: 10px; right: 10px; z-index: 999;">
@@ -105,19 +105,21 @@
         <div id="reasons-list"></div>
       </div>
       <div class="reasons">
-        <h2>Time has passed... ⏳ </h2>
+        <h2 style="color:#d63384; font-family:'Pacifico', cursive;">ITS OUR FOUURR MONTHS TOGETHERRR 💖</h2>
         <div class="container">
           <p id="time-since" style="font-size: 1.5rem; color: #c9184a;"></p>
           <!--<a href="typewriter.html" style="font-family: 'Pacifico', cursive; color: rgb(83, 3, 70);" class="text">✍️
             Love Letter</a><br>-->
-          <br> <a href="stars.html" style="font-family: 'Pacifico', cursive; color: rgb(83, 3, 70);" class="text">🌌
-            Stargazing</a>
+          <br> <div class="anniversary-celebration">
+  <a href="loveletter.html" class="anniversary-btn">💖 4 Months Anniversary Surprise 🎉</a>
+  <div class="floating-hearts">💗 💕 💘 💓 💞</div>
+</div>
+
           <br>
           <div id="heartbeatContainer" class="heartbeat-wrapper">
             <button id="heartbeatBtn">❤️ Hold for Heartbeat</button>
-            <div id="heartbeatPulse" class="pulse-circle"></div>
-            <p id="heartbeatMsg" class="heartbeat-msg">Press and hold to feel the beat...</p>
-            <a href="draw.html" class="heartbeat-msg">🎨 Doodle Together</a>
+            <div id="heartbeatPulse" class="pulse-circle"></div> <br>
+            <button class="goodnight-btn" onclick="showGoodNightImage()">🌙 Our First Good Night</button>
 
           </div>
 
@@ -156,7 +158,7 @@
         <div id="futureMessages" style="margin-top: 30px;"></div>
       </div>
 
-      <div class="love-notes" style="margin-top: 60px;">
+     <!-- <div class="love-notes" style="margin-top: 60px;">
   <h2>📓 Private Journal - (A work in progress, I'm sowwee 🥺)</h2>
   <select id="journalOwner" class="noteFrom">
     <option value="anika">Anika's Journal</option>
@@ -165,7 +167,7 @@
   <textarea class="noteFrom" rows="6" placeholder="Your secret thoughts..."></textarea><br>
   <button class="note-btn" onclick="saveJournal()">💾 Save Entry</button>
   <button class="note-btn" onclick="loadJournal()">📖 Load Entry</button>
-</div>
+</div>-->
 
 
 
@@ -248,6 +250,13 @@
         admin
       </div>
 
+      <div id="goodNightOverlay" class="overlay" onclick="hideGoodNightImage()">
+  <div class="popup-image">
+    <img src="images/Untitled-1.png" alt="Our first good night message" />
+  </div>
+</div>
+
+
 
 
 
@@ -327,6 +336,16 @@
           }
         }
 
+        setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "floating-heart";
+  heart.innerText = "💗";
+  heart.style.left = `${Math.random() * 100}vw`;
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 4000);
+}, 1000);
+
 
 
         const messaging = firebase.messaging();
@@ -371,6 +390,19 @@
             alert("❌ Wrong password!");
           }
         });
+
+        window.addEventListener('load', () => {
+  const now = new Date();
+  const anniversaryDate = new Date("2025-07-05"); // Update if needed
+  if (now.toDateString() === anniversaryDate.toDateString()) {
+    confetti({
+      particleCount: 200,
+      spread: 100,
+      origin: { y: 0.6 }
+    });
+  }
+});
+
 
 
 
@@ -779,6 +811,14 @@
             }
           });
         }
+
+        function showGoodNightImage() {
+  document.getElementById('goodNightOverlay').style.display = 'flex';
+}
+
+function hideGoodNightImage() {
+  document.getElementById('goodNightOverlay').style.display = 'none';
+}
 
 
         function renderArchivedNotes() {
