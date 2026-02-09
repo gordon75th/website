@@ -1,5 +1,5 @@
 (() => {
-  const PASSWORD = "change-me";
+  const PASSWORD = "meinbebi";
   const STORAGE_KEY = "site_auth_ok_v1";
   const BODY_LOCK_CLASS = "auth-locked";
 
