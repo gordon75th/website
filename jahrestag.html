@@ -1,99 +1,1261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💌 For You, Anika</title>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Pacifico&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💘 Jahrestag - CLASSIFIED</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&family=VT323&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
+    :root {
+      --pink: #ff6b9d;
+      --deep-pink: #c9184a;
+      --rose: #ffb3c6;
+      --cream: #fff5f7;
+      --dark: #1a0a0e;
+      --gold: #ffd700;
+      --green: #00ff88;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      background: linear-gradient(to top, #ffe0f0, #fff0f6);
-      font-family: 'Caveat', cursive;
-      padding: 40px;
+      background: var(--cream);
+      font-family: 'Quicksand', sans-serif;
+      overflow-x: hidden;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='24' font-size='24'%3E💕%3C/text%3E%3C/svg%3E") 16 16, auto;
+    }
+
+    /* ========== LOADING SCREEN ========== */
+    #loadingScreen {
+      position: fixed;
+      inset: 0;
+      background: var(--dark);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .loading-title {
+      font-family: 'VT323', monospace;
+      font-size: clamp(28px, 6vw, 52px);
+      color: var(--pink);
+      text-shadow: 0 0 20px var(--pink);
+      animation: flicker 1.5s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 95%, 100% { opacity: 1; }
+      96% { opacity: 0.3; }
+      97% { opacity: 1; }
+      98% { opacity: 0.1; }
+    }
+
+    .loading-bar-container {
+      width: min(400px, 80vw);
+      background: #333;
+      border: 2px solid var(--pink);
+      border-radius: 4px;
+      padding: 4px;
+    }
+
+    .loading-bar {
+      height: 24px;
+      background: linear-gradient(90deg, var(--deep-pink), var(--pink), var(--rose));
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s;
+      box-shadow: 0 0 12px var(--pink);
+    }
+
+    .loading-status {
+      font-family: 'VT323', monospace;
+      font-size: 20px;
+      color: var(--green);
       text-align: center;
-      color: #c9184a;
+      min-height: 28px;
     }
 
-    .love-letter {
-      max-width: 600px;
-      margin: 0 auto;
-      background: #fff6fa;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      font-size: 1.3rem;
+    .loading-percent {
+      font-family: 'VT323', monospace;
+      font-size: 48px;
+      color: white;
+    }
+
+    /* ========== HERO ========== */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a0a0e 0%, #3d0a1a 50%, #1a0a0e 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       position: relative;
+      overflow: hidden;
     }
 
-    .letter-title {
-      font-family: 'Pacifico', cursive;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+    .stars {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
     }
 
-    .back-btn {
-      margin-top: 30px;
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle var(--d) infinite var(--delay);
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    .breaking-news {
+      background: var(--deep-pink);
+      color: white;
+      padding: 10px 0;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      overflow: hidden;
+      font-family: 'VT323', monospace;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .ticker-content {
       display: inline-block;
-      font-size: 1.2rem;
-      padding: 10px 20px;
-      background: #ffb3c6;
+      white-space: nowrap;
+      animation: ticker 30s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(100vw); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(60px, 15vw, 160px);
+      color: white;
+      text-align: center;
+      line-height: 0.9;
+      letter-spacing: -2px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title span {
+      color: var(--pink);
+      text-shadow: 0 0 40px var(--pink), 0 0 80px var(--deep-pink);
+    }
+
+    .hero-subtitle {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(16px, 4vw, 28px);
+      color: var(--rose);
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      font-family: 'VT323', monospace;
+      font-size: 20px;
+      color: var(--pink);
+      animation: bounce 1.5s infinite;
+      z-index: 1;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .floating-emoji {
+      position: absolute;
+      font-size: clamp(24px, 4vw, 40px);
+      animation: float var(--d) ease-in-out infinite var(--delay);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(10deg); }
+      66% { transform: translateY(10px) rotate(-5deg); }
+    }
+
+    /* ========== SECTIONS ========== */
+    .section {
+      padding: clamp(60px, 10vw, 120px) clamp(20px, 6vw, 80px);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(36px, 8vw, 72px);
+      color: var(--dark);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .section-title .accent { color: var(--deep-pink); }
+
+    /* ========== FAKE ERROR ========== */
+    #errorSection {
+      background: var(--dark);
+      padding: clamp(40px, 8vw, 80px) clamp(20px, 6vw, 60px);
+    }
+
+    .error-window {
+      background: #c0c0c0;
+      border: 3px solid #fff;
+      border-right-color: #666;
+      border-bottom-color: #666;
+      max-width: 480px;
+      margin: 0 auto;
+      animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    .error-titlebar {
+      background: #000080;
+      color: white;
+      padding: 4px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'VT323', monospace;
+      font-size: 18px;
+    }
+
+    .error-btn-group { display: flex; gap: 4px; }
+    .error-win-btn {
+      background: #c0c0c0;
+      border: 1px solid #fff;
+      border-right-color: #666;
+      border-bottom-color: #666;
+      width: 18px; height: 18px;
+      font-size: 10px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .error-body {
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .error-icon { font-size: 40px; flex-shrink: 0; }
+
+    .error-text {
+      font-family: 'VT323', monospace;
+      font-size: 18px;
+      color: #000;
+      line-height: 1.6;
+    }
+
+    .error-footer {
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .win-btn {
+      background: #c0c0c0;
+      border: 2px solid #fff;
+      border-right-color: #666;
+      border-bottom-color: #666;
+      padding: 4px 20px;
+      font-family: 'VT323', monospace;
+      font-size: 18px;
+      cursor: pointer;
+      min-width: 80px;
+    }
+
+    .win-btn:active {
+      border-color: #666;
+      border-right-color: #fff;
+      border-bottom-color: #fff;
+    }
+
+    /* ========== MOVIE TRAILER ========== */
+    #trailerSection {
+      background: #000;
+      padding: clamp(60px, 10vw, 120px) 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trailer-line {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(24px, 5vw, 52px);
+      color: white;
+      letter-spacing: 4px;
+      opacity: 0;
+      transform: scale(1.3);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      margin: 8px 0;
+      text-shadow: 0 0 30px rgba(255,255,255,0.3);
+    }
+
+    .trailer-line.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .trailer-line.pink { color: var(--pink); text-shadow: 0 0 40px var(--pink); }
+    .trailer-line.big { font-size: clamp(40px, 9vw, 100px); }
+    .trailer-line.small { font-family: 'Quicksand', sans-serif; font-size: clamp(14px, 3vw, 22px); letter-spacing: 8px; color: #aaa; }
+
+    /* ========== CLICKER GAME ========== */
+    #clickerSection {
+      background: linear-gradient(135deg, #fff0f5, #ffe4ef);
+      padding: clamp(60px, 10vw, 100px) clamp(20px, 6vw, 60px);
+      text-align: center;
+    }
+
+    .clicker-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .big-heart-btn {
+      width: clamp(140px, 30vw, 200px);
+      height: clamp(140px, 30vw, 200px);
+      font-size: clamp(60px, 12vw, 90px);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.08s;
+      filter: drop-shadow(0 0 20px var(--pink));
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .big-heart-btn:active { transform: scale(0.88); }
+
+    .clicker-count {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(60px, 12vw, 100px);
+      color: var(--deep-pink);
+      line-height: 1;
+    }
+
+    .clicker-timer {
+      font-family: 'VT323', monospace;
+      font-size: 28px;
+      color: #888;
+    }
+
+    .clicker-result {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(16px, 4vw, 24px);
+      color: var(--deep-pink);
+      max-width: 500px;
+      display: none;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .start-btn, .retry-btn {
+      background: var(--deep-pink);
       color: white;
       border: none;
-      border-radius: 10px;
-      cursor: pointer;
+      padding: 14px 40px;
       font-family: 'Pacifico', cursive;
-      text-decoration: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      font-size: 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(201,24,74,0.4);
+      transition: transform 0.15s, box-shadow 0.15s;
     }
 
-    .hearts {
-      font-size: 2rem;
-      animation: floatHearts 3s ease-in-out infinite alternate;
+    .start-btn:hover, .retry-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(201,24,74,0.5);
+    }
+
+    /* ========== QUIZ ========== */
+    #quizSection {
+      background: var(--dark);
+      padding: clamp(60px, 10vw, 120px) clamp(20px, 6vw, 60px);
+    }
+
+    .quiz-card {
+      background: #2a0f1a;
+      border: 2px solid var(--deep-pink);
+      border-radius: 20px;
+      padding: clamp(24px, 5vw, 48px);
+      max-width: 600px;
+      margin: 32px auto 0;
+      box-shadow: 0 0 40px rgba(201,24,74,0.2);
+    }
+
+    .quiz-question {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(16px, 3.5vw, 22px);
+      color: white;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .quiz-options { display: flex; flex-direction: column; gap: 12px; }
+
+    .quiz-option {
+      background: #3d0a1a;
+      border: 2px solid #660022;
+      color: var(--rose);
+      padding: 14px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-size: clamp(14px, 3vw, 16px);
+      font-weight: 600;
+      text-align: left;
+      transition: all 0.2s;
+    }
+
+    .quiz-option:hover {
+      background: var(--deep-pink);
+      border-color: var(--pink);
+      color: white;
+      transform: translateX(8px);
+    }
+
+    .quiz-result {
+      text-align: center;
+      padding: 24px 0 8px;
+      display: none;
+    }
+
+    .quiz-result-text {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(36px, 8vw, 64px);
+      color: var(--gold);
+      text-shadow: 0 0 20px var(--gold);
+    }
+
+    .quiz-result-sub {
+      font-family: 'Quicksand', sans-serif;
+      font-size: clamp(14px, 3vw, 18px);
+      color: var(--rose);
+      margin-top: 8px;
+    }
+
+    .quiz-next-btn {
+      background: var(--deep-pink);
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      font-family: 'Pacifico', cursive;
+      font-size: 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 16px;
+      box-shadow: 0 4px 20px rgba(201,24,74,0.4);
+      transition: transform 0.15s;
+    }
+
+    .quiz-next-btn:hover { transform: scale(1.05); }
+
+    /* ========== COMPLIMENT MACHINE ========== */
+    #complimentSection {
+      background: linear-gradient(180deg, #fff5f7, #ffe0eb);
+      padding: clamp(60px, 10vw, 120px) clamp(20px, 6vw, 60px);
+      text-align: center;
+    }
+
+    .machine-body {
+      background: white;
+      border: 3px solid var(--deep-pink);
+      border-radius: 24px;
+      padding: clamp(24px, 5vw, 48px);
+      max-width: 560px;
+      margin: 32px auto 0;
+      box-shadow: 0 12px 48px rgba(201,24,74,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .machine-screen {
+      background: #1a0a0e;
+      border-radius: 12px;
+      padding: clamp(20px, 4vw, 32px);
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      border: 2px solid var(--deep-pink);
+    }
+
+    .compliment-text {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(14px, 3vw, 18px);
+      color: var(--rose);
+      line-height: 1.6;
+      text-align: center;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    .dispense-btn {
+      background: linear-gradient(135deg, var(--deep-pink), #ff4081);
+      color: white;
+      border: none;
+      padding: 16px 44px;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 24px;
+      letter-spacing: 2px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(201,24,74,0.4);
+      transition: all 0.2s;
+    }
+
+    .dispense-btn:hover { transform: scale(1.05); box-shadow: 0 10px 32px rgba(201,24,74,0.6); }
+    .dispense-btn:active { transform: scale(0.96); }
+
+    /* ========== CERTIFICATE ========== */
+    #certSection {
+      padding: clamp(60px, 10vw, 120px) clamp(20px, 6vw, 40px);
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .cert {
+      max-width: 680px;
+      margin: 32px auto 0;
+      background: #fffef5;
+      border: 6px double #c9a84c;
+      padding: clamp(32px, 6vw, 64px);
+      position: relative;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12), inset 0 0 60px rgba(201,168,76,0.05);
+    }
+
+    .cert::before, .cert::after {
+      content: '✦';
       position: absolute;
-      top: -10px;
-      right: 20px;
+      font-size: 32px;
+      color: #c9a84c;
+    }
+    .cert::before { top: 16px; left: 16px; }
+    .cert::after { bottom: 16px; right: 16px; }
+
+    .cert-corner-tl, .cert-corner-tr, .cert-corner-bl, .cert-corner-br {
+      position: absolute;
+      font-size: 28px;
+      color: #c9a84c;
+    }
+    .cert-corner-tl { top: 16px; right: 16px; }
+    .cert-corner-tr { bottom: 16px; left: 16px; }
+
+    .cert-header {
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 6px;
+      font-size: clamp(11px, 2.5vw, 14px);
+      color: #888;
+      margin-bottom: 16px;
     }
 
-    @keyframes floatHearts {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-20px); opacity: 0.7; }
+    .cert-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(26px, 6vw, 44px);
+      color: var(--deep-pink);
+      margin: 12px 0;
+      line-height: 1.2;
+    }
+
+    .cert-body {
+      font-family: 'Quicksand', sans-serif;
+      font-size: clamp(14px, 3vw, 17px);
+      color: #444;
+      line-height: 1.8;
+      margin: 20px 0;
+    }
+
+    .cert-name {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(28px, 6vw, 48px);
+      color: var(--dark);
+      border-bottom: 2px solid #c9a84c;
+      display: inline-block;
+      padding-bottom: 4px;
+      margin: 12px 0;
+    }
+
+    .cert-seal {
+      font-size: clamp(48px, 10vw, 72px);
+      margin: 16px 0 8px;
+      filter: drop-shadow(0 4px 8px rgba(201,168,76,0.4));
+    }
+
+    .cert-footer {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .cert-sig {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(13px, 2.5vw, 16px);
+      color: #888;
+      border-top: 1px solid #ccc;
+      padding-top: 8px;
+      text-align: center;
+    }
+
+    .download-cert-btn {
+      background: #c9a84c;
+      color: white;
+      border: none;
+      padding: 14px 36px;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 22px;
+      letter-spacing: 2px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 24px;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+      transition: all 0.2s;
+    }
+
+    .download-cert-btn:hover { transform: scale(1.04); }
+
+    /* ========== FINALE ========== */
+    #finaleSection {
+      background: linear-gradient(135deg, var(--dark), #3d0a1a, var(--dark));
+      padding: clamp(80px, 12vw, 160px) clamp(20px, 8vw, 80px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .finale-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(48px, 12vw, 120px);
+      color: white;
+      line-height: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .finale-title .pink { color: var(--pink); text-shadow: 0 0 60px var(--pink); }
+
+    .finale-msg {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(16px, 4vw, 26px);
+      color: var(--rose);
+      max-width: 600px;
+      margin: 24px auto;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .finale-btn {
+      background: linear-gradient(135deg, var(--deep-pink), var(--pink));
+      color: white;
+      border: none;
+      padding: 20px 60px;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 28px;
+      letter-spacing: 3px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 40px rgba(255,107,157,0.5);
+      transition: all 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .finale-btn:hover { transform: scale(1.06); box-shadow: 0 12px 60px rgba(255,107,157,0.7); }
+
+    .heart-rain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .rain-heart {
+      position: absolute;
+      font-size: clamp(16px, 3vw, 24px);
+      animation: rainFall linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes rainFall {
+      0% { transform: translateY(-40px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.3; }
+    }
+
+    /* ========== DIVIDER ========== */
+    .divider {
+      text-align: center;
+      font-size: 28px;
+      padding: 32px 0 8px;
+      color: var(--pink);
+      opacity: 0.5;
+    }
+
+    /* ========== RESPONSIVE HELPERS ========== */
+    @media (max-width: 600px) {
+      .error-body { flex-direction: column; }
+      .cert-footer { flex-direction: column; align-items: center; }
     }
   </style>
-  <link href="css/auth.css" rel="stylesheet">
-  <script src="js/auth.js" defer></script>
 </head>
 <body>
-  <div class="love-letter">
-    <div class="hearts">💕💖💘</div>
-    <h1 class="letter-title">Es ist offiziel, unser Beziehungsbebbiii ist 3 Monate alt...</h1>
-    <p>
-      TEXT. <br/>
-      ...
-      <br>
-      <br>
-      ...
 
-      <br>
-      <br>
-      ...
-      <br>
-      <br>
-      ...
-      <br>
-      <br>
-      ...
-      
-      <br>
-      <br>
-      ...<br/>
-      ... <br/><br/>
-    </p>
-
-    <p style="margin-top: 30px; font-size: 1.5rem;">
-      >....
-    </p>
-
-    <a href="index.html" class="back-btn">← Back to the Garden</a>
+<!-- LOADING SCREEN -->
+<div id="loadingScreen">
+  <div class="loading-title">⚙️ SYSTEM LOADING ⚙️</div>
+  <div class="loading-percent" id="loadPercent">0%</div>
+  <div class="loading-bar-container">
+    <div class="loading-bar" id="loadBar"></div>
   </div>
+  <div class="loading-status" id="loadStatus">Initializing love.exe...</div>
+</div>
+
+<!-- BREAKING NEWS HERO -->
+<section id="hero">
+  <div class="stars" id="starsContainer"></div>
+  <div class="breaking-news">
+    <span class="ticker-content">
+      🚨 BREAKING NEWS 🚨 — Local man still completely obsessed with girlfriend after months together 💘 &nbsp;&nbsp;&nbsp; 
+      🌷 JAHRESTAG ALERT 🌷 — Scientists confirm: Anika is statistically too cute for this planet 📊 &nbsp;&nbsp;&nbsp;
+      💌 URGENT UPDATE 💌 — Boyfriend has no plans to stop being in love anytime soon, immaaa und für immaaa 🔴 LIVE &nbsp;&nbsp;&nbsp;
+      ⚠️ WARNING ⚠️ — This page contains dangerous levels of affection. Proceed with caution. 💕 &nbsp;&nbsp;&nbsp;
+    </span>
+  </div>
+
+  <div class="floating-emoji" style="left:5%; top:20%; --d:4s; --delay:0s;">🌷</div>
+  <div class="floating-emoji" style="left:88%; top:15%; --d:5s; --delay:0.5s;">💕</div>
+  <div class="floating-emoji" style="left:15%; top:70%; --d:3.5s; --delay:1s;">🥰</div>
+  <div class="floating-emoji" style="left:80%; top:65%; --d:4.5s; --delay:0.2s;">✨</div>
+  <div class="floating-emoji" style="left:50%; top:10%; --d:6s; --delay:1.5s;">💘</div>
+
+  <div class="hero-title" style="position:relative; z-index:1;">
+    HAPPY<br><span>JAHRESTAG</span><br>ANIKA 🌷
+  </div>
+  <div class="hero-subtitle">( you're stuck with me. IMMA UND FÜR IMMA. )</div>
+  <div class="scroll-hint">↓ scroll down, something unhinged awaits ↓</div>
+</section>
+
+<!-- FAKE WINDOWS ERROR -->
+<section id="errorSection"> 
+  <div class="section" style="max-width:600px; text-align:center;">
+    <div class="section-title" style="color:white;">⚠️ CRITICAL <span class="accent">ERROR</span></div>
+    <p style="color:#aaa; font-family:'Quicksand'; margin-bottom:32px;"></p>
+    <div class="error-window" id="errorWindow">
+      <div class="error-titlebar">
+        <span>💔 LOVE_OVERFLOW.EXE — Fatal Error</span>
+        <div class="error-btn-group">
+          <button class="error-win-btn">_</button>
+          <button class="error-win-btn">□</button>
+          <button class="error-win-btn" onclick="errorOK()">✕</button>
+        </div>
+      </div>
+      <div class="error-body">
+        <div class="error-icon">🛑</div>
+        <div class="error-text">
+          CRITICAL ERROR 0x0000L0VE<br><br>
+          A fatal exception has occurred.<br><br>
+          CAUSE: Girlfriend.exe is running at<br>
+          999% cuteness capacity.<br><br>
+          System cannot process.<br>
+          Heart overflow detected.<br><br>
+          Recommend: eine sehr lange Umarmung 🥹
+        </div>
+      </div>
+      <div class="error-footer">
+        <button class="win-btn" onclick="errorOK()">OK</button>
+        <button class="win-btn" onclick="errorOK()">Cancel</button>
+        <button class="win-btn" onclick="errorIgnore()">Ignore</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOVIE TRAILER -->
+<section id="trailerSection">
+  <div id="trailerLines">
+    <div class="trailer-line small">A MAID PRODUCTION PRESENTS</div>
+    <div class="trailer-line" style="opacity:0; height:20px;"></div>
+    <div class="trailer-line">IN A WORLD...</div>
+    <div class="trailer-line pink">WHERE ONE GUY</div>
+    <div class="trailer-line">WAS ABSOLUTELY</div>
+    <div class="trailer-line big pink">WHIPPED</div>
+    <div class="trailer-line small" style="margin-top:8px;">for one girl named</div>
+    <div class="trailer-line big" style="color:var(--rose); text-shadow: 0 0 30px var(--rose);">ANIKA</div>
+    <div class="trailer-line" style="opacity:0; height:20px;"></div>
+    <div class="trailer-line small">THIS. IS. THEIR. STORY.</div>
+    <div class="trailer-line" style="opacity:0; height:20px;"></div>
+    <div class="trailer-line pink big">JAHRESTAG</div>
+    <div class="trailer-line small">coming to your heart - VERY SOON</div>
+  </div>
+</section>
+
+<!-- CLICKER GAME -->
+<section id="clickerSection">
+  <div class="section" style="text-align:center;">
+    <div class="section-title">THE LOVE <span class="accent">CLICKER</span></div>
+    <p style="font-family:'Quicksand'; color:#888; font-size:clamp(14px,3vw,17px); margin-bottom:8px;">
+      Click the heart as many times as you can in <strong>10 seconds</strong>.<br>
+      That's how many times I think about you... per minute.
+    </p>
+    <div class="clicker-area">
+      <div id="clickerTimer" class="clicker-timer">Press START to begin 💕</div>
+      <button class="big-heart-btn" id="heartBtn" onclick="clickHeart()" disabled>💗</button>
+      <div class="clicker-count" id="clickCount">0</div>
+      <div class="clicker-result" id="clickerResult"></div>
+      <button class="start-btn" id="startBtn" onclick="startClicker()">START 💘</button>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quizSection">
+  <div class="section" style="max-width:680px;">
+    <div class="section-title" style="color:white;">RATE YOUR <span class="accent">BOYFRIEND</span></div>
+    <p style="color:#aaa; font-family:'Quicksand'; font-size:clamp(14px,3vw,16px);">
+      Answer honestly. Results may vary. (They won't.)
+    </p>
+    <div class="quiz-card">
+      <div class="quiz-question" id="quizQuestion"></div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-result" id="quizResult">
+        <div class="quiz-result-text" id="quizResultText"></div>
+        <div class="quiz-result-sub" id="quizResultSub"></div>
+        <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">Next Question →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIMENT MACHINE -->
+<section id="complimentSection">
+  <div class="section" style="text-align:center;">
+    <div class="section-title">COMPLIMENT <span class="accent">MACHINE</span> 3000</div>
+    <p style="font-family:'Quicksand'; color:#888; font-size:clamp(14px,3vw,16px); margin-bottom:8px;">
+      Patent pending. Powered by real feelings. 100% organic.
+    </p>
+    <div class="machine-body">
+      <div class="machine-screen">
+        <div class="compliment-text" id="complimentDisplay">
+          Press the button below to receive your daily dose of appreciation 💕
+        </div>
+      </div>
+      <button class="dispense-btn" onclick="dispenseCompliment()">⚡ DISPENSE COMPLIMENT ⚡</button>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATE -->
+<section id="certSection">
+  <div class="section" style="text-align:center;">
+    <div class="section-title">OFFICIAL <span class="accent">CERTIFICATE</span></div>
+    <p style="font-family:'Quicksand'; color:#888; font-size:clamp(14px,3vw,16px);">
+      Legally binding in 47 countries and all timelines.
+    </p>
+    <div class="cert" id="certEl">
+      <span class="cert-corner-tl">✦</span>
+      <span class="cert-corner-tr">✦</span>
+      <div class="cert-header">MINISTRY OF LOVE — OFFICIAL DOCUMENT NO. 001</div>
+      <div style="font-size:clamp(28px,6vw,40px); margin:8px 0;">💘</div>
+      <div class="cert-title">Certificate of Being<br>The World's Best Girlfriend</div>
+      <div class="cert-body">
+        This is to certify that
+      </div>
+      <div class="cert-name">Anika</div>
+      <div class="cert-body">
+        has successfully completed all requirements for the title of<br>
+        <strong>"Mein Bebii"</strong>, including but not limited to:<br><br>
+        • Being unreasonably cute at all times<br>
+        • Making everything better just by existing<br>
+        • Winning every argument (even when wrong)<br>
+        • Having a laugh that fixes everything<br>
+        • Being loved unconditionally since Day 1
+      </div>
+      <div class="cert-seal">🏅</div>
+      <div style="font-family:'VT323',monospace; font-size:16px; color:#aaa;">CERT-JAHRESTAG-2026-ANIKA-001</div>
+      <div class="cert-footer">
+        <div class="cert-sig">Maid<br>Head of Department of<br>Being in Love</div>
+        <div class="cert-sig">💕<br>Ministry of Love<br>Official Seal</div>
+        <div class="cert-sig">Jahrestag<br>05.03.2026</div>
+      </div>
+    </div>
+    <button class="download-cert-btn" onclick="downloadCert()">🏅 SAVE CERTIFICATE</button>
+  </div>
+</section>
+
+<!-- FINALE -->
+<section id="finaleSection">
+  <div class="heart-rain" id="heartRain"></div>
+  <div class="finale-title">
+    ICH LIEBE<br><span class="pink">DICH</span><br>SO SEHR 💕
+  </div>
+  <div class="finale-msg">
+      But I just want to say that I love you more than anything on this world. I apreciate you SOOO MUCH and thank you
+      for being in my life, my love.. You have given me the feeling of security, you're my safe space.. Thank God I found a girl, beatuiful and sweet...
+      I will never give you up, I hope you never give up on me.. Through hard times, we talk. Through fights we relax and take a breath.
+      It's us against the problems, not against each other, meinn bebbiii... Alles gute zu Jahrestag Anika.. ♥️ 
+  </div>
+  <button class="finale-btn" onclick="bigFinale()">💘 CELEBRATE 💘</button>
+</section>
+
+<script>
+// ============ LOADING SCREEN ============
+const loadStatuses = [
+  "Initializing love.exe...",
+  "Loading 200 reasons...",
+  "Calibrating cuteness levels...",
+  "Importing good memories...",
+  "Charging heart battery... ❤️",
+  "Downloading Anika appreciation module...",
+  "Almost ready... please wait 💕",
+  "ERROR: Too much love — overriding safety limits...",
+  "OVERRIDE SUCCESSFUL ✅",
+  "Welcome, Anika 🌷"
+];
+
+let loadProgress = 0;
+const loadBar = document.getElementById('loadBar');
+const loadPercent = document.getElementById('loadPercent');
+const loadStatus = document.getElementById('loadStatus');
+
+function advanceLoader() {
+  const statusIndex = Math.floor((loadProgress / 100) * loadStatuses.length);
+  if (statusIndex < loadStatuses.length) {
+    loadStatus.textContent = loadStatuses[statusIndex];
+  }
+  loadBar.style.width = loadProgress + '%';
+  loadPercent.textContent = loadProgress + '%';
+  
+  if (loadProgress < 100) {
+    const increment = loadProgress < 70 ? Math.random() * 12 + 3 : Math.random() * 5 + 1;
+    loadProgress = Math.min(100, loadProgress + increment);
+    setTimeout(advanceLoader, loadProgress < 80 ? 180 : 300);
+  } else {
+    loadStatus.textContent = loadStatuses[loadStatuses.length - 1];
+    setTimeout(() => {
+      document.getElementById('loadingScreen').style.transition = 'opacity 0.8s';
+      document.getElementById('loadingScreen').style.opacity = '0';
+      setTimeout(() => document.getElementById('loadingScreen').style.display = 'none', 800);
+    }, 900);
+  }
+}
+
+setTimeout(advanceLoader, 300);
+
+// ============ STARS ============
+const starsContainer = document.getElementById('starsContainer');
+for (let i = 0; i < 80; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  const size = Math.random() * 3 + 1;
+  star.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%; top:${Math.random()*100}%;
+    --d:${Math.random()*3+2}s; --delay:${Math.random()*3}s;
+  `;
+  starsContainer.appendChild(star);
+}
+
+// ============ TRAILER ANIMATION ============
+const trailerLines = document.querySelectorAll('.trailer-line');
+let trailerObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      let delay = 0;
+      trailerLines.forEach((line, i) => {
+        setTimeout(() => line.classList.add('show'), delay);
+        delay += 280;
+      });
+      trailerObserver.disconnect();
+    }
+  });
+}, { threshold: 0.2 });
+trailerObserver.observe(document.getElementById('trailerSection'));
+
+// ============ ERROR WINDOW ============
+function errorOK() {
+  const win = document.getElementById('errorWindow');
+  win.style.transition = 'transform 0.3s, opacity 0.3s';
+  win.style.transform = 'scale(0.8)';
+  win.style.opacity = '0';
+  setTimeout(() => {
+    win.innerHTML = `<div style="text-align:center; padding:40px 20px; font-family:'Pacifico',cursive; color:var(--rose); font-size:20px; background:#2a0f1a; border-radius:8px;">
+      Error dismissed.<br><br>
+      Love.exe is still running.<br>Immer und für immer.
+    </div>`;
+    win.style.transform = 'scale(1)';
+    win.style.opacity = '1';
+    win.style.background = '#2a0f1a';
+    win.style.border = '2px solid var(--deep-pink)';
+    win.style.borderRadius = '8px';
+  }, 300);
+}
+
+function errorIgnore() {
+  const win = document.getElementById('errorWindow');
+  const body = win.querySelector('.error-body');
+  if (body) body.querySelector('.error-text').innerHTML =
+    'ERROR IGNORED.<br><br>New error spawning...<br><br>ERROR 0x000HEART:<br>Cannot stop loving Anika.<br><br>This error will repeat<br>indefinitely. 💕';
+}
+
+// ============ CLICKER GAME ============
+let clickCount = 0;
+let clickerRunning = false;
+let clickerInterval = null;
+let clickerTime = 10;
+
+function startClicker() {
+  clickCount = 0;
+  clickerTime = 10;
+  clickerRunning = true;
+  document.getElementById('clickCount').textContent = '0';
+  document.getElementById('startBtn').style.display = 'none';
+  document.getElementById('clickerResult').style.display = 'none';
+  document.getElementById('heartBtn').disabled = false;
+  document.getElementById('heartBtn').textContent = '💗';
+
+  clickerInterval = setInterval(() => {
+    clickerTime--;
+    document.getElementById('clickerTimer').textContent = `⏱️ ${clickerTime}s remaining`;
+    if (clickerTime <= 0) {
+      clearInterval(clickerInterval);
+      clickerRunning = false;
+      document.getElementById('heartBtn').disabled = true;
+      showClickerResult();
+    }
+  }, 1000);
+
+  document.getElementById('clickerTimer').textContent = `⏱️ ${clickerTime}s remaining`;
+}
+
+function clickHeart() {
+  if (!clickerRunning) return;
+  clickCount++;
+  document.getElementById('clickCount').textContent = clickCount;
+  const btn = document.getElementById('heartBtn');
+  btn.textContent = clickCount % 2 === 0 ? '💗' : '💖';
+}
+
+function showClickerResult() {
+  const result = document.getElementById('clickerResult');
+  const msgs = [
+    [0, 1, `${clickCount} times? Du nutte... ${clickCount * 60} ?? WIRKLICHHH, NÖÖ`],
+    [2, 20, `${clickCount} times? That's cute. I think about you ${clickCount * 60} times per hour. 😏`],
+    [21, 50, `${clickCount}! That's how many ways I can describe how much I love you. And I'm still counting. 💕`],
+    [51, 90, `${clickCount} clicks?! Your finger speed is impressive. Almost as impressive as how amazing you are. 🌷`],
+    [91, 150, `${clickCount} TIMES?! Okay okay, I think about you even more than that. Science has no unit for it. 🔬💘`],
+    [151, 9999, `${clickCount}?!?! WHAT. You broke the love machine. I give up. You win. You're perfect. 🏆💝`]
+  ];
+  const match = msgs.find(([min, max]) => clickCount >= min && clickCount <= max);
+  result.textContent = match ? match[2] : `${clickCount} — and it's still not enough. 💕`;
+  result.style.display = 'block';
+  
+  const retryBtn = document.createElement('button');
+  retryBtn.className = 'retry-btn';
+  retryBtn.textContent = '🔄 Try Again';
+  retryBtn.onclick = () => {
+    retryBtn.remove();
+    document.getElementById('startBtn').style.display = 'inline-block';
+    document.getElementById('clickerTimer').textContent = 'Press START to begin 💕';
+    document.getElementById('clickCount').textContent = '0';
+    result.style.display = 'none';
+    document.getElementById('heartBtn').textContent = '💗';
+  };
+  result.after(retryBtn);
+  document.getElementById('startBtn').style.display = 'none';
+}
+
+// ============ QUIZ ============
+const quizData = [
+  {
+    q: "On a scale of 1–10, how would you rate your boyfriend's overall vibe?",
+    options: ["Honestly a solid 10", "Maybe 10.5?", "Struggling to go above 10/10", "The scale doesn't go high enough"],
+    result: "10/10 CERTIFIED ✅",
+    sub: "The Ministry of Love (Hubert) has verified: perfect boyfriend status confirmed."
+  },
+  {
+    q: "How would you describe the quality of your boyfriend's hugs?",
+    options: ["Dangerously comfortable", "A public health hazard (too good)", "Should require a license", "Literally illegal in 12 countries"],
+    result: "GOLD STANDARD HUGGER 🏅",
+    sub: "The International Hug Bureau (Freed) has issued a formal commendation."
+  },
+  {
+    q: "How often does your boyfriend make you smile?",
+    options: ["Too often, it's suspicious", "My face hurts actually", "Every single day", "Studies show: constantly"],
+    result: "SMILE DEALER 😄",
+    sub: "Authorities (Bruno) have flagged him for distributing happiness without a permit."
+  },
+  {
+    q: "What is your honest rating of this Jahrestag page?",
+    options: ["Verrryy sweet 😭", "Er ist so cool und gar nicht schwul", "Unfassbar süß", "10/10 would recommend"],
+    result: "BEST JAHRESTAG EVER 🏆",
+    sub: "According to 100% of the surveys taken in this relationship."
+  }
+];
+
+let currentQ = 0;
+
+function loadQuestion() {
+  const q = quizData[currentQ];
+  document.getElementById('quizQuestion').textContent = q.q;
+  document.getElementById('quizResult').style.display = 'none';
+  const opts = document.getElementById('quizOptions');
+  opts.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.textContent = opt;
+    btn.onclick = () => showQuizResult(q);
+    opts.appendChild(btn);
+  });
+  
+  if (currentQ >= quizData.length - 1) {
+    document.getElementById('quizNextBtn').textContent = 'Done! 🎉';
+    document.getElementById('quizNextBtn').onclick = () => {
+      document.getElementById('quizResult').style.display = 'none';
+      document.getElementById('quizQuestion').textContent = '🏆 Official Verdict: 10/10 Boyfriend. Zero doubts. Certified. Signed. Sealed.';
+      document.getElementById('quizOptions').innerHTML = '';
+    };
+  }
+}
+
+function showQuizResult(q) {
+  document.getElementById('quizOptions').innerHTML = '';
+  document.getElementById('quizResultText').textContent = q.result;
+  document.getElementById('quizResultSub').textContent = q.sub;
+  document.getElementById('quizResult').style.display = 'block';
+}
+
+function nextQuestion() {
+  currentQ = Math.min(currentQ + 1, quizData.length - 1);
+  loadQuestion();
+}
+
+loadQuestion();
+
+// ============ COMPLIMENT MACHINE ============
+const compliments = [
+  "Du bist das beste was mir je passier ist ❤️🥹",
+  "Jeden Tag werde ich mehr und mehr verliebt 🥹",
+  "If you were a font, you'd be something beautiful that everyone tries to copy but can't quite get right. ✍️",
+  "You make me want to be a better person, which is very annoying of you, honestly, wirrklich frechh 😤❤️",
+  "You're proof that the universe occasionally makes something so good it needs to double-check its own work. 🔬",
+  "Your vibe is so immaculate that even your bad days are other people's good days. 📊",
+  "You are the reason I understand why poets exist. I get it now. I finally get it. 📝",
+  "Honestly? A little unfair how cute you are. A formal complaint has been filed. 📋",
+  "If 'Anika' was a word in the dictionary, the definition would just be a heart emoji and nothing else. ❤️ (vllt Autismus aba)",
+  "You make every room better just by walking into it. This is not an exaggeration. Physics confirm it. 🧪",
+  "You're the 'main character' energy and the cozy side character warmth at the same time and it makes no sense. 🎬",
+  "Ich freue mich sehr, dass unser Beziegungsbebi schon 3 Monate alt ist 🥹♥️"
+];
+
+let lastCompliment = -1;
+function dispenseCompliment() {
+  let idx;
+  do { idx = Math.floor(Math.random() * compliments.length); } while (idx === lastCompliment);
+  lastCompliment = idx;
+  const el = document.getElementById('complimentDisplay');
+  el.style.animation = 'none';
+  el.offsetHeight; // reflow
+  el.style.animation = 'fadeInUp 0.5s ease';
+  el.textContent = compliments[idx];
+  
+  // mini confetti
+  confetti({ particleCount: 30, spread: 60, origin: { y: 0.8 }, colors: ['#ff6b9d','#ffb3c6','#c9184a'] });
+}
+
+// ============ CERTIFICATE DOWNLOAD ============
+function downloadCert() {
+  const cert = document.getElementById('certEl');
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html><html><head>
+    <title>Certificate - Anika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+      body { background:#fffef5; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; }
+      ${cert.ownerDocument.querySelector('style').textContent}
+    </style>
+  </head><body>${cert.outerHTML}
+  <script>window.onload=()=>window.print()<\/script>
+  </body></html>`);
+  w.document.close();
+}
+
+// ============ FINALE ============
+function bigFinale() {
+  // Massive confetti
+  const duration = 5000;
+  const end = Date.now() + duration;
+  
+  (function frame() {
+    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff6b9d','#c9184a','#ffb3c6','#ffd700'] });
+    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff6b9d','#c9184a','#ffb3c6','#ffd700'] });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
+
+  // Heart rain
+  const rain = document.getElementById('heartRain');
+  const hearts = ['💗','💕','💘','💖','💝','🌷','✨'];
+  rain.innerHTML = '';
+  for (let i = 0; i < 30; i++) {
+    const h = document.createElement('div');
+    h.className = 'rain-heart';
+    h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    h.style.cssText = `left:${Math.random()*100}%; animation-duration:${Math.random()*4+3}s; animation-delay:${Math.random()*2}s;`;
+    rain.appendChild(h);
+  }
+}
+
+// ============ HEART RAIN AMBIENT ============
+(function startRain() {
+  const rain = document.getElementById('heartRain');
+  const hearts = ['💗','💕','💘','💖','🌷'];
+  setInterval(() => {
+    const h = document.createElement('div');
+    h.className = 'rain-heart';
+    h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    h.style.cssText = `left:${Math.random()*100}%; animation-duration:${Math.random()*6+5}s; animation-delay:0s; font-size:${Math.random()*14+10}px;`;
+    rain.appendChild(h);
+    setTimeout(() => h.remove(), 12000);
+  }, 600);
+})();
+</script>
 </body>
 </html>
